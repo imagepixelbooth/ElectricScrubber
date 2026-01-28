@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ViralTrenz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        :root {
+            --bg-midnight: #050510;
+            --bg-offwhite: #e1e8f3;
+            --accent-cyan: #00f2ea;
+            --text-main-light: #1a1a2e;
+            --primary-gradient: linear-gradient(135deg, #00f2ea 0%, #00a8ff 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-offwhite);
+            color: var(--text-main-light);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-midnight);
+            padding: 1.5rem 0;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Layout */
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        /* Stripe */
+        #card-element {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .error-message {
+            color: #ff4757;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Summary */
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .summary-row.total {
+            font-weight: 700;
+            color: black;
+            font-size: 1.25rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: #050510;
+            font-weight: 700;
+            padding: 1rem;
+            border-radius: 12px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 900px) {
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container flex">
+            <a href="index.html"
+                style="font-size:1.5rem; font-weight:800; color:white; text-decoration:none;">Viral<span
+                    style="color:var(--accent-cyan)">Trenz</span></a>
+            <span style="color:#a0a0b0; font-size:0.9rem;">Secure Checkout</span>
+        </div>
+    </header>
+
+    <div class="container" style="padding-top: 1.5rem; padding-bottom: 0;">
+        <a href="cart.html"
+            style="color: var(--text-main-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Go back to cart
+        </a>
+    </div>
+
+    <div class="container checkout-layout">
+        <!-- Left: Payment Form -->
+        <div class="payment-form">
+            <!-- Contact/Shipping Form Removed (Data from Cart) -->
+
+            <div class="card">
+                <h2>Payment Method</h2>
+                <div class="form-group">
+                    <label class="form-label">Card Details</label>
+                    <div id="card-element"></div>
+                    <div class="error-message" id="card-errors"></div>
+                </div>
+
+                <div
+                    style="background:#f8f9fa; padding:1rem; border-radius:8px; border:1px solid #eee; margin-top:1rem;">
+                    <p style="font-size:0.85rem; color:#666;"><strong>Test Mode:</strong> Use a Stripe Test Card (e.g.,
+                        4242...).
+                    </p>
+                </div>
+
+                <button class="btn-primary" id="payBtn">Pay <span id="payAmount">$0.00</span></button>
+            </div>
+        </div>
+
+        <!-- Right: Summary -->
+        <div class="order-summary">
+            <div class="card">
+                <h2>Order Summary</h2>
+                <div id="summaryItems"></div>
+
+                <div class="summary-row" style="margin-top:1.5rem; border-top:1px solid #eee; padding-top:1rem;">
+                    <span>Subtotal</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span id="shipping">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax</span>
+                    <span id="taxAmount">Calculating...</span>
+                </div>
+                <!-- Display Shipping Details for user confidence -->
+                <div
+                    style="font-size:0.85rem; color:#666; margin-top:0.5rem; margin-bottom:0.5rem; border-bottom:1px solid #eee; padding-bottom:1rem;">
+                    <strong>Ship to:</strong><br>
+                    <span id="shipToDisplay">Loading...</span>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total">$0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Overlay -->
+    <div id="successOverlay"
+        style="position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:2000; display:none; align-items:center; justify-content:center;">
+        <div class="card" style="text-align:center; max-width:400px;">
+            <div
+                style="width:60px; height:60px; background:#e0fff4; color:#00c853; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
+                ✓</div>
+            <h2>Order Confirmed!</h2>
+            <p style="color:#666; margin-bottom:1.5rem;">Thanks for your order.</p>
+            <button class="btn-primary" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+        // Init
+        const cart = JSON.parse(localStorage.getItem('viraltrenz_cart')) || [];
+        const shippingDetails = JSON.parse(localStorage.getItem('viraltrenz_shipping')) || {};
+        let stripe, elements, card;
+        let paymentIntentId = null;
+
+        async function initialize() {
+            // Display Shipping Info
+            if (shippingDetails.address) {
+                document.getElementById('shipToDisplay').innerHTML = `
+                    ${shippingDetails.email}<br>
+                    ${shippingDetails.address} ${shippingDetails.apt ? shippingDetails.apt : ''}<br>
+                    ${shippingDetails.city}, ${shippingDetails.state} ${shippingDetails.zip}
+                `;
+            } else {
+                // If accessed directly without cart data, prompt return
+                document.getElementById('shipToDisplay').innerHTML = `<span style="color:red">No shipping info found. Please return to cart.</span>`;
+            }
+
+            // 1. Fetch Publishable Key from backend
+            try {
+                const { publishableKey } = await fetch('/api/config').then(r => r.json());
+                stripe = Stripe(publishableKey);
+
+                // 2. Create Payment Intent immediately (to get clientSecret)
+                // Pass the state from localStorage so server logic calculates Tax immediately
+                const response = await fetch('/api/create-payment-intent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        items: cart,
+                        currency: 'usd',
+                        state: shippingDetails.state || null // Pass state here
+                    }),
+                }).then(r => r.json());
+
+                const { clientSecret, id } = response;
+                paymentIntentId = id; // Store ID for updates
+
+                elements = stripe.elements({ clientSecret, appearance: { theme: 'stripe' } });
+                const paymentElement = elements.create('payment');
+                paymentElement.mount('#card-element');
+
+                // 3. Immediately fetch/validate the totals (Tax) to update UI
+                // Because create-payment-intent returned secret but we need the breakdown numbers
+                if (shippingDetails.state) {
+                    await updateOrderTotal(shippingDetails.state);
+                }
+
+                // Handle Payment
+                document.getElementById('payBtn').addEventListener('click', async () => {
+                    const btn = document.getElementById('payBtn');
+                    btn.disabled = true;
+                    btn.innerText = 'Processing...';
+
+                    const { error } = await stripe.confirmPayment({
+                        elements,
+                        confirmParams: {
+                            return_url: window.location.href.split('?')[0] + '?success=true',
+                            // Use stored email
+                            receipt_email: shippingDetails.email
+                        },
+                        redirect: 'if_required'
+                    });
+
+                    if (error) {
+                        const messageContainer = document.querySelector('#card-errors');
+                        messageContainer.style.display = 'block';
+                        messageContainer.textContent = error.message;
+                        btn.disabled = false;
+                        btn.innerText = 'Pay Now';
+                    } else {
+                        // Successful payment (if redirect didn't happen)
+                        document.getElementById('successOverlay').style.display = 'flex';
+                        localStorage.removeItem('viraltrenz_cart');
+                        // Optional: Clear shipping info too
+                        localStorage.removeItem('viraltrenz_shipping');
+                    }
+                });
+
+            } catch (e) {
+                console.error("Backend offline or error:", e);
+                document.getElementById('card-errors').innerText = "Error connecting to payment server. Make sure Node backend is running.";
+                document.getElementById('card-errors').style.display = 'block';
+            }
+        }
+
+        async function updateOrderTotal(state) {
+            try {
+                // Call backend to update PI with tax
+                const res = await fetch('/api/update-payment-intent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        paymentIntentId: paymentIntentId,
+                        items: cart,
+                        state: state
+                    }),
+                });
+
+                const data = await res.json();
+
+                if (data.amount) {
+                    // Current Total in Cents -> Dollars
+                    const totalDollars = (data.amount / 100).toFixed(2);
+                    const taxDollars = (data.tax / 100).toFixed(2);
+
+                    document.getElementById('total').innerText = '$' + totalDollars;
+                    document.getElementById('payAmount').innerText = '$' + totalDollars;
+                    document.getElementById('taxAmount').innerText = '$' + taxDollars;
+                }
+
+            } catch (e) {
+                console.error("Failed to update tax:", e);
+            }
+        }
+
+        // Render Summary (Initial Local Calc)
+        let subtotal = 0;
+        const itemsContainer = document.getElementById('summaryItems');
+        cart.forEach(item => {
+            const row = document.createElement('div');
+            row.className = 'summary-row';
+            row.innerHTML = `<span>${item.title} x${item.quantity}</span><span>$${(item.price * item.quantity).toFixed(2)}</span>`;
+            itemsContainer.appendChild(row);
+            subtotal += item.price * item.quantity;
+        });
+
+        const shipping = 0;
+        // const total = subtotal + shipping + (subtotal * 0.08); // Removed rough estimate
+        // document.getElementById('total').innerText = '$' + total.toFixed(2); // Wait for async update
+
+        document.getElementById('subtotal').innerText = '$' + subtotal.toFixed(2);
+        document.getElementById('shipping').innerText = 'Free';
+
+        // Check for success URL param (if redirected)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success')) {
+            document.getElementById('successOverlay').style.display = 'flex';
+            localStorage.removeItem('viraltrenz_cart');
+        }
+
+        // Start
+        initialize();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - ViralTrenz</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Stripe JS -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        :root {
+            --bg-midnight: #050510;
+            --bg-offwhite: #e1e8f3;
+            --bg-charcoal: #12121a;
+            --accent-cyan: #00f2ea;
+            --accent-blue: #00a8ff;
+            --text-main-dark: #ffffff;
+            --text-sec-dark: #a0a0b0;
+            --text-main-light: #1a1a2e;
+            --text-sec-light: #444455;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary-gradient: linear-gradient(135deg, #00f2ea 0%, #00a8ff 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-offwhite);
+            color: var(--text-main-light);
+            min-height: 100vh;
+        }
+
+        /* Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: #050510;
+            font-weight: 700;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 242, 234, 0.2);
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Header (Dark) */
+        header {
+            background: var(--bg-midnight);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: var(--text-sec-dark);
+            margin-left: 1rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-sec-dark);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4757;
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Layout */
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main-light);
+        }
+
+        /* Cart Items */
+        .cart-item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .item-details h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-price {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .item-compare {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+
+        .item-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .select-opt {
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 0.85rem;
+            color: #555;
+            background: white;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: #f9f9f9;
+        }
+
+        .remove-btn {
+            color: #ff4757;
+            font-size: 0.85rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 1rem;
+            text-decoration: underline;
+        }
+
+        /* Order Summary */
+        .summary-card {
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .summary-row.total {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main-light);
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 0;
+        }
+
+        .discount-text {
+            color: #2ecc71;
+        }
+
+        .promo-box {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .promo-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .promo-btn {
+            padding: 0 1rem;
+            background: var(--bg-charcoal);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Trust Badges - Horizontal */
+        .trust-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+        }
+
+        .trust-item {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #666;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .trust-item svg {
+            width: 20px;
+            height: 20px;
+            color: var(--text-main-light);
+        }
+
+        /* Stripe Section */
+        .stripe-section {
+            margin-top: 2rem;
+            border-top: 1px solid #eee;
+            padding-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        #card-element {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .error-message {
+            color: #ff4757;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Empty State */
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .empty-cart svg {
+            width: 64px;
+            height: 64px;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .empty-cart p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            /* Mobile Glassmorphism */
+            #cartContainer,
+            .summary-card {
+                background: rgba(255, 255, 255, 0.65);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.6);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            }
+
+            .cart-item {
+                grid-template-columns: 70px 1fr;
+                grid-template-rows: auto auto;
+            }
+
+            .item-total {
+                grid-column: 2;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="index.html" style="font-size:1.5rem; font-weight:800; color:white;">Viral<span
+                        style="color:var(--accent-cyan)">Trenz</span></a>
+                <span class="breadcrumb"><a href="index.html">Home</a> &gt; Cart</span>
+            </div>
+            <div class="cart-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span class="badge" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container cart-layout">
+
+        <!-- LEFT: Items & Stripe -->
+        <div class="cart-main">
+            <!-- Items Area -->
+            <div class="card" id="cartContainer">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Stripe Payment -->
+            <div class="card stripe-section hidden" id="paymentSection">
+                <h2>Secure Checkout</h2>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="you@example.com" id="emailInput">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Name on Card</label>
+                    <input type="text" class="form-input" placeholder="John Doe" id="nameInput">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Card Details</label>
+                    <div id="card-element"><!-- Stripe Element --></div>
+                    <div class="error-message" id="card-errors" role="alert"></div>
+                </div>
+
+                <div
+                    style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #eee;">
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 0.5rem;"><strong>Demo Mode:</strong> No
+                        actual payment will be processed.</p>
+                    <p style="font-size: 0.8rem; color: #999; word-break: break-all;">Backend Endpoint:
+                        <code>/create-payment-intent</code> (Mocked)
+                    </p>
+                    <p style="font-size: 0.8rem; color: #999;">Public Key: <code>pk_test_...</code> (Placeholder)</p>
+                </div>
+
+                <button class="btn-primary" id="payBtn">Pay Now <span id="payAmount">$0.00</span></button>
+            </div>
+        </div>
+
+        <!-- RIGHT: Contact & Shipping (Replaces Order Summary) -->
+        <aside>
+            <div class="card summary-card">
+                <h2>Contact & Shipping</h2>
+
+                <div class="form-group">
+                    <label class="form-label"
+                        style="font-size:0.9rem; font-weight:500; margin-bottom:0.4rem; display:block;">Email</label>
+                    <input type="email" class="form-input" id="cartEmail" placeholder="you@example.com"
+                        style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:8px;">
+                </div>
+
+                <div class="form-group" style="margin-top:1rem;">
+                    <label class="form-label"
+                        style="font-size:0.9rem; font-weight:500; margin-bottom:0.4rem; display:block;">Shipping
+                        Address</label>
+                    <input type="text" class="form-input" id="cartAddress" placeholder="123 Main St"
+                        style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:8px; margin-bottom:0.5rem;">
+                    <input type="text" class="form-input" id="cartApt" placeholder="Apt / Unit (Optional)"
+                        style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:8px;">
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem; margin-top:0.5rem;">
+                    <div>
+                        <input type="text" class="form-input" id="cartCity" placeholder="City"
+                            style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:8px;">
+                    </div>
+                    <div>
+                        <select class="form-input" id="cartState"
+                            style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:8px; background:white;">
+                            <option value="">State</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NY">New York</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="CT">Connecticut</option>
+                            <!-- Add more as needed, keeping concise for demo -->
+                            <option value="CA">California</option>
+                            <option value="TX">Texas</option>
+                            <option value="FL">Florida</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top:0.5rem;">
+                    <input type="text" class="form-input" id="cartZip" placeholder="Zip Code"
+                        style="width:100%; padding:0.6rem; border:1px solid #ddd; border-radius:8px;">
+                </div>
+
+
+                <div class="promo-box" style="margin-top:1.5rem;">
+                    <input type="text" class="promo-input" placeholder="Promo Code" id="promoInput">
+                    <button class="promo-btn" onclick="applyPromo()">Apply</button>
+                </div>
+                <div id="promoMsg" style="font-size: 0.85rem; margin-bottom: 1rem; display:none;"></div>
+
+                <div class="summary-row" style="margin-top:1rem; border-top:1px solid #eee; padding-top:1rem;">
+                    <span>Subtotal</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span id="shipping">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax</span>
+                    <span id="tax">To be calculated</span>
+                </div>
+                <div class="summary-row discount-row hidden">
+                    <span>Discount <span id="discountCodeTag"></span></span>
+                    <span class="discount-text" id="discountVal">-$0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total">$0.00</span>
+                </div>
+
+                <button class="btn-primary" id="checkoutBtn" onclick="validateAndProceed()"
+                    style="display:block; width:100%; text-align:center; margin-top:1.5rem; text-decoration:none; border:none; cursor:pointer; font-size:1rem;">Proceed
+                    to
+                    Checkout</button>
+
+                <div class="trust-row">
+                    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <polyline points="1 20 1 14 7 14"></polyline>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg> 30-Day Returns</div>
+                    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="3" width="15" height="13"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                        </svg> Fast Shipping</div>
+                    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg> Safe & Secure</div>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Success Modal Overlay (Mock) -->
+    <div id="successOverlay"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; display:none; align-items:center; justify-content:center;">
+        <div
+            style="background:white; padding:3rem; border-radius:16px; text-align:center; max-width:500px; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+            <div
+                style="width:80px; height:80px; background:#e0fff4; color:#00c853; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem;">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h2 style="margin-bottom:0.5rem; color:#1a1a2e;">Order Confirmed!</h2>
+            <p style="color:#666; margin-bottom:2rem;">Thank you for your purchase. A confirmation email has been sent
+                to <span id="successEmail" style="font-weight:600;"></span>.</p>
+            <button class="btn-primary" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+    </div>
+    <style>
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+
+    <script>
+        // --- State ---
+        let cart = JSON.parse(localStorage.getItem('viraltrenz_cart')) || [];
+        let discountApplied = false;
+        let paymentIntentId = null;
+
+        // --- Core Logic ---
+
+        async function init() {
+            renderCart();
+            await initializeStripeIntent();
+            setupStateListener();
+        }
+
+        async function initializeStripeIntent() {
+            if (cart.length === 0) return;
+            try {
+                // Fetch config (if needed) but mainly create intent
+                const { publishableKey } = await fetch('/api/config').then(r => r.json());
+                // We don't need to mount Stripe Element here on Cart, just get the ID for tax calc
+
+                const response = await fetch('/api/create-payment-intent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ items: cart, currency: 'usd' }),
+                }).then(r => r.json());
+
+                if (response.id) {
+                    paymentIntentId = response.id;
+                }
+            } catch (e) {
+                console.error("Backend offline or error:", e);
+            }
+        }
+
+        function setupStateListener() {
+            const stateSelect = document.getElementById('cartState');
+            if (stateSelect) {
+                stateSelect.addEventListener('change', async (e) => {
+                    const selectedState = e.target.value;
+                    await updateOrderTotal(selectedState);
+                });
+            }
+        }
+
+        async function updateOrderTotal(state) {
+            if (!paymentIntentId) return;
+            try {
+                const res = await fetch('/api/update-payment-intent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        paymentIntentId: paymentIntentId,
+                        items: cart,
+                        state: state
+                    }),
+                });
+
+                const data = await res.json();
+
+                if (data.amount) {
+                    const totalDollars = (data.amount / 100).toFixed(2);
+                    const taxDollars = (data.tax / 100).toFixed(2);
+
+                    document.getElementById('total').innerText = '$' + totalDollars;
+                    document.getElementById('tax').innerText = '$' + taxDollars;
+
+                    // Note: We are overwriting local calcs with server truth
+                }
+            } catch (e) {
+                console.error("Failed to update tax:", e);
+            }
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartContainer');
+            const cartCountBadge = document.getElementById('cartCount');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            // Update Badge
+            const totalQty = cart.reduce((acc, item) => acc + item.quantity, 0);
+            cartCountBadge.innerText = totalQty;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line></svg>
+                        <p>Your cart is empty.</p>
+                        <a href="index.html" class="btn-primary" style="display:inline-block; width:auto; padding: 0.8rem 2rem; color:black;">Return to Shop</a>
+                    </div>
+                `;
+                if (checkoutBtn) checkoutBtn.style.display = 'none';
+                updateTotals(0);
+                return;
+            }
+
+            if (checkoutBtn) checkoutBtn.style.display = 'block';
+
+            let html = `<h2>Shopping Cart (${totalQty} items)</h2>`;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                html += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.title}" class="item-img">
+                        <div class="item-details">
+                            <h3>${item.title}</h3>
+                            <div class="item-price">
+                                $${item.price.toFixed(2)}
+                                <span class="item-compare">$${item.compareAt.toFixed(2)}</span>
+                            </div>
+                            <div class="item-options">
+                                <span class="select-opt">Color: ${item.color || 'White'}</span>
+                                <span class="select-opt">Bundle: Standard</span>
+                            </div>
+                            <div class="qty-control">
+                                <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                                <span style="font-weight:600; min-width:20px; text-align:center;">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                            </div>
+                        </div>
+                        <div class="item-total">
+                            $${itemTotal.toFixed(2)}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+
+            const subtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+            updateTotals(subtotal);
+        }
+
+        function updateQty(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity < 1) {
+                if (confirm("Remove this item?")) {
+                    cart.splice(index, 1);
+                } else {
+                    cart[index].quantity = 1; // revert
+                }
+            }
+            saveCart();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+        }
+
+        function saveCart() {
+            localStorage.setItem('viraltrenz_cart', JSON.stringify(cart));
+            renderCart();
+            // Re-init intent on cart change to update amount logic if we were strictly syncing
+            initializeStripeIntent();
+        }
+
+        function updateTotals(subtotal) {
+
+            let discount = 0;
+            if (discountApplied && subtotal > 0) {
+                discount = subtotal * 0.10;
+                document.querySelector('.discount-row').classList.remove('hidden');
+                document.getElementById('discountCodeTag').innerText = '(VIRAL10)';
+                document.getElementById('discountVal').innerText = '-$' + discount.toFixed(2);
+            } else {
+                document.querySelector('.discount-row').classList.add('hidden');
+            }
+
+            const taxable = (subtotal - discount);
+            // Default tax 0 until state selected (handled by server now)
+            const tax = 0;
+            // Shipping always free
+            const shipping = 0;
+            const total = taxable + tax + shipping;
+
+            document.getElementById('subtotal').innerText = '$' + subtotal.toFixed(2);
+            document.getElementById('shipping').innerText = 'Free';
+
+            // Logic for "To be calculated"
+            const stateVal = document.getElementById('cartState') ? document.getElementById('cartState').value : '';
+            if (stateVal === '') {
+                document.getElementById('tax').innerText = 'To be calculated';
+            } else {
+                document.getElementById('tax').innerText = '$' + tax.toFixed(2);
+            }
+
+            document.getElementById('total').innerText = '$' + total.toFixed(2);
+        }
+
+        function validateAndProceed() {
+            const email = document.getElementById('cartEmail').value.trim();
+            const address = document.getElementById('cartAddress').value.trim();
+            const city = document.getElementById('cartCity').value.trim();
+            const state = document.getElementById('cartState').value;
+            const zip = document.getElementById('cartZip').value.trim();
+
+            if (!email || !address || !city || !state || !zip) {
+                alert('Please enter all contact and shipping details to proceed.');
+                return;
+            }
+
+            // Optional: Save to localStorage for checkout pre-fill
+            const shippingDetails = {
+                email, address, city, state, zip,
+                apt: document.getElementById('cartApt').value.trim()
+            };
+            localStorage.setItem('viraltrenz_shipping', JSON.stringify(shippingDetails));
+
+            window.location.href = 'checkout.html';
+        }
+
+        function applyPromo() {
+            const code = document.getElementById('promoInput').value.trim().toUpperCase();
+            const msg = document.getElementById('promoMsg');
+
+            if (code === 'VIRAL10') {
+                discountApplied = true;
+                msg.style.display = 'block';
+                msg.style.color = '#2ecc71';
+                msg.innerText = 'Promo applied: 10% off!';
+                renderCart(); // recalculate
+            } else {
+                discountApplied = false;
+                msg.style.display = 'block';
+                msg.style.color = '#ff4757';
+                msg.innerText = 'Invalid promo code.';
+                renderCart();
+            }
+        }
+
+        // Run
+        init();
+
+    </script>
+</body>
+
+</html>

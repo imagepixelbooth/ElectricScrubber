@@ -1,0 +1,2825 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViralTrenz Multifunctional Electric Cleaning Brush</title>
+    <meta name="description"
+        content="Telescopic Long Handle, 8-in-1 Cleaning Brush for Household, Kitchen, Bathroom, Tile, and Vehicle Cleaning.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-midnight: #050510;
+            --bg-offwhite: #e1e8f3;
+            --bg-charcoal: #12121a;
+            --accent-cyan: #00f2ea;
+            --accent-blue: #00a8ff;
+            --accent-red: #ff4757;
+            /* Added red accent */
+            --text-main-dark: #ffffff;
+            --text-sec-dark: #a0a0b0;
+            --text-main-light: #1a1a2e;
+            --text-sec-light: #444455;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --surface-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+            --primary-gradient: linear-gradient(135deg, #00f2ea 0%, #00a8ff 100%);
+            --aurora: conic-gradient(from 180deg at 50% 50%, #1a1a2e 0deg, #0f2027 120deg, #203a43 240deg, #1a1a2e 360deg);
+        }
+
+        /* Reset & Base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-midnight);
+            color: var(--text-main-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        /* Alternating Sections - Strict Requirement */
+        section.bg-midnight {
+            background-color: var(--bg-midnight);
+            color: var(--text-main-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        section.bg-offwhite {
+            background-color: var(--bg-offwhite);
+            color: var(--text-main-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .text-muted-dark {
+            color: var(--text-sec-dark);
+        }
+
+        .text-muted-light {
+            color: var(--text-sec-light);
+        }
+
+        /* Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .gap-4 {
+            gap: 1rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .py-20 {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .py-12 {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--primary-gradient);
+            z-index: 1001;
+            transition: width 0.1s;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(5, 5, 16, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-sec-dark);
+        }
+
+        nav a:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 8px rgba(0, 242, 234, 0.4);
+        }
+
+        .header-cta {
+            background: var(--primary-gradient);
+            color: #050510;
+            font-weight: 700;
+            padding: 0.6rem 1.4rem;
+            border-radius: 99px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--accent-cyan), 0 0 40px rgba(0, 242, 234, 0.4);
+        }
+
+        .cart-icon {
+            position: relative;
+            padding: 0.5rem;
+        }
+
+        .badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #ff4757;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .badge.visible {
+            opacity: 1;
+        }
+
+        /* Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion) {
+            .reveal {
+                transition: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Hero (Sticky Animation) */
+        .hero-spacer {
+            height: 1000vh;
+            /* Adjusted for faster 1000vh speed */
+            position: relative;
+        }
+
+        .hero-sticky-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+            pointer-events: none;
+            /* Allow scroll through */
+        }
+
+        canvas#heroCanvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            /* Fallback */
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards 0.5s;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content .sub-text {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        .scroll-instruction {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Responsive Hero */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-content .sub-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Mini Assurance Bar (Off-white) */
+        .assurance-bar {
+            background: var(--bg-offwhite);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1.5rem 0;
+        }
+
+        .assurance-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .badge-card {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            transition: 0.3s;
+            color: var(--text-sec-light);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: default;
+            /* Not clickable */
+        }
+
+        .badge-card:hover {
+            border-color: var(--accent-cyan);
+            /* Theme color outline */
+            color: var(--bg-midnight);
+            /* Optional: darker text on hover */
+        }
+
+        /* Section 1: Features (Off-white) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotateX(2deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border-color: var(--accent-blue);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 168, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(15deg) scale(1.1);
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        /* Mobile Only Feature Images */
+        .mobile-feature-img {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .mobile-feature-img {
+                display: block;
+                width: 100%;
+                height: 220px;
+                /* Slightly taller for better fit */
+                object-fit: contain;
+                /* Ensure full image is visible */
+                background: #f8f9fa;
+                /* Light background for the image area */
+                border-radius: 12px;
+                margin-bottom: 1.5rem;
+                padding: 10px;
+                /* Add padding inside */
+                box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.03);
+                /* Subtle inner shadow */
+            }
+        }
+
+        /* Section 2: Attachments (Black) */
+
+        .attachments-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .att-card {
+            flex: 0 1 140px;
+            /* Base width */
+            max-width: 180px;
+            /* Restrict max size */
+        }
+
+        /* Force 8 columns on large screens to keep single row */
+        @media (min-width: 1200px) {
+            .attachments-grid {
+                display: grid;
+                grid-template-columns: repeat(8, 1fr);
+            }
+
+            .att-card {
+                max-width: none;
+                /* Let grid handle width */
+            }
+        }
+
+        .att-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .att-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+            border-color: var(--accent-cyan);
+        }
+
+        .att-img {
+            height: 80px;
+            width: 100%;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            transition: 0.3s;
+            filter: drop-shadow(0 0 5px rgba(0, 242, 234, 0.2));
+        }
+
+        .att-card:hover .att-img {
+            transform: translateY(-5px) scale(1.1);
+            filter: drop-shadow(0 0 15px rgba(0, 242, 234, 0.6));
+        }
+
+        .att-label {
+            color: var(--text-sec-dark);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .att-card:hover .att-label {
+            color: white;
+        }
+
+        /* Section 3: Surfaces (Off-white) */
+        .surface-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .surface-chips {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chip {
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            font-weight: 600;
+            color: var(--text-sec-light);
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chip:hover {
+            transform: translateX(10px);
+            background: #f8f9fa;
+        }
+
+        .chip.active {
+            background: var(--bg-midnight);
+            color: white;
+            border-color: var(--bg-midnight);
+            transform: translateX(15px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 900px) {
+
+            .chip:hover,
+            .chip.active {
+                transform: none !important;
+                /* Keep centered on mobile */
+            }
+        }
+
+        /* Glass effect for Surface Chips ONLY */
+        .surface-chips .chip {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .surface-chips .chip:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .surface-chips .chip.active {
+            background: var(--bg-midnight);
+            border-color: var(--bg-midnight);
+            opacity: 1;
+        }
+
+        .chip-arrow {
+            opacity: 0.4;
+            transition: 0.3s;
+            display: inline-block;
+            /* Enable transform */
+        }
+
+        .chip:hover .chip-arrow {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .chip.active .chip-arrow {
+            opacity: 1;
+            transform: rotate(90deg);
+            /* Downward arrow */
+        }
+
+        @media (max-width: 900px) {
+            .chip:hover .chip-arrow {
+                transform: translateX(0);
+                /* Reset hover move on mobile */
+            }
+
+            .chip.active .chip-arrow {
+                transform: rotate(90deg);
+                /* Ensure rotation persists */
+            }
+        }
+
+        .surface-viewer {
+            position: relative;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--surface-shadow);
+        }
+
+        .surface-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.4s;
+        }
+
+        .pro-tip {
+            text-align: right;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Section 4: How it works (Black) */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            margin: 0 auto 4rem auto;
+            position: relative;
+            max-width: 700px;
+        }
+
+        .review-cta-block {
+            text-align: center;
+            margin-top: 4rem;
+            scroll-margin-top: 120px;
+            /* Prevent header overlay */
+        }
+
+        .product-options {
+            max-width: 400px;
+            margin: 1.5rem auto;
+            text-align: center;
+        }
+
+        .price-block {
+            margin-bottom: 1rem;
+        }
+
+        .price-new {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-right: 0.8rem;
+        }
+
+        .price-old {
+            font-size: 1.2rem;
+            color: var(--text-muted-dark);
+            text-decoration: line-through;
+        }
+
+        .option-group {
+            margin-bottom: 1rem;
+        }
+
+        .option-label {
+            color: var(--text-muted-dark);
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .color-selector {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .color-opt {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .color-opt.active {
+            border-color: var(--accent-cyan);
+            transform: scale(1.1);
+        }
+
+        .color-white {
+            background: #eee;
+        }
+
+        .color-black {
+            background: #333;
+        }
+
+        .color-pink {
+            background: #ffb7b2;
+        }
+
+        .qty-selector {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 4px;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .qty-input {
+            width: 40px;
+            background: transparent;
+            border: none;
+            color: white;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--accent-cyan), transparent);
+        }
+
+        .step {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .step-num {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-midnight);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+            position: relative;
+            /* Fix z-index stacking */
+            z-index: 2;
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(0, 242, 234, 0.2);
+        }
+
+        .step-content {
+            padding-top: 0.5rem;
+        }
+
+        .step-content h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .ba-slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            /* Responsive Aspect Ratio instead of fixed height */
+            aspect-ratio: 16 / 9;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            cursor: col-resize;
+            user-select: none;
+            /* Prevent selection */
+            -webkit-user-select: none;
+        }
+
+        .ba-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            /* Remove inline spacing */
+        }
+
+        /* Result Buttons Override */
+        .result-btn {
+            transform: none !important;
+            padding: 0.8rem 1.5rem !important;
+            justify-content: center !important;
+        }
+
+        .result-btn:hover {
+            transform: translateY(-2px) !important;
+        }
+
+        .result-btn.active {
+            transform: translateY(-2px) !important;
+            background: rgba(0, 242, 234, 0.1) !important;
+            /* Cyan tint */
+            color: white !important;
+            border-color: var(--accent-cyan) !important;
+            box-shadow: 0 4px 10px rgba(0, 242, 234, 0.2) !important;
+        }
+
+        .ba-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+            border-right: 3px solid var(--accent-cyan);
+            will-change: width;
+            /* Optimization */
+        }
+
+        .ba-overlay img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            /* Fill container width */
+            max-width: 800px;
+            /* Match container max-width to keep alignment */
+            height: 100%;
+            object-fit: cover;
+            object-position: left;
+            /* Keep left side pinned */
+            display: block;
+            pointer-events: none;
+            /* Prevent interaction */
+        }
+
+        /* Ensure overlay image is sized to the container's full width, not overlay width */
+        /* JS handles the visual clipping via ba-overlay width */
+
+        .ba-overlay img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 800px;
+            max-width: none;
+        }
+
+        /* Must match container width */
+        .ba-handle {
+            position: absolute;
+            top: 50%;
+            right: -22px;
+            width: 44px;
+            height: 44px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-size: 1.2rem;
+            transform: translateY(-50%);
+            box-shadow: 0 0 20px rgba(0, 242, 234, 0.5);
+        }
+
+        /* Section 5: Reviews (Off-white) */
+        .reviews-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 2rem 1rem;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .review-card {
+            min-width: 350px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 2rem;
+            border-radius: 16px;
+            scroll-snap-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stars {
+            color: #ffb400;
+            letter-spacing: 2px;
+        }
+
+        .review-cta-block {
+            background: var(--bg-midnight);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-cta-block::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 242, 234, 0.1), transparent);
+            animation: spin 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* FAQ (Black) */
+        .accordion-item {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .accordion-btn {
+            width: 100%;
+            padding: 1.5rem 0;
+            background: transparent;
+            color: white;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: var(--text-sec-dark);
+            font-size: 0.95rem;
+        }
+
+        .accordion-active .accordion-content {
+            padding-bottom: 1.5rem;
+        }
+
+        .accordion-icon {
+            transition: 0.3s;
+        }
+
+        .accordion-active .accordion-icon {
+            transform: rotate(45deg);
+            color: var(--accent-cyan);
+        }
+
+        /* Final CTA (Black) */
+        .cta-strip {
+            background: linear-gradient(to bottom, var(--bg-midnight), #001015);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-strip::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #00f2ea, #00a8ff, #00f2ea);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 100% 0;
+            }
+
+            100% {
+                background-position: -100% 0;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-charcoal);
+            color: var(--text-sec-dark);
+            padding: 4rem 0 2rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h4 {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col h5 {
+            color: white;
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .copy {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 2rem;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(5, 5, 16, 0.95);
+            border: 1px solid var(--accent-cyan);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+
+            .hero-layout,
+            .surface-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .footer-brand {
+                grid-column: span 2;
+                text-align: left;
+            }
+
+            .hero {
+                padding-top: 6rem;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .assurance-grid {
+                gap: 1rem;
+            }
+
+            .hero-layout .hero-img-wrap {
+                order: -1;
+            }
+
+            .hero-img {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .surface-viewer {
+                min-height: 300px;
+                /* Mobile: Move viewer to be inline if needed via JS, but if we want 'underneath' cleanly,
+                   we should probably just hide the main desktop viewer on mobile and show an image inside the chip list.
+                   OR, move the viewer element in JS. Let's move it in JS. */
+            }
+
+            .step {
+                flex-direction: row;
+                gap: 1.5rem;
+                text-align: left;
+            }
+
+
+
+            .ba-overlay img {
+                width: 100vw;
+            }
+
+            /* Adjustment needed in JS for responsive slider */
+            nav ul {
+                display: none;
+            }
+
+            /* Simplified mobile nav for demo */
+        }
+
+        /* --- Mini Cart Popup --- */
+        .mini-cart {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            /* Default desktop position */
+            width: 320px;
+            background: rgba(18, 18, 26, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            z-index: 3000;
+            /* Above everything */
+            transform: translateY(-20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .mini-cart.show {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mini-cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+
+        .mini-cart-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .mini-cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile specific positioning to align with cart icon roughly or center */
+        @media (max-width: 900px) {
+            .mini-cart {
+                right: 50%;
+                transform: translateX(50%) translateY(-20px);
+                /* Center horiz, offset vert */
+                width: 90%;
+                max-width: 320px;
+
+                /* Glass Effect requested */
+                background: rgba(18, 18, 26, 0.85);
+                /* Slightly more transparent */
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+            }
+
+            .mini-cart .btn-primary {
+                border-radius: 99px;
+                /* Requested corner radius */
+            }
+
+            .mini-cart.show {
+                transform: translateX(50%) translateY(0);
+            }
+        }
+
+        /* Override Product Grid text for Light Background */
+        #buy-now-wrapper .product-title {
+            color: black;
+            background: none;
+            -webkit-background-clip: border-box;
+            -webkit-text-fill-color: black;
+        }
+
+        #buy-now-wrapper .qty-btn,
+        #buy-now-wrapper .qty-input {
+            color: black;
+        }
+
+        #buy-now-wrapper .product-desc {
+            color: var(--text-sec-light);
+        }
+
+        #buy-now-wrapper .qty-selector {
+            background: rgba(0, 0, 0, 0.05);
+            /* Slight dark tint for visibility */
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        #buy-now-wrapper .option-label {
+            color: var(--text-main-light);
+        }
+
+        #buy-now-wrapper .review-count {
+            color: var(--text-sec-light) !important;
+        }
+
+        #buy-now-wrapper .price-old {
+            color: var(--text-sec-light) !important;
+        }
+
+        #buy-now-wrapper .trust-item {
+            color: black;
+            text-shadow: none;
+        }
+
+        #buy-now-wrapper .trust-item svg {
+            stroke: black;
+            filter: none;
+        }
+
+        /* --- Product Grid Split Layout --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            scroll-margin-top: 120px;
+        }
+
+        .product-visual {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-visual img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 24px;
+        }
+
+        .product-info {
+            text-align: left;
+        }
+
+        .product-title {
+            font-size: 3rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #a0a0b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .price-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-current {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-red);
+        }
+
+        .price-compare {
+            font-size: 1.5rem;
+            color: var(--text-sec-dark);
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background: rgba(0, 242, 234, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .product-desc {
+            color: var(--text-sec-dark);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 480px;
+        }
+
+        .option-group {
+            margin-bottom: 2rem;
+        }
+
+        .option-label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--text-main-dark);
+        }
+
+        .color-selector {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .color-opt {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            /* Outer ring space */
+            box-shadow: 0 0 0 2px transparent;
+            /* Outer ring */
+            transition: all 0.3s ease;
+        }
+
+        .color-opt.active {
+            box-shadow: 0 0 0 2px var(--accent-cyan);
+            transform: scale(1.1);
+        }
+
+        .color-white {
+            background: #eee;
+        }
+
+        .color-black {
+            background: #333;
+        }
+
+        .color-pink {
+            background: #ffb7b2;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .qty-selector {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            height: 56px;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .qty-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .qty-input {
+            width: 40px;
+            background: transparent;
+            border: none;
+            color: white;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* LED Strip Effect Animation */
+        @keyframes border-rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .btn-large {
+            flex: 1;
+            min-width: 200px;
+            height: 56px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            /* LED Effect Layout */
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            background: rgb(225, 232, 243);
+            /* Dark center */
+            border-radius: 99px;
+            /* Rounded pill */
+            border: none;
+            /* Remove default border */
+            box-shadow: 0 0 20px rgba(0, 242, 234, 0.3);
+        }
+
+        /* The Rotating Light */
+        .btn-large::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 400%;
+            /* Extra height to cover rotation */
+            background: conic-gradient(from 0deg, transparent 0%, transparent 70%, #00f2ea 85%, #ffffff 100%);
+            top: -150%;
+            left: -50%;
+            z-index: -2;
+            animation: border-rotate 3s linear infinite;
+        }
+
+        /* The Button Face (Inner Mask) */
+        .btn-large::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            /* Thickness of LED strip */
+            background: var(--primary-gradient);
+            /* Original Gradient */
+            border-radius: 99px;
+            z-index: -1;
+        }
+
+        /* Ensure hover glow remains */
+        .btn-large:hover {
+            box-shadow: 0 0 30px rgba(0, 242, 234, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .trust-signals {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #FFD700;
+            /* Gold */
+            font-size: 0.9rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+            font-weight: 500;
+        }
+
+        .trust-item svg {
+            stroke: #FFD700;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
+        }
+
+        /* Mobile Responsive for Grid */
+        @media (max-width: 900px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                /* Drastically reduced gap */
+                text-align: left;
+            }
+
+            .product-visual {
+                padding: 0;
+                /* Remove padding */
+                background: transparent;
+                /* Remove background box if it takes space */
+                border: none;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Adjust visual image constraints if needed, but user said keep image size */
+            /* We will just ensure container doesn't add bulk */
+
+            .product-info {
+                padding: 0 0.5rem;
+            }
+
+            #buy-now-wrapper {
+                padding-top: 1rem;
+                padding-bottom: 2rem;
+            }
+
+            .product-title {
+                font-size: 1.5rem;
+                /* Smaller title */
+                margin-bottom: 0.2rem;
+            }
+
+            .price-wrapper {
+                margin-bottom: 0.5rem;
+                gap: 0.5rem;
+            }
+
+            .price-current {
+                font-size: 1.8rem;
+            }
+
+            .price-compare {
+                font-size: 1.1rem;
+            }
+
+            .product-desc {
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+                line-height: 1.4;
+            }
+
+            .option-group {
+                margin-bottom: 1rem;
+            }
+
+            .color-selector {
+                justify-content: flex-start;
+            }
+
+            .actions-row {
+                flex-direction: row;
+                /* Keep on one line if possible */
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+                align-items: stretch;
+            }
+
+            .qty-selector {
+                width: auto;
+                margin: 0;
+                height: 50px;
+                padding: 0.2rem;
+            }
+
+            .qty-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+
+            .qty-input {
+                width: 30px;
+                font-size: 0.9rem;
+            }
+
+            .btn-large {
+                width: 100%;
+                min-height: 50px;
+                /* Reduced height */
+                font-size: 1rem;
+                flex: 1;
+                /* Take remaining space */
+            }
+
+            .trust-signals {
+                justify-content: flex-start;
+                padding-top: 0.5rem;
+                gap: 1rem;
+            }
+
+            .trust-item {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scroll-progress" id="progressBar"></div>
+
+    <header>
+        <div class="container flex justify-between items-center">
+            <a href="#" style="font-size:1.5rem; font-weight:800; color:white;">Viral<span
+                    style="color:var(--accent-cyan)">Trenz</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#attachments">8-in-1</a></li>
+                    <li><a href="#surfaces">Use Cases</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="cart.html" class="cart-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="badge" id="cartBadge">0</span>
+                </a>
+                <a href="#buy-now-section" class="header-cta pc-only">Buy Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mini Cart Popup -->
+    <div id="mini-cart-popup" class="mini-cart">
+        <div class="mini-cart-header">
+            <span>Item Added to Cart!</span>
+            <button onclick="closeMiniCart()"
+                style="background:none; border:none; color:white; font-size:1.2rem;">&times;</button>
+        </div>
+        <div class="mini-cart-item">
+            <img id="mc-img" src="" alt="Product">
+            <div class="mc-details">
+                <span id="mc-title" style="font-weight:700; display:block; margin-bottom:4px;"></span>
+                <span id="mc-variant" style="color:var(--text-sec-dark); font-size:0.9rem; display:block;"></span>
+                <span id="mc-qty" style="color:var(--text-sec-dark); font-size:0.9rem;"></span>
+            </div>
+        </div>
+        <a href="cart.html" class="btn-primary"
+            style="width:100%; text-align:center; display:block; margin-top:1rem;">Checkout</a>
+    </div>
+
+    <!-- HERO SECTION (BLACK) -->
+    <!-- HERO SECTION (Sticky Scroll Animation) -->
+    <div class="hero-spacer">
+        <div class="hero-sticky-container">
+            <canvas id="heroCanvas"></canvas>
+            <div class="hero-overlay">
+                <div class="container hero-content">
+                    <h1>Electric Cleaning Brush</h1>
+                    <p class="sub-text">Premium home cleaning.</p>
+                </div>
+            </div>
+            <div class="scroll-instruction">
+                <span>Scroll to explore</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- ASSURANCE BAR (OFF-WHITE START) -->
+    <div class="assurance-bar">
+        <div class="container assurance-grid">
+            <div class="badge-card"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                    </path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg> Ships in 2 Days</div>
+            <div class="badge-card"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg> 30-Day Returns</div>
+            <div class="badge-card"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg> Secure Checkout</div>
+            <div class="badge-card"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg> Free Shipping</div>
+            <div class="badge-card"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                </svg> 24/7 Support</div>
+        </div>
+    </div>
+
+    <!-- SECTION 1 (OFF-WHITE CONT.) -->
+    <section class="bg-offwhite py-20" id="features">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2 style="font-size: 2.5rem; color: var(--text-main-light);">Why You'll Love It</h2>
+                <p class="text-muted-light" style="max-width: 600px; margin: 1rem auto;">Designed to make deep cleaning
+                    effortless, faster, and more effective than manual scrubbing.</p>
+                <div class="flex items-center justify-center gap-4" style="flex-wrap: wrap; margin-top: 1rem;">
+                    <span
+                        style="background:#e0e5eb; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight:600; color: #556;">Telescopic
+                        Handle</span>
+                    <span
+                        style="background:#e0e5eb; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight:600; color: #556;">8
+                        Attachments</span>
+                    <span
+                        style="background:#e0e5eb; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight:600; color: #556;">Water
+                        Resistant</span>
+                    <span
+                        style="background:#e0e5eb; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight:600; color: #556;">Multi-surface</span>
+                    <span
+                        style="background:#e0e5eb; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight:600; color: #556;">Long-lasting
+                        Battery</span>
+                    <span
+                        style="background:#e0e5eb; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight:600; color: #556;">User-Friendly</span>
+                </div>
+            </div>
+
+            <div class="grid grid-2 gap-4 items-center" style="margin-top: 4rem;">
+                <div class="reveal">
+                    <div
+                        style="padding:56.25% 0 0 0;position:relative; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <iframe
+                            src="https://player.vimeo.com/video/1158819306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;background=1"
+                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                            title="CleanPro Action"></iframe>
+                    </div>
+                </div>
+                <!-- Features Grid embedded right -->
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <img src="https://i.postimg.cc/htJsCcyR/telescopic.png" alt="Handle" class="mobile-feature-img">
+                    <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M13 3l0 .01"></path>
+                            <path d="M12 21l0 .01"></path>
+                            <path d="M12 9l0 .01"></path>
+                            <path d="M12 15l0 .01"></path>
+                            <rect x="9" y="3" width="6" height="18" rx="2"></rect>
+                        </svg></div>
+                    <h3>Telescopic Handle</h3>
+                    <p class="text-muted-light">Extends up to 54 inches. No more back-breaking bending or climbing
+                        unstable chairs to reach high spots.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <img src="https://i.postimg.cc/gJKfH84z/high-torque.png" alt="Motor" class="mobile-feature-img">
+                    <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg></div>
+                    <h3>High-Torque Motor</h3>
+                    <p class="text-muted-light">Powerful dual-speed spinning action cuts through soap scum, dirt, and
+                        grime in half the time.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <img src="https://i.postimg.cc/bwbVR1wG/Whisk-a87822e033f0773b6b14abe375c7f12cdr.png"
+                        alt="Waterproof" class="mobile-feature-img">
+                    <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M12 2.69l5.74 5.74-5.74 5.74-5.74-5.74z"></path>
+                            <path d="M5.64 18.36l6.36 6.36 6.36-6.36"></path>
+                        </svg></div>
+                    <h3>Water-Resistant</h3>
+                    <p class="text-muted-light">IPX5 waterproof rating ensures safe operation in wet environments like
+                        showers and tubs.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <img src="https://i.postimg.cc/28BNPbSG/buckle-design.png" alt="Heads" class="mobile-feature-img">
+                    <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M3.5 12h17"></path>
+                            <path d="M12 3.5v17"></path>
+                        </svg></div>
+                    <h3>Quick-Swap Heads</h3>
+                    <p class="text-muted-light">Snap-on mechanism allows you to switch between 7 brushes in seconds for
+                        any surface type.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Attachments (BLACK) -->
+    <section class="bg-midnight py-20" id="attachments">
+        <div class="container text-center">
+            <h2 class="reveal mb-4" style="font-size: 2.5rem;">8-in-1 Versatility</h2>
+            <p class="text-muted-dark reveal" style="margin-bottom: 3rem;">Everything you need for a total home detail.
+            </p>
+
+            <div class="attachments-grid reveal">
+                <div class="att-card">
+                    <img src="https://i.postimg.cc/d3hVffG5/pointed-removebg-preview.png" class="att-img"
+                        alt="Pointed Brush">
+                    <span class="att-label">Pointed Brush</span>
+                </div>
+                <div class="att-card">
+                    <img src="https://i.postimg.cc/sxPsbRvt/small-brush-removebg-preview.png" class="att-img"
+                        alt="Small Brush">
+                    <span class="att-label">Small Brush</span>
+                </div>
+                <div class="att-card">
+                    <img src="https://i.postimg.cc/26DzG656/large_brush_removebg_preview.png" class="att-img"
+                        alt="Large Brush">
+                    <span class="att-label">Large Brush</span>
+                </div>
+                <div class="att-card">
+                    <img src="https://i.postimg.cc/26DzG65v/universal_1_removebg_preview.png" class="att-img"
+                        alt="Universal Head">
+                    <span class="att-label">Universal Head</span>
+                </div>
+                <div class="att-card">
+                    <img src="https://i.postimg.cc/MTSW5TGH/cloth_removebg_preview.png" class="att-img" alt="Cloth Pad">
+                    <span class="att-label">Cloth Pad</span>
+                </div>
+                <div class="att-card">
+                    <img src="https://i.postimg.cc/63X9c3QZ/wool_cloth_removebg_preview.png" class="att-img"
+                        alt="Wool Cloth Pad">
+                    <span class="att-label">Wool Cloth Pad</span>
+                </div>
+                <div class="att-card">
+                    <img src="https://i.postimg.cc/FR49pRK1/fiber_sponge_removebg_preview.png" class="att-img"
+                        alt="Fiber Sponge">
+                    <span class="att-label">Fiber Sponge</span>
+                </div>
+                <div class="att-card">
+                    <img src="https://i.postimg.cc/9MhWbMf4/regular_songe_removebg_preview.png" class="att-img"
+                        alt="Regular Sponge">
+                    <span class="att-label">Regular Sponge</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem;" class="reveal">
+                <p style="margin-top: 1rem; color: var(--accent-cyan); font-weight: 500;">Includes USB-C charging cable
+                    & hanging hook.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: Surfaces (OFF-WHITE) -->
+    <section class="bg-offwhite py-20" id="surfaces">
+        <div class="container">
+            <div class="text-center mb-4 reveal">
+                <h2 style="font-size: 2.5rem; color: var(--text-main-light);">Made for Every Surface</h2>
+                <p class="text-muted-light">Select a surface to see the recommended brush.</p>
+            </div>
+
+            <div class="surface-container" style="margin-top: 3rem;">
+                <div class="surface-chips reveal">
+                    <div class="chip active" onclick="changeSurface(0)">
+                        <span>Kitchen (Stovetop, Sink)</span> <span class="chip-arrow">→</span>
+                    </div>
+                    <div class="chip" onclick="changeSurface(1)">
+                        <span>Bathroom (Tub, Sink)</span> <span class="chip-arrow">→</span>
+                    </div>
+                    <div class="chip" onclick="changeSurface(2)">
+                        <span>Tile & Grout</span> <span class="chip-arrow">→</span>
+                    </div>
+                    <div class="chip" onclick="changeSurface(3)">
+                        <span>Floors (Hardwood, Vinyl)</span> <span class="chip-arrow">→</span>
+                    </div>
+                    <div class="chip" onclick="changeSurface(4)">
+                        <span>Shower Glass</span> <span class="chip-arrow">→</span>
+                    </div>
+                    <div class="chip" onclick="changeSurface(5)">
+                        <span>Vehicle Wheels</span> <span class="chip-arrow">→</span>
+                    </div>
+                    <div class="chip" onclick="changeSurface(6)">
+                        <span>House Windows</span> <span class="chip-arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <div class="surface-viewer">
+                        <img id="surfaceImg" src="https://i.postimg.cc/Jzy5QYfH/kitchen_sink_and_stove.png"
+                            class="surface-img" alt="Surface use case">
+                    </div>
+                    <p class="pro-tip" id="proTip">Pro Tip: Use the scouring pad for burnt-on grease.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: How it works (BLACK) -->
+    <section class="bg-midnight py-20" id="how-it-works">
+        <div class="container">
+            <h2 class="text-center reveal" style="font-size: 2.5rem; margin-bottom: 4rem;">How It Works</h2>
+
+            <div class="timeline reveal">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h3>Choose Your Head</h3>
+                        <p class="text-muted-dark">Select the best attachment for the mess. Snap it on securely.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h3>Extend & Angle</h3>
+                        <p class="text-muted-dark">Adjust the telescopic handle and head angle to reach comfortably.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h3>Power Scrub</h3>
+                        <p class="text-muted-dark">Press the button and let the high-torque motor do the work. Rinse
+                            away the dirt.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal" style="text-align:center; margin-top: 4rem;">
+                <h3 style="margin-bottom: 2rem;">Real Results</h3>
+                <div class="ba-slider-container" id="baSlider">
+                    <img src="https://i.postimg.cc/fL7D3NDf/cleantub.png" alt="After" class="ba-img" draggable="false">
+                    <div class="ba-overlay" id="baOverlay">
+                        <img src="https://i.postimg.cc/RF143B4T/dirtytub.png" alt="Before" draggable="false">
+                    </div>
+                    <div class="ba-handle" id="baHandle">↔</div>
+                </div>
+
+                <!-- Result Categories -->
+                <div class="flex justify-center gap-2 mt-4"
+                    style="margin-top: 1.5rem; display: flex; gap: 0.5rem; justify-content: center;">
+                    <button class="chip active result-btn" onclick="changeResult(0)">Bathroom</button>
+                    <button class="chip result-btn" onclick="changeResult(1)">Kitchen</button>
+                    <button class="chip result-btn" onclick="changeResult(2)">Living Room</button>
+                </div>
+
+                <p class="text-muted-dark mt-4" style="margin-top:1rem;">Drag the slider to see the difference</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Reviews (OFF-WHITE) -->
+    <section class="bg-offwhite py-20" id="reviews">
+        <div class="container">
+            <h2 class="text-center reveal" style="font-size: 2.5rem; color: var(--text-main-light);">Customer Reviews
+            </h2>
+
+            <div class="reviews-slider reveal" style="margin-top: 1.5rem;">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p style="color:var(--text-sec-light);">"I have arthritis and this brush changed my life. I can
+                        clean the whole shower without pain."</p>
+                    <strong>— Sarah M.</strong>
+                </div>
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p style="color:var(--text-sec-light);">"The power on this thing is crazy. Cleaned my grout lines to
+                        white in seconds."</p>
+                    <strong>— James P.</strong>
+                </div>
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p style="color:var(--text-sec-light);">"Best purchase for my car. The wheel rim attachment is
+                        perfect."</p>
+                    <strong>— Mike T.</strong>
+                </div>
+                <!-- Review 4 -->
+                <div class="review-card">
+                    <div class="stars">★★★★☆</div>
+                    <p style="color:var(--text-sec-light);">"Battery lasts a long time. Cleans the whole bathroom on one
+                        charge."</p>
+                    <strong>— Linda K.</strong>
+                </div>
+                <!-- Review 5 -->
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My back pain
+                        is gone thanks to this!"</p>
+                    <strong>— Robert D.</strong>
+                </div>
+                <!-- Review 6 -->
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both love
+                        it. Highly recommended."</p>
+                    <strong>— Emily W.</strong>
+                </div>
+                <!-- Review 7 -->
+                <div class="review-card">
+                    <div class="stars">★★★★☆</div>
+                    <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium and
+                        sturdy."</p>
+                    <strong>— David H.</strong>
+                </div>
+                <!-- Review 8 -->
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower mold.
+                        10/10."</p>
+                    <strong>— Jessica S.</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5.5: Buy Now (BLACK) -->
+    <section class="bg-offwhite py-20" id="buy-now-wrapper">
+        <div class="container">
+            <div class="product-grid reveal" id="buy-now-section">
+                <!-- Left Column: Visual -->
+                <div class="product-visual">
+                    <img id="product-variant-img" src="https://i.postimg.cc/nLdm9cQD/white_color_(1).jpg"
+                        alt="ViralTrenz Scrubber White">
+                </div>
+
+                <!-- Right Column: Info & Actions -->
+                <div class="product-info">
+                    <h2 class="product-title">ViralTrenz Electric Scrubber</h2>
+                    <div class="price-wrapper">
+                        <span class="price-current">$34.99</span>
+                        <span class="price-compare">$79.99</span>
+                        <span class="discount-badge">SAVE 56%</span>
+                    </div>
+
+                    <!-- Review Stars -->
+                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1.5rem; margin-top:-1rem;">
+                        <div
+                            style="color:#FFD700; font-size:1.1rem; letter-spacing:2px; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                            ★★★★★</div>
+                        <span class="review-count" style="font-size:0.9rem;">(1,245 Reviews)</span>
+                    </div>
+                    <p class="product-desc">
+                        The ultimate 8-in-1 cleaning solution. High-torque cleaning power for every surface in your
+                        home, from bathrooms to vehicles.
+                    </p>
+
+                    <!-- Color Selection -->
+                    <div class="option-group">
+                        <span class="option-label" id="color-label-display">Color: <strong>White</strong></span>
+                        <div class="color-selector">
+                            <div class="color-opt color-white active" onclick="selectColor('white', this)"
+                                title="White"></div>
+                            <div class="color-opt color-black" onclick="selectColor('black', this)" title="Black"></div>
+                            <div class="color-opt color-pink" onclick="selectColor('pink', this)" title="Pink"></div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="actions-row">
+                        <div class="qty-selector">
+                            <button class="qty-btn" onclick="adjustQty(-1)">-</button>
+                            <input type="text" id="qtyInput" class="qty-input" value="1" readonly>
+                            <button class="qty-btn" onclick="adjustQty(1)">+</button>
+                        </div>
+                        <button class="btn-primary btn-large" onclick="addToCart(true)">Add to Cart</button>
+                    </div>
+
+                    <!-- Trust Signals -->
+                    <div class="trust-signals">
+                        <div class="trust-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            <span>1-Year Warranty</span>
+                        </div>
+                        <div class="trust-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="1" y="3" width="15" height="13"></rect>
+                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                            </svg>
+                            <span>Free Shipping</span>
+                        </div>
+                        <div class="trust-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                            <span>30-Day Money Back</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: FAQ (BLACK) -->
+    <section class="bg-midnight py-20" id="faq">
+        <div class="container" style="max-width: 800px;">
+            <h2 class="text-center reveal mb-4" style="font-size: 2.5rem; margin-bottom: 3rem;">Frequently Asked
+                Questions</h2>
+
+            <div class="reveal">
+                <div class="accordion-item">
+                    <button class="accordion-btn" aria-expanded="false">
+                        Is it safe for tile and grout?
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">Yes! The corner brush and scouring pads are specifically designed for
+                        tile and grout without scratching.</div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-btn" aria-expanded="false">
+                        Can I use it on a car?
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">Absolutely. Use the sponge and polishing pads for car surfaces and
+                        the bristles for tires and rims.</div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-btn" aria-expanded="false">
+                        Is it rechargeable?
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">Yes, it comes with a high-capacity rechargeable battery and a USB-C
+                        charging cable.</div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-btn" aria-expanded="false">
+                        How long does the battery last?
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">It runs for up to 90 minutes on a single charge, depending on the
+                        intensity of use.</div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-btn" aria-expanded="false">
+                        Is it water resistant?
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">The head unit is IPX7 waterproof (submersible) and the handle is IPX5
+                        water-resistant (splash proof).</div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-btn" aria-expanded="false">
+                        What comes in the box?
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">The main unit, telescopic handle, 8 different cleaning heads, and
+                        USB-C charging cable.</div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-btn" aria-expanded="false">
+                        Do you accept returns?
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">Returns are accepted if the item arrives damaged or if the product is
+                        not as described.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: CTA Strip (BLACK) -->
+    <section class="cta-strip py-12">
+        <div class="container flex justify-between items-center" style="gap: 2rem; flex-wrap: wrap;">
+            <div style="text-align: left;">
+                <h3 style="font-size: 1.8rem; color: white;">Try it risk-free for 30 days.</h3>
+                <p class="text-muted-dark">Join 10,000+ happy customers today.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h4>ViralTrenz</h4>
+                    <p>The smartest way to clean your home. Powerful, versatile, and built to last.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Support</h5>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Warranty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Policies</h5>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copy text-muted-dark">
+            &copy; 2026 ViralTrenz. All rights reserved. Demo landing page.
+        </div>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button id="backToTop"
+        style="position:fixed; bottom:30px; right:30px; width:50px; height:50px; border-radius:50%; background:var(--accent-cyan); color:black; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 20px rgba(0,242,234,0.3); opacity:0; pointer-events:none; transition:0.3s; z-index:900;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"></path>
+        </svg>
+    </button>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f2ea" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span>Added to cart!</span>
+    </div>
+
+    <script>
+        // --- Interactions & Animations ---
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+
+            // Back to top visibility
+            const btt = document.getElementById('backToTop');
+            if (winScroll > 500) {
+                btt.style.opacity = '1';
+                btt.style.pointerEvents = 'all';
+            } else {
+                btt.style.opacity = '0';
+                btt.style.pointerEvents = 'none';
+            }
+        });
+
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // --- 69-Frame Sticky Scroll Hero Animation (Refined) ---
+        const canvas = document.getElementById('heroCanvas');
+        const ctx = canvas.getContext('2d');
+        const frameCount = 69; // Updated to 69 frames
+        const frames = [];
+        let framesLoaded = 0;
+
+        // Settings
+        const speed = 1.0; // Speed effectively controlled by 1000vh spacer
+        const easing = 0.12;
+
+        // State for smoothing
+        let currentFrameIndex = 0;
+        let targetFrameIndex = 0;
+
+        const isMobile = window.innerWidth < 768;
+        const heroSpacer = document.querySelector('.hero-spacer');
+
+        // Fallback: Set background image in CSS or here in case JS fails or loading
+        canvas.style.backgroundImage = "url('hero/heroanimation/ezgif-frame-001.jpg')";
+        canvas.style.backgroundSize = "cover";
+        canvas.style.backgroundPosition = "center";
+
+        // Resize Logic
+        function resizeCanvas() {
+            const ratio = Math.min(window.devicePixelRatio, 2);
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+
+            canvas.width = w * ratio;
+            canvas.height = h * ratio;
+            canvas.style.width = w + 'px';
+            canvas.style.height = h + 'px';
+
+            ctx.scale(ratio, ratio);
+
+            // Force re-render
+            renderFrame(Math.round(currentFrameIndex));
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // 1. Frame Path
+        const currentFramePath = index => {
+            const id = (index + 1).toString().padStart(3, '0');
+            return `hero/heroanimation/ezgif-frame-${id}.jpg`;
+        };
+
+        // 2. Preload
+        function preloadFrames() {
+            const loadFrame = (i) => {
+                if (isMobile && i % 2 !== 0) {
+                    frames[i] = null;
+                    return;
+                }
+                const img = new Image();
+                img.src = currentFramePath(i);
+                img.onload = () => {
+                    framesLoaded++;
+                    if (framesLoaded === 1) renderFrame(0);
+                };
+                frames[i] = img;
+            };
+
+            for (let i = 0; i < 10; i++) loadFrame(i);
+            setTimeout(() => {
+                for (let i = 10; i < frameCount; i++) loadFrame(i);
+            }, 100);
+        }
+        preloadFrames();
+
+        // 3. Render
+        function renderFrame(index) {
+            if (index < 0) index = 0;
+            if (index >= frameCount) index = frameCount - 1;
+
+            if (isMobile && index % 2 !== 0) index = index - 1;
+
+            const img = frames[index];
+            if (!img) {
+                // Fallback is handled by background-image if canvas is transparent
+                // But we clearRect, so we need to draw over it. 
+                // If img is missing (not loaded), we skip drawImage, showing background?
+                // No, clearRect clears background too if it's on canvas element? 
+                // Actually BG image is on the element style, clearRect clears pixels. 
+                // So BG image shows through transparent pixels.
+                return;
+            }
+
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const imgW = img.width;
+            const imgH = img.height;
+
+            const scale = Math.max(w / imgW, h / imgH);
+            const x = (w / 2) - (imgW * scale / 2);
+            const y = (h / 2) - (imgH * scale / 2);
+
+            ctx.clearRect(0, 0, w, h);
+            ctx.drawImage(img, x, y, imgW * scale, imgH * scale);
+        }
+
+        // 4. Update Target
+        function updateTarget() {
+            if (!heroSpacer) return;
+            const spacerRect = heroSpacer.getBoundingClientRect();
+            const scrollDistance = spacerRect.height - window.innerHeight;
+            const scrolled = -spacerRect.top;
+
+            let progress = scrolled / scrollDistance;
+            progress = Math.max(0, Math.min(1, progress));
+
+            // Map full progress to full frames
+            const maxFrame = frameCount - 1;
+            targetFrameIndex = Math.floor(progress * maxFrame);
+        }
+
+        window.addEventListener('scroll', updateTarget);
+
+        // 5. Animation Loop
+        function animationLoop() {
+            const diff = targetFrameIndex - currentFrameIndex;
+            if (Math.abs(diff) > 0.01) {
+                currentFrameIndex += diff * easing;
+                renderFrame(Math.round(currentFrameIndex));
+            } else if (Math.abs(targetFrameIndex - Math.round(currentFrameIndex)) > 0) {
+                renderFrame(Math.round(targetFrameIndex));
+            }
+            requestAnimationFrame(animationLoop);
+        }
+        requestAnimationFrame(animationLoop);
+
+        // Remove old logic hooks if any
+        // (Tilt effect follows)
+
+        // End Hero Animation Logic
+
+        // Surface Swap Logic
+        const surfaceData = [
+            { text: "Kitchen", img: "https://i.postimg.cc/Jzy5QYfH/kitchen_sink_and_stove.png", tip: "Pro Tip: Use the scouring pad for burnt-on grease." },
+            { text: "Bathroom", img: "https://i.postimg.cc/289xhNKS/bath_tub_and_sink.png", tip: "Pro Tip: The round brush contours perfectly to sinks." },
+            { text: "Tile", img: "https://i.postimg.cc/QdBJqY2B/tiles_and_grout.png", tip: "Pro Tip: Let the cleaner sit for 5 mins before scrubbing." },
+            { text: "Floors", img: "https://i.postimg.cc/6p7fhbk8/kitchen_floor.png", tip: "Pro Tip: Use the flat brush for large areas." },
+            { text: "Glass", img: "https://i.postimg.cc/PrVMYnRX/glass_shower.png", tip: "Pro Tip: Use the sponge head for a streak-free shine." },
+            { text: "Wheels", img: "https://i.postimg.cc/sDHJ7CND/car_wheel.png", tip: "Pro Tip: The corner brush gets into tight rim spokes." },
+            { text: "Outdoor", img: "https://i.postimg.cc/K8KD5p68/house_windows.png", tip: "Pro Tip: Great for patio furniture and siding." }
+        ];
+
+        function changeSurface(index) {
+            // update chips
+            const chips = document.querySelectorAll('.surface-chips .chip');
+            chips.forEach((c, i) => {
+                c.classList.toggle('active', i === index);
+            });
+
+            // update content
+            const img = document.getElementById('surfaceImg');
+            const tip = document.getElementById('proTip');
+            const viewer = document.querySelector('.surface-viewer');
+            const activeChip = chips[index];
+            const rightCol = document.querySelector('.surface-container').children[1]; // Ensure right col selection for desktop
+
+            // Styling for tip
+            tip.style.textAlign = 'center';
+            tip.style.marginBottom = '1rem';
+            tip.style.color = 'var(--text-sec-light)';
+            tip.style.fontSize = '0.9rem';
+            tip.style.fontWeight = '500';
+
+            if (window.innerWidth <= 900) {
+                // Mobile: Move viewer AND tip under active chip
+                // Order: Chip -> Viewer -> Tip
+                activeChip.insertAdjacentElement('afterend', viewer);
+                viewer.insertAdjacentElement('afterend', tip);
+
+                viewer.style.marginTop = '1rem';
+                viewer.style.marginBottom = '0';
+                viewer.style.height = '300px';
+                tip.style.marginBottom = '2rem'; // Spacing after group
+            } else {
+                // Desktop: Restore to right column if needed
+                if (rightCol && !rightCol.contains(viewer)) {
+                    // Start of right col
+                    rightCol.insertBefore(viewer, rightCol.firstChild);
+                    viewer.insertAdjacentElement('afterend', tip);
+                } else {
+                    // Just ensure tip follows viewer
+                    viewer.insertAdjacentElement('afterend', tip);
+                }
+
+                viewer.style.marginTop = '0';
+                viewer.style.marginBottom = '0';
+                viewer.style.height = 'auto';
+            }
+
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = surfaceData[index].img;
+                tip.textContent = surfaceData[index].tip;
+                img.style.opacity = 1;
+            }, 300);
+        }
+
+        // Add resize listener to handle layout reset without click
+        window.addEventListener('resize', () => {
+            let activeIndex = 0;
+            document.querySelectorAll('.surface-chips .chip').forEach((c, i) => {
+                if (c.classList.contains('active')) activeIndex = i;
+            });
+            changeSurface(activeIndex);
+        });
+
+        // Initialize tip position and mobile layout on load
+        window.addEventListener('DOMContentLoaded', () => {
+            changeSurface(0);
+        });
+
+
+
+
+        // Before/After Slider
+        const baContainer = document.getElementById('baSlider');
+        const baOverlay = document.getElementById('baOverlay');
+        const baOverlayImg = baOverlay.querySelector('img'); // Select inner image
+        const baHandle = document.getElementById('baHandle');
+        let isDragging = false;
+
+        baContainer.addEventListener('mousedown', () => isDragging = true);
+        window.addEventListener('mouseup', () => isDragging = false);
+        baContainer.addEventListener('touchstart', () => isDragging = true);
+        window.addEventListener('touchend', () => isDragging = false);
+
+        // Sync overlay image width to container width (Fix for responsive behavior)
+        function updateSliderImageWidth() {
+            const width = baContainer.offsetWidth;
+            baOverlayImg.style.width = width + 'px';
+            baOverlayImg.style.maxWidth = 'none'; // Override CSS constraint if any
+        }
+        window.addEventListener('resize', updateSliderImageWidth);
+        // Initial call
+        updateSliderImageWidth();
+        // Also call on load just in case images load late
+        window.addEventListener('load', updateSliderImageWidth);
+
+        const moveSlider = (x) => {
+            const rect = baContainer.getBoundingClientRect();
+            let pos = ((x - rect.left) / rect.width) * 100;
+            if (pos < 0) pos = 0;
+            if (pos > 100) pos = 100;
+            baOverlay.style.width = pos + "%";
+            baHandle.style.left = pos + "%";
+        };
+
+        baContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            moveSlider(e.clientX);
+        });
+
+        baContainer.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault(); // Stop page scroll
+            moveSlider(e.touches[0].clientX);
+        }, { passive: false });
+
+        // Result Categories Logic
+        const resultsData = [
+            { // Bathroom
+                before: "https://i.postimg.cc/RF143B4T/dirtytub.png",
+                after: "https://i.postimg.cc/fL7D3NDf/cleantub.png"
+            },
+            { // Kitchen
+                before: "https://i.postimg.cc/vHyWnHhb/dirty_sink.jpg",
+                after: "https://i.postimg.cc/CL0j8LN2/clean_sink.jpg"
+            },
+            { // Living Room
+                before: "https://i.postimg.cc/k4NqVmqF/dirtywindow.png",
+                after: "https://i.postimg.cc/fL7D3NDK/cleanwindow.png"
+            }
+        ];
+
+
+        function changeResult(index) {
+            // Update buttons
+            document.querySelectorAll('.result-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+                btn.style.borderColor = i === index ? 'var(--accent-cyan)' : 'transparent';
+                btn.style.background = i === index ? 'rgba(0, 242, 234, 0.1)' : 'white';
+            });
+
+            // Update images
+            const afterImg = baContainer.querySelector('.ba-img');
+            const beforeImg = baOverlay.querySelector('img');
+
+            // Fade out
+            baContainer.style.opacity = 0.5;
+
+            setTimeout(() => {
+                beforeImg.src = resultsData[index].before;
+                afterImg.src = resultsData[index].after;
+
+                // Reset slider to center
+                baOverlay.style.width = '50%';
+                baHandle.style.left = '50%';
+
+                // Fade in
+                baContainer.style.opacity = 1;
+            }, 200);
+        }
+
+        // FAQ Accordion
+        document.querySelectorAll('.accordion-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const content = item.querySelector('.accordion-content');
+                const isActive = item.classList.contains('accordion-active');
+
+                item.classList.toggle('accordion-active');
+                btn.setAttribute('aria-expanded', !isActive);
+
+                if (!isActive) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    content.style.maxHeight = null;
+                }
+            });
+        });
+
+        // --- Cart Logic (LocalStorage) ---
+
+        const PRODUCT = {
+            id: "cleanbrush-7in1",
+            title: "Multifunctional Electric Cleaning Brush",
+            price: 34.99,
+            compareAt: 79.99,
+            // Variants now have specific images
+            variants: {
+                White: "https://i.postimg.cc/nLdm9cQD/white_color_(1).jpg",
+                Black: "https://i.postimg.cc/qv3yYdSd/black_color_(1).jpg",
+                Pink: "https://i.postimg.cc/cJD3t48Y/pink_color_(1).jpg"
+            }
+        };
+
+        const qtyInput = document.getElementById('qtyInput');
+        let selectedColor = 'White'; // Default
+
+        function selectColor(color, btn) {
+            selectedColor = color.charAt(0).toUpperCase() + color.slice(1);
+
+            // Update Label
+            const label = document.getElementById('color-label-display');
+            if (label) label.innerHTML = `Color: <strong>${selectedColor}</strong>`;
+
+            // Update Image
+            const img = document.getElementById('product-variant-img');
+            if (PRODUCT.variants[selectedColor]) {
+                img.src = PRODUCT.variants[selectedColor];
+            }
+
+            // Update UI (Buttons)
+            document.querySelectorAll('.color-opt').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function adjustQty(amount) {
+            let val = parseInt(qtyInput.value) + amount;
+            if (val < 1) val = 1;
+            if (val > 10) val = 10;
+            qtyInput.value = val;
+        }
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('viraltrenz_cart')) || [];
+            const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+            const badge = document.getElementById('cartBadge');
+            badge.innerText = count;
+            badge.classList.toggle('visible', count > 0);
+        }
+
+        // Show Mini Cart Popup
+        function showMiniCart(item) {
+            const popup = document.getElementById('mini-cart-popup');
+            document.getElementById('mc-img').src = item.image;
+            document.getElementById('mc-title').textContent = item.title;
+            document.getElementById('mc-variant').textContent = `Color: ${item.color}`;
+            document.getElementById('mc-qty').textContent = `Qty: ${item.quantity}`;
+
+            popup.classList.add('show');
+
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                // closeMiniCart(); // Optional: user might want it to stay
+            }, 5000);
+        }
+
+        function closeMiniCart() {
+            document.getElementById('mini-cart-popup').classList.remove('show');
+        }
+
+        function addToCart(redirect = false) { // redirect arg kept for compatibility but overridden
+            const quantity = parseInt(qtyInput.value);
+            const selectedColorVal = selectedColor || 'White';
+
+            // Create Cart Item
+            const cartItem = {
+                id: `${PRODUCT.id}-${selectedColorVal.toLowerCase()}`,
+                title: PRODUCT.title,
+                price: PRODUCT.price,
+                compareAt: PRODUCT.compareAt,
+                image: PRODUCT.variants[selectedColorVal], // Specific image
+                quantity: quantity,
+                color: selectedColorVal
+            };
+
+            // Get existing cart
+            let cart = JSON.parse(localStorage.getItem('viraltrenz_cart')) || [];
+
+            // Check if item exists
+            const existingItem = cart.find(i => i.id === cartItem.id);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push(cartItem);
+            }
+
+            // Save
+            localStorage.setItem('viraltrenz_cart', JSON.stringify(cart));
+
+            // Update Badge
+            updateCartBadge();
+
+            // Show Toast (Optional, but replacing with Mini Cart)
+            // showToast(`Added ${quantity} item(s) to cart`);
+
+            // Show Mini Cart Popup instead of Redirect
+            showMiniCart(cartItem);
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Init
+        updateCartBadge();
+
+    </script>
+</body>
+
+</html>
