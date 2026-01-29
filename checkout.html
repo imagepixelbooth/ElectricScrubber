@@ -66,6 +66,17 @@
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
+        /* Glassmorphism Effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
         h2 {
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
@@ -179,7 +190,7 @@
         <div class="payment-form">
             <!-- Contact/Shipping Form Removed (Data from Cart) -->
 
-            <div class="card">
+            <div class="glass-card">
                 <h2>Payment Method</h2>
                 <div class="form-group">
                     <label class="form-label">Card Details</label>
@@ -200,7 +211,7 @@
 
         <!-- Right: Summary -->
         <div class="order-summary">
-            <div class="card">
+            <div class="glass-card">
                 <h2>Order Summary</h2>
                 <div id="summaryItems"></div>
 
@@ -239,7 +250,8 @@
                 style="width:60px; height:60px; background:#e0fff4; color:#00c853; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
                 ✓</div>
             <h2>Order Confirmed!</h2>
-            <p style="color:#666; margin-bottom:1.5rem;">Thanks for your order.</p>
+            <p style="color:#666; margin-bottom:1.5rem;">Thanks for your order. Please check your email for order
+                confirmation.</p>
             <button class="btn-primary" onclick="window.location.href='index.html'">Back to Home</button>
         </div>
     </div>
