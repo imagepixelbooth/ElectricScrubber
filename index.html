@@ -685,6 +685,33 @@
             background: var(--bg-midnight);
         }
 
+        /* Responsive Adjustments for Carousel */
+        @media (max-width: 900px) {
+            .carousel-viewport {
+                height: 450px;
+                /* Slightly smaller stage */
+                display: block;
+                /* Disable flex centering on mobile to avoid conflicts */
+            }
+
+            .carousel-track {
+                display: block;
+                /* Disable flex on mobile */
+                height: 450px;
+            }
+
+            .carousel-card {
+                width: 260px;
+                height: 350px;
+                margin: -175px 0 0 -130px;
+                /* Recenter based on new dimensions (350/2, 260/2) */
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .carousel-viewport {
