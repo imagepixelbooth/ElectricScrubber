@@ -102,4 +102,8 @@ app.post('/update-payment-intent', async (req, res) => {
   }
 });
 
+// Import the Order Handler
+const createOrder = require('./api/create-order');
+app.post('/api/create-order', createOrder);
+
 app.listen(4242, () => console.log('Node server listening on port 4242! on http://localhost:4242'));
