@@ -96,21 +96,21 @@ module.exports = async (req, res) => {
                 auth: { user: 'apikey', pass: process.env.SENDGRID_API_KEY }
             });
             */
-            
+
             // Example: Generic SMTP (Placeholder - needs real credentials)
             const transporter = nodemailer.createTransport({
-                 host: process.env.SMTP_HOST || 'smtp.example.com',
-                 port: 587,
-                 secure: false, 
-                 auth: {
-                     user: process.env.SMTP_USER,
-                     pass: process.env.SMTP_PASS,
-                 },
+                host: process.env.SMTP_HOST || 'smtp.example.com',
+                port: 587,
+                secure: false,
+                auth: {
+                    user: process.env.SMTP_USER,
+                    pass: process.env.SMTP_PASS,
+                },
             });
 
             // Send
             const htmlContent = generateEmailHtml(orderId, items, total);
-            
+
             await transporter.sendMail({
                 from: '"ViralTrenz" <orders@viraltrenz.com>',
                 to: email, // User's email
@@ -119,15 +119,20 @@ module.exports = async (req, res) => {
             });
 
             // Success Response
-            res.status(200).json({ 
-                success: true, 
+            res.status(200).json({
+                success: true,
                 orderId: orderId,
                 message: 'Order created and email sent'
             });
 
         } catch (error) {
             console.error('Order Error:', error);
-            res.status(500).json({ success: false, error: 'Failed to process order' });
+            // Return specific error message for debugging
+            res.status(500).json({
+                success: false,
+                error: error.message || 'Unknown error occurred',
+                details: error.toString()
+            });
         }
     } else {
         res.status(405).json({ error: 'Method not allowed' });
