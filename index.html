@@ -2598,6 +2598,11 @@
             const cards = document.querySelectorAll('.carousel-card');
             const dots = document.querySelectorAll('.page-dot');
             const len = surfaceData.length;
+            const isMobile = window.innerWidth <= 768;
+
+            // Responsive Params
+            const sideOffset = isMobile ? 55 : 120;
+            const farOffset = isMobile ? 80 : 300;
 
             // Remove Track translation (we move cards absolutely now)
             track.style.transform = 'none';
@@ -2612,7 +2617,7 @@
 
                 // Default hidden state
                 let scale = 0.7;
-                let translateX = offset > 0 ? 300 : -300;
+                let translateX = offset > 0 ? farOffset : -farOffset;
                 let opacity = 0;
                 let zIndex = 0;
                 let filter = 'grayscale(1) brightness(0.4)';
@@ -2630,7 +2635,7 @@
                     // Previous / Next (Side cards)
                     scale = 0.85;
                     // Push them closer (120px)
-                    translateX = offset > 0 ? 120 : -120;
+                    translateX = offset > 0 ? sideOffset : -sideOffset;
                     rotateY = offset > 0 ? -15 : 15;
                     opacity = 0.6;
                     zIndex = 5;
@@ -2639,7 +2644,7 @@
                 } else {
                     // Others (Hidden but positioned for entrance)
                     // We keep them slightly further out so they can slide in
-                    translateX = offset > 0 ? 300 : -300;
+                    translateX = offset > 0 ? farOffset : -farOffset;
                     opacity = 0; // Hide invisible ones
                     card.classList.remove('active');
                 }
