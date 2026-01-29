@@ -13,7 +13,9 @@ console.log("Supabase Key present:", !!supabaseKey);
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 if (!supabase) {
-    console.warn("WARNING: Supabase client NOT initialized. Check .env variables.");
+    console.error("!!! WARNING: Supabase client NOT initialized. Check .env variables. !!!");
+    console.error("SUPABASE_URL found:", !!supabaseUrl);
+    console.error("SUPABASE_KEY found:", !!supabaseKey);
 }
 
 /**
