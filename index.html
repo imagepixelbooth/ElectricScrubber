@@ -548,101 +548,164 @@
             color: white;
         }
 
-        /* Section 3: Surfaces (Off-white) */
-        .surface-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .surface-chips {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .chip {
-            padding: 1rem 1.5rem;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            font-weight: 600;
-            color: var(--text-sec-light);
-            cursor: pointer;
-            transition: 0.3s;
+        /* Section 3: Surfaces (3D Carousel) */
+        .carousel-viewport {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            /* Fixed height stage */
+            margin-top: 2rem;
+            perspective: 1000px;
+            /* Essential for 3D effect */
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            /* Overflow: hidden is on the section, but we ensure track stays bounds */
         }
 
-        .chip:hover {
-            transform: translateX(10px);
-            background: #f8f9fa;
+        .carousel-track {
+            display: flex;
+            align-items: center;
+            /* No wrap - a single horizontal strip */
+            position: absolute;
+            left: 50%;
+            /* Start from center */
+            transform-style: preserve-3d;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            /* Smooth slide */
+            cursor: grab;
         }
 
-        .chip.active {
-            background: var(--bg-midnight);
+        .carousel-track:active {
+            cursor: grabbing;
+        }
+
+        .carousel-card {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 400px;
+            margin: 0 15px;
+            /* Spacing between cards */
+            border-radius: 40px;
+            /* Premium rounded corners */
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            /* Fallback */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            /* Deep shadow */
+            transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease, z-index 0s linear 0.4s;
+            /* z-index flips after anim */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-origin: center center;
+            user-select: none;
+        }
+
+        .carousel-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 60%);
+            /* Text protection */
+            z-index: 2;
+        }
+
+        /* Dimming overlay (for side cards) */
+        .carousel-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            /* Base dim */
+            transition: background 0.4s;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .carousel-card.active::after {
+            background: rgba(0, 0, 0, 0);
+            /* Active is bright */
+        }
+
+        .card-content {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 4;
             color: white;
-            border-color: var(--bg-midnight);
-            transform: translateX(15px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            padding: 0 1rem;
         }
 
-        @media (max-width: 900px) {
-
-            .chip:hover,
-            .chip.active {
-                transform: none !important;
-                /* Keep centered on mobile */
-            }
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* Glass effect for Surface Chips ONLY */
-        .surface-chips .chip {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+        .card-tip {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 400;
         }
 
-        .surface-chips .chip:hover {
-            background: rgba(255, 255, 255, 0.6);
+        /* Pagination Rail */
+        .pagination-rail {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
         }
 
-        .surface-chips .chip.active {
-            background: var(--bg-midnight);
-            border-color: var(--bg-midnight);
-            opacity: 1;
-        }
-
-        .chip-arrow {
-            opacity: 0.4;
+        .page-dot {
+            width: 20px;
+            height: 4px;
+            background: #cbd5e1;
+            border-radius: 2px;
             transition: 0.3s;
-            display: inline-block;
-            /* Enable transform */
+            cursor: pointer;
         }
 
-        .chip:hover .chip-arrow {
-            opacity: 1;
-            transform: translateX(5px);
+        .page-dot.active {
+            width: 40px;
+            background: var(--bg-midnight);
         }
 
-        .chip.active .chip-arrow {
-            opacity: 1;
-            transform: rotate(90deg);
-            /* Downward arrow */
-        }
-
-        @media (max-width: 900px) {
-            .chip:hover .chip-arrow {
-                transform: translateX(0);
-                /* Reset hover move on mobile */
+        /* Responsive */
+        @media (max-width: 768px) {
+            .carousel-viewport {
+                height: 350px;
             }
 
-            .chip.active .chip-arrow {
-                transform: rotate(90deg);
-                /* Ensure rotation persists */
+            .carousel-card {
+                width: 220px;
+                height: 300px;
+                margin: 0 10px;
+                border-radius: 24px;
+            }
+
+            .card-title {
+                font-size: 1.4rem;
+            }
+
+            .container.mobile-full-width {
+                padding-left: 0;
+                padding-right: 0;
+                overflow: hidden;
             }
         }
 
@@ -1963,45 +2026,24 @@
     </section>
 
     <!-- SECTION 3: Surfaces (OFF-WHITE) -->
-    <section class="bg-offwhite py-20" id="surfaces">
-        <div class="container">
+    <section class="bg-offwhite py-20" id="surfaces" style="overflow:hidden;">
+        <div class="container mobile-full-width">
             <div class="text-center mb-4 reveal">
-                <h2 style="font-size: 2.5rem; color: var(--text-main-light);">Made for Every Surface</h2>
-                <p class="text-muted-light">Select a surface to see the recommended brush.</p>
+                <h2 style="font-size: 2.5rem; color: var(--text-main-light); margin-bottom: 0.5rem;">Made for Every
+                    Surface</h2>
+                <p class="text-muted-light">Drag to explore</p>
             </div>
 
-            <div class="surface-container" style="margin-top: 3rem;">
-                <div class="surface-chips reveal">
-                    <div class="chip active" onclick="changeSurface(0)">
-                        <span>Kitchen (Stovetop, Sink)</span> <span class="chip-arrow">→</span>
-                    </div>
-                    <div class="chip" onclick="changeSurface(1)">
-                        <span>Bathroom (Tub, Sink)</span> <span class="chip-arrow">→</span>
-                    </div>
-                    <div class="chip" onclick="changeSurface(2)">
-                        <span>Tile & Grout</span> <span class="chip-arrow">→</span>
-                    </div>
-                    <div class="chip" onclick="changeSurface(3)">
-                        <span>Floors (Hardwood, Vinyl)</span> <span class="chip-arrow">→</span>
-                    </div>
-                    <div class="chip" onclick="changeSurface(4)">
-                        <span>Shower Glass</span> <span class="chip-arrow">→</span>
-                    </div>
-                    <div class="chip" onclick="changeSurface(5)">
-                        <span>Vehicle Wheels</span> <span class="chip-arrow">→</span>
-                    </div>
-                    <div class="chip" onclick="changeSurface(6)">
-                        <span>House Windows</span> <span class="chip-arrow">→</span>
-                    </div>
+            <!-- 3D Carousel Viewport -->
+            <div class="carousel-viewport" id="carouselViewport">
+                <div class="carousel-track" id="surfaceTrack">
+                    <!-- Cards injected via JS -->
                 </div>
+            </div>
 
-                <div class="reveal">
-                    <div class="surface-viewer">
-                        <img id="surfaceImg" src="https://i.postimg.cc/Jzy5QYfH/kitchen_sink_and_stove.png"
-                            class="surface-img" alt="Surface use case">
-                    </div>
-                    <p class="pro-tip" id="proTip">Pro Tip: Use the scouring pad for burnt-on grease.</p>
-                </div>
+            <!-- Pagination -->
+            <div class="pagination-rail" id="surfacePagination">
+                <!-- Dots injected via JS -->
             </div>
         </div>
     </section>
@@ -2519,78 +2561,165 @@
             { text: "Outdoor", img: "assets/images/surfaces/house_windows.png", tip: "Pro Tip: Great for patio furniture and siding." }
         ];
 
-        function changeSurface(index) {
-            // update chips
-            const chips = document.querySelectorAll('.surface-chips .chip');
-            chips.forEach((c, i) => {
-                c.classList.toggle('active', i === index);
-            });
+        // --- 3D Carousel Logic ---
+        const track = document.getElementById('surfaceTrack');
+        const pagination = document.getElementById('surfacePagination');
+        let activeIndex = 0;
+        let startX = 0;
+        let isDraggingTrack = false;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID;
 
-            // update content
-            const img = document.getElementById('surfaceImg');
-            const tip = document.getElementById('proTip');
-            const viewer = document.querySelector('.surface-viewer');
-            const activeChip = chips[index];
-            const rightCol = document.querySelector('.surface-container').children[1]; // Ensure right col selection for desktop
+        // Render Carousel
+        function initCarousel() {
+            // Generate Cards
+            track.innerHTML = surfaceData.map((item, index) => `
+                <div class="carousel-card" onclick="goToSlide(${index})">
+                    <img src="${item.img}" alt="${item.text}">
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <div class="card-title">${item.text}</div>
+                        <div class="card-tip">${item.tip}</div>
+                    </div>
+                </div>
+            `).join('');
 
-            // Styling for tip
-            tip.style.textAlign = 'center';
-            tip.style.marginBottom = '1rem';
-            tip.style.color = 'var(--text-sec-light)';
-            tip.style.fontSize = '0.9rem';
-            tip.style.fontWeight = '500';
+            // Generate Pagination
+            pagination.innerHTML = surfaceData.map((_, index) => `
+                <div class="page-dot" onclick="goToSlide(${index})"></div>
+            `).join('');
 
-            if (window.innerWidth <= 900) {
-                // Mobile: Move viewer AND tip under active chip
-                // Order: Chip -> Viewer -> Tip
-                activeChip.insertAdjacentElement('afterend', viewer);
-                viewer.insertAdjacentElement('afterend', tip);
-
-                viewer.style.marginTop = '1rem';
-                viewer.style.marginBottom = '0';
-                viewer.style.height = '300px';
-                tip.style.marginBottom = '2rem'; // Spacing after group
-            } else {
-                // Desktop: Restore to right column if needed
-                if (rightCol && !rightCol.contains(viewer)) {
-                    // Start of right col
-                    rightCol.insertBefore(viewer, rightCol.firstChild);
-                    viewer.insertAdjacentElement('afterend', tip);
-                } else {
-                    // Just ensure tip follows viewer
-                    viewer.insertAdjacentElement('afterend', tip);
-                }
-
-                viewer.style.marginTop = '0';
-                viewer.style.marginBottom = '0';
-                viewer.style.height = 'auto';
-            }
-
-            img.style.opacity = 0;
-            setTimeout(() => {
-                img.src = surfaceData[index].img;
-                tip.textContent = surfaceData[index].tip;
-                img.style.opacity = 1;
-            }, 300);
+            updateCarousel();
         }
 
-        // Add resize listener to handle layout reset without click
-        let lastWidth = window.innerWidth;
-        window.addEventListener('resize', () => {
-            if (window.innerWidth !== lastWidth) {
-                lastWidth = window.innerWidth;
-                let activeIndex = 0;
-                document.querySelectorAll('.surface-chips .chip').forEach((c, i) => {
-                    if (c.classList.contains('active')) activeIndex = i;
-                });
-                changeSurface(activeIndex);
+        function updateCarousel() {
+            const cards = document.querySelectorAll('.carousel-card');
+            const dots = document.querySelectorAll('.page-dot');
+            const cardWidth = 330; // card(300) + margin(30)
+            const centerOffset = (window.innerWidth / 2) - (cardWidth / 2); // Center active card
+
+            // Update Track Position
+            // We want activeIndex to be at center
+            // Position = centerOffset - (index * cardWidth)
+            // But we need to handle "center" relative to track
+            // Actually, best way is to translate track so active card is at center of viewport
+
+            // Re-calc viewport center for resize
+            const viewportWidth = document.querySelector('.carousel-viewport').offsetWidth;
+            const trackCenter = viewportWidth / 2;
+            const cardCenter = 150 + 15; // half width + margin
+
+            // Calculate shift needed to center the active card
+            // We want: (index * 330) + 165 = trackCenter
+            // So track transform = trackCenter - ((index * 330) + 165)
+            const shift = trackCenter - ((activeIndex * 330) + 165);
+
+            track.style.transform = `translateX(${shift}px)`;
+
+            // Update Cards (3D Effect)
+            cards.forEach((card, index) => {
+                const offset = index - activeIndex;
+                const absOffset = Math.abs(offset);
+
+                if (absOffset === 0) {
+                    card.style.transform = 'scale(1) translateZ(0)';
+                    card.style.opacity = '1';
+                    card.style.filter = 'grayscale(0) brightness(1)';
+                    card.style.zIndex = '10';
+                    card.classList.add('active');
+                } else if (absOffset === 1) {
+                    // Side cards
+                    const scale = 0.85;
+                    const translateX = offset > 0 ? -40 : 40; // Pull them closer
+                    const rotateY = offset > 0 ? -15 : 15; // Rotate inward
+                    card.style.transform = `scale(${scale}) translateX(${translateX}px) rotateY(${rotateY}deg)`;
+                    card.style.opacity = '0.6';
+                    card.style.filter = 'grayscale(1) brightness(0.6)';
+                    card.style.zIndex = '5';
+                    card.classList.remove('active');
+                } else {
+                    // Far cards
+                    const scale = 0.7;
+                    const translateX = offset > 0 ? -100 : 100;
+                    card.style.transform = `scale(${scale}) translateX(${translateX}px)`;
+                    card.style.opacity = '0.3';
+                    card.style.filter = 'grayscale(1) brightness(0.4)';
+                    card.style.zIndex = '0';
+                    card.classList.remove('active');
+                }
+            });
+
+            // Update Pagination
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            activeIndex = index;
+            // Clamp
+            if (activeIndex < 0) activeIndex = 0;
+            if (activeIndex >= surfaceData.length) activeIndex = surfaceData.length - 1;
+            updateCarousel();
+        }
+
+        // --- Drag / Swipe Logic ---
+        function touchStart(index) {
+            return function (event) {
+                isDraggingTrack = true;
+                startX = getPositionX(event);
+                animationID = requestAnimationFrame(animation);
             }
+        }
+
+        function touchMove(event) {
+            if (isDraggingTrack) {
+                const currentX = getPositionX(event);
+                const diff = startX - currentX;
+                // Add resistance? For now just simple swipe detection
+                // We'll implement "drag to scroll" later if needed, for now swipe
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) goToSlide(activeIndex + 1);
+                    else goToSlide(activeIndex - 1);
+                    isDraggingTrack = false; // Trigger once
+                }
+            }
+        }
+
+        function touchEnd() {
+            isDraggingTrack = false;
+            cancelAnimationFrame(animationID);
+        }
+
+        function getPositionX(event) {
+            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        }
+
+        function animation() {
+            if (isDraggingTrack) requestAnimationFrame(animation);
+        }
+
+        // Attach Events
+        const viewport = document.querySelector('.carousel-viewport');
+        viewport.addEventListener('mousedown', touchStart(activeIndex));
+        viewport.addEventListener('touchstart', touchStart(activeIndex), { passive: true });
+
+        viewport.addEventListener('mousemove', touchMove);
+        viewport.addEventListener('touchmove', touchMove, { passive: true });
+
+        viewport.addEventListener('mouseup', touchEnd);
+        viewport.addEventListener('mouseleave', touchEnd);
+        viewport.addEventListener('touchend', touchEnd);
+
+        // Resize
+        window.addEventListener('resize', () => {
+            // Debounce or just raw update
+            updateCarousel();
         });
 
-        // Initialize tip position and mobile layout on load
-        window.addEventListener('DOMContentLoaded', () => {
-            changeSurface(0);
-        });
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initCarousel);
 
 
 
