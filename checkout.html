@@ -339,7 +339,8 @@
                                 body: JSON.stringify({
                                     email: shippingDetails.email,
                                     items: cart,
-                                    total: totalAmount
+                                    total: totalAmount,
+                                    shipping: shippingDetails // Pass full object (includes name, address)
                                 })
                             });
                         } catch (err) {

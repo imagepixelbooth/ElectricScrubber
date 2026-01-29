@@ -85,19 +85,29 @@ module.exports = async (req, res) => {
         try {
             const { email, items, total } = req.body;
 
-            // Generate ID
+            const { email, items, total, shipping } = req.body; // 'shipping' contains name/address
             const orderId = generateOrderId();
 
-            // Configure Transporter (Use Environment Variables in production)
-            // Example: SendGrid
-            /*
-            const transporter = nodemailer.createTransport({
-                service: 'SendGrid',
-                auth: { user: 'apikey', pass: process.env.SENDGRID_API_KEY }
-            });
-            */
+            // 1. Save to Supabase (if configured)
+            if (supabase) {
+                const { error: dbError } = await supabase
+                    .from('orders')
+                    .insert([
+                        {
+                            id: orderId,
+                            email: email,
+                            total: total,
+                            items: items,
+                            shipping_address: shipping, // Includes name
+                            name: shipping ? shipping.name : null, // Extract name specificially if column exists
+                            created_at: new Date()
+                        }
+                    ]);
 
-            // Example: Generic SMTP (Placeholder - needs real credentials)
+                if (dbError) console.error("Supabase Error:", dbError);
+                else console.log("Order saved to Supabase:", orderId);
+            }
+
             const transporter = nodemailer.createTransport({
                 host: process.env.SMTP_HOST || 'smtp.example.com',
                 port: 587,
