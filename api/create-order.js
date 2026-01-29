@@ -4,7 +4,17 @@ const { createClient } = require('@supabase/supabase-js');
 // Initialize Supabase
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
+
+// Debug Logs
+console.log("--- Create Order Handler ---");
+console.log("Supabase URL present:", !!supabaseUrl);
+console.log("Supabase Key present:", !!supabaseKey);
+
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
+
+if (!supabase) {
+    console.warn("WARNING: Supabase client NOT initialized. Check .env variables.");
+}
 
 /**
  * CleanPro / ViralTrenz Order Processing Function
@@ -94,6 +104,9 @@ module.exports = async (req, res) => {
 
             // 1. Save to Supabase (if configured)
             if (supabase) {
+                console.log("Attempting to save order to Supabase:", orderId);
+                console.log("Shipping Data:", JSON.stringify(shipping || {}));
+
                 const { error: dbError } = await supabase
                     .from('orders')
                     .insert([
@@ -108,8 +121,13 @@ module.exports = async (req, res) => {
                         }
                     ]);
 
-                if (dbError) console.error("Supabase Error:", dbError);
-                else console.log("Order saved to Supabase:", orderId);
+                if (dbError) {
+                    console.error("Supabase SAVE Error:", dbError);
+                } else {
+                    console.log("SUCCESS: Order saved to Supabase:", orderId);
+                }
+            } else {
+                console.log("Skipping Supabase save (Client is null)");
             }
 
             const transporter = nodemailer.createTransport({
