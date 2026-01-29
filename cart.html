@@ -361,83 +361,71 @@
             border-radius: 8px;
             font-family: inherit;
             font-size: 1rem;
+            background-color: white;
+            color: #333;
+            /* height: 45px; removed to match padding */
+            padding-right: 20px;
+            /* Space for arrow if needed */
+        }
 
-            .form-group {
-                margin-bottom: 1rem;
-                position: relative;
-                /* Fix for Safari mobile focus */
-                z-index: 1;
+        #card-element {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .error-message {
+            color: #ff4757;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Empty State */
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .empty-cart svg {
+            width: 64px;
+            height: 64px;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .empty-cart p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
             }
 
-            /* Fix Safari Select Issue */
-            select.form-input {
-                -webkit-appearance: none;
-                appearance: none;
-                background-color: white;
-                color: #333;
-                /* height: 45px; removed to match padding */
-                padding-right: 20px;
-                /* Space for arrow if needed */
+            /* Mobile Glassmorphism */
+            #cartContainer,
+            .summary-card {
+                background: rgba(255, 255, 255, 0.65);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.6);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             }
 
-            #card-element {
-                padding: 1rem;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                background: white;
+            .cart-item {
+                grid-template-columns: 70px 1fr;
+                grid-template-rows: auto auto;
             }
 
-            .error-message {
-                color: #ff4757;
-                font-size: 0.85rem;
-                margin-top: 0.5rem;
-                display: none;
+            .item-total {
+                grid-column: 2;
+                text-align: left;
             }
-
-            /* Empty State */
-            .empty-cart {
-                text-align: center;
-                padding: 4rem 1rem;
-            }
-
-            .empty-cart svg {
-                width: 64px;
-                height: 64px;
-                color: #ccc;
-                margin-bottom: 1rem;
-            }
-
-            .empty-cart p {
-                color: #666;
-                margin-bottom: 2rem;
-            }
-
-            /* Responsive */
-            @media (max-width: 900px) {
-                .cart-layout {
-                    grid-template-columns: 1fr;
-                }
-
-                /* Mobile Glassmorphism */
-                #cartContainer,
-                .summary-card {
-                    background: rgba(255, 255, 255, 0.65);
-                    backdrop-filter: blur(16px);
-                    -webkit-backdrop-filter: blur(16px);
-                    border: 1px solid rgba(255, 255, 255, 0.6);
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-                }
-
-                .cart-item {
-                    grid-template-columns: 70px 1fr;
-                    grid-template-rows: auto auto;
-                }
-
-                .item-total {
-                    grid-column: 2;
-                    text-align: left;
-                }
-            }
+        }
     </style>
 </head>
 
