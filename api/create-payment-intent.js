@@ -1,6 +1,6 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const calculateOrderAmount = (items, state, promoCode) => {
+const calculateOrderAmount = (items, state) => {
     let amount = 0;
     items.forEach(item => {
         amount += (item.price * 100) * item.quantity;
@@ -8,13 +8,6 @@ const calculateOrderAmount = (items, state, promoCode) => {
 
     // Shipping is now always free
     // if (amount < 3500 && amount > 0) amount += 499;
-
-    // Apply Discounts
-    if (promoCode === 'FAVORITE99') {
-        amount = Math.round(amount * 0.01); // 99% OFF
-    } else if (promoCode === 'VIRAL10') {
-        amount = Math.round(amount * 0.90); // 10% OFF
-    }
 
     // Add Tax (NJ Only: 6.625%)
     if (state && (state.toLowerCase() === 'nj' || state.toLowerCase() === 'new jersey')) {
@@ -37,12 +30,12 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const { items, currency, state, promoCode } = req.body;
+        const { items, currency, state } = req.body;
 
         // Use the state if provided, otherwise null (mimicking server.js but allowing state override)
         // Original server.js had: amount: calculateOrderAmount(items, null)
         // But user passed state from frontend, so we use it if available.
-        const orderAmount = calculateOrderAmount(items, state || null, promoCode);
+        const orderAmount = calculateOrderAmount(items, state || null);
 
         const paymentIntent = await stripe.paymentIntents.create({
             amount: orderAmount,

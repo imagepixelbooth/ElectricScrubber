@@ -13,20 +13,13 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const { paymentIntentId, items, state, promoCode } = req.body;
+        const { paymentIntentId, items, state } = req.body;
 
-        const calculateOrderAmount = (items, state, promoCode) => {
+        const calculateOrderAmount = (items, state) => {
             let amount = 0;
             items.forEach(item => {
                 amount += (item.price * 100) * item.quantity;
             });
-
-            // Apply Discounts
-            if (promoCode === 'FAVORITE99') {
-                amount = Math.round(amount * 0.01); // 99% OFF
-            } else if (promoCode === 'VIRAL10') {
-                amount = Math.round(amount * 0.90); // 10% OFF
-            }
 
             // Tax Logic
             let tax = 0;
@@ -37,7 +30,7 @@ module.exports = async (req, res) => {
             return { total: Math.round(amount + tax), tax: tax };
         };
 
-        const { total, tax } = calculateOrderAmount(items, state, promoCode);
+        const { total, tax } = calculateOrderAmount(items, state);
 
         // Update Stripe PaymentIntent
         await stripe.paymentIntents.update(paymentIntentId, {
