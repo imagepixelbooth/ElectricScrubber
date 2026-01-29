@@ -112,7 +112,7 @@ module.exports = async (req, res) => {
             const htmlContent = generateEmailHtml(orderId, items, total);
 
             await transporter.sendMail({
-                from: '"ViralTrenz" <orders@viraltrenz.com>',
+                from: `"ViralTrenz" <${process.env.SMTP_FROM_EMAIL || 'orders@viraltrenz.com'}>`,
                 to: email, // User's email
                 subject: `Order Confirmation ${orderId}`,
                 html: htmlContent
@@ -131,7 +131,8 @@ module.exports = async (req, res) => {
             res.status(500).json({
                 success: false,
                 error: error.message || 'Unknown error occurred',
-                details: error.toString()
+                details: error.toString(),
+                debug_from: `"${process.env.SMTP_FROM_NAME || 'ViralTrenz'}" <${process.env.SMTP_FROM_EMAIL || 'orders@viraltrenz.com'}>`
             });
         }
     } else {
