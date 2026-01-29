@@ -2575,12 +2575,16 @@
         }
 
         // Add resize listener to handle layout reset without click
+        let lastWidth = window.innerWidth;
         window.addEventListener('resize', () => {
-            let activeIndex = 0;
-            document.querySelectorAll('.surface-chips .chip').forEach((c, i) => {
-                if (c.classList.contains('active')) activeIndex = i;
-            });
-            changeSurface(activeIndex);
+            if (window.innerWidth !== lastWidth) {
+                lastWidth = window.innerWidth;
+                let activeIndex = 0;
+                document.querySelectorAll('.surface-chips .chip').forEach((c, i) => {
+                    if (c.classList.contains('active')) activeIndex = i;
+                });
+                changeSurface(activeIndex);
+            }
         });
 
         // Initialize tip position and mobile layout on load
