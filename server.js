@@ -23,8 +23,8 @@ app.post('/create-payment-intent', async (req, res) => {
     const { items, currency } = req.body;
 
     // Calculate total on the server to prevent manipulation
-    // Now accepts state for tax calculation
-    const calculateOrderAmount = (items, state) => {
+    // Now accepts state for tax calculation and promoCode for discounts
+    const calculateOrderAmount = (items, state, promoCode) => {
       let amount = 0;
       items.forEach(item => {
         amount += (item.price * 100) * item.quantity;
@@ -32,6 +32,13 @@ app.post('/create-payment-intent', async (req, res) => {
 
       // Shipping is now always free
       // if (amount < 3500 && amount > 0) amount += 499;
+
+      // Apply Discounts
+      if (promoCode === 'FAVORITE99') {
+        amount = Math.round(amount * 0.01); // 99% OFF
+      } else if (promoCode === 'VIRAL10') {
+        amount = Math.round(amount * 0.90); // 10% OFF
+      }
 
       // Add Tax (NJ Only: 6.625%)
       if (state && (state.toLowerCase() === 'nj' || state.toLowerCase() === 'new jersey')) {
@@ -43,7 +50,7 @@ app.post('/create-payment-intent', async (req, res) => {
     };
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: calculateOrderAmount(items, null), // Initial load has no state usually, or pass it if you have it
+      amount: calculateOrderAmount(items, null, req.body.promoCode), // Initial load has no state usually, or pass it if you have it
       currency: currency || 'usd',
       automatic_payment_methods: {
         enabled: true,
@@ -66,9 +73,9 @@ app.post('/create-payment-intent', async (req, res) => {
 // Endpoint to update amount when state changes
 app.post('/update-payment-intent', async (req, res) => {
   try {
-    const { paymentIntentId, items, state } = req.body;
+    const { paymentIntentId, items, state, promoCode } = req.body;
 
-    const calculateOrderAmount = (items, state) => {
+    const calculateOrderAmount = (items, state, promoCode) => {
       let amount = 0;
       items.forEach(item => {
         amount += (item.price * 100) * item.quantity;
@@ -76,6 +83,13 @@ app.post('/update-payment-intent', async (req, res) => {
 
       // Shipping is now always free
       // if (amount < 3500 && amount > 0) amount += 499;
+
+      // Apply Discounts
+      if (promoCode === 'FAVORITE99') {
+        amount = Math.round(amount * 0.01); // 99% OFF
+      } else if (promoCode === 'VIRAL10') {
+        amount = Math.round(amount * 0.90); // 10% OFF
+      }
 
       // Tax Logic
       let tax = 0;
@@ -86,7 +100,7 @@ app.post('/update-payment-intent', async (req, res) => {
       return { total: Math.round(amount + tax), tax: tax };
     };
 
-    const { total, tax } = calculateOrderAmount(items, state);
+    const { total, tax } = calculateOrderAmount(items, state, promoCode);
 
     // Update Stripe PaymentIntent
     await stripe.paymentIntents.update(paymentIntentId, {

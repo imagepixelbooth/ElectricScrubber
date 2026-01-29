@@ -676,6 +676,7 @@
         // --- State ---
         let cart = JSON.parse(localStorage.getItem('viraltrenz_cart')) || [];
         let discountApplied = false;
+        let currentPromoCode = null;
         let paymentIntentId = null;
 
         // --- Core Logic ---
@@ -696,7 +697,7 @@
                 const response = await fetch('/api/create-payment-intent', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ items: cart, currency: 'usd' }),
+                    body: JSON.stringify({ items: cart, currency: 'usd', promoCode: currentPromoCode }),
                 }).then(r => r.json());
 
                 if (response.id) {
@@ -726,7 +727,8 @@
                     body: JSON.stringify({
                         paymentIntentId: paymentIntentId,
                         items: cart,
-                        state: state
+                        state: state,
+                        promoCode: currentPromoCode
                     }),
                 });
 
@@ -835,9 +837,14 @@
 
             let discount = 0;
             if (discountApplied && subtotal > 0) {
-                discount = subtotal * 0.10;
+                if (currentPromoCode === 'FAVORITE99') {
+                    discount = subtotal * 0.99;
+                    document.getElementById('discountCodeTag').innerText = '(FAVORITE99)';
+                } else {
+                    discount = subtotal * 0.10;
+                    document.getElementById('discountCodeTag').innerText = '(VIRAL10)';
+                }
                 document.querySelector('.discount-row').classList.remove('hidden');
-                document.getElementById('discountCodeTag').innerText = '(VIRAL10)';
                 document.getElementById('discountVal').innerText = '-$' + discount.toFixed(2);
             } else {
                 document.querySelector('.discount-row').classList.add('hidden');
@@ -892,16 +899,29 @@
 
             if (code === 'VIRAL10') {
                 discountApplied = true;
+                currentPromoCode = 'VIRAL10';
                 msg.style.display = 'block';
                 msg.style.color = '#2ecc71';
                 msg.innerText = 'Promo applied: 10% off!';
                 renderCart(); // recalculate
+                // Update Stripe with new total
+                if (paymentIntentId) updateOrderTotal(document.getElementById('cartState').value);
+            } else if (code === 'FAVORITE99') {
+                discountApplied = true;
+                currentPromoCode = 'FAVORITE99';
+                msg.style.display = 'block';
+                msg.style.color = '#2ecc71';
+                msg.innerText = 'VIP Promo applied: 99% off!';
+                renderCart();
+                if (paymentIntentId) updateOrderTotal(document.getElementById('cartState').value);
             } else {
                 discountApplied = false;
+                currentPromoCode = null;
                 msg.style.display = 'block';
                 msg.style.color = '#ff4757';
                 msg.innerText = 'Invalid promo code.';
                 renderCart();
+                if (paymentIntentId) updateOrderTotal(document.getElementById('cartState').value);
             }
         }
 
