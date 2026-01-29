@@ -564,15 +564,14 @@
         }
 
         .carousel-track {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            /* Match viewport height approximately */
             display: flex;
+            justify-content: center;
             align-items: center;
-            /* No wrap - a single horizontal strip */
-            position: absolute;
-            left: 50%;
-            /* Start from center */
-            transform-style: preserve-3d;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            /* Smooth slide */
+            /* Remove transform transition on track, we move cards individually now */
             cursor: grab;
         }
 
@@ -581,24 +580,25 @@
         }
 
         .carousel-card {
-            flex: 0 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* Start all at dead center */
+            /* We will translate them out via JS */
             width: 300px;
             height: 400px;
-            margin: 0 15px;
-            /* Spacing between cards */
+            margin: -200px 0 0 -150px;
+            /* Negative margin to center exactly (height/2, width/2) */
+
             border-radius: 40px;
-            /* Premium rounded corners */
-            position: relative;
             overflow: hidden;
             background: #fff;
-            /* Fallback */
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            /* Deep shadow */
-            transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease, z-index 0s linear 0.4s;
-            /* z-index flips after anim */
+            transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transform-origin: center center;
             user-select: none;
+            /* Ensure they stack */
+            transform-style: preserve-3d;
         }
 
         .carousel-card img {
@@ -2593,61 +2593,61 @@
             updateCarousel();
         }
 
+        // Update Cards (Infinite Loop Logic)
         function updateCarousel() {
             const cards = document.querySelectorAll('.carousel-card');
             const dots = document.querySelectorAll('.page-dot');
-            const cardWidth = 330; // card(300) + margin(30)
-            const centerOffset = (window.innerWidth / 2) - (cardWidth / 2); // Center active card
+            const len = surfaceData.length;
 
-            // Update Track Position
-            // We want activeIndex to be at center
-            // Position = centerOffset - (index * cardWidth)
-            // But we need to handle "center" relative to track
-            // Actually, best way is to translate track so active card is at center of viewport
+            // Remove Track translation (we move cards absolutely now)
+            track.style.transform = 'none';
 
-            // Re-calc viewport center for resize
-            const viewportWidth = document.querySelector('.carousel-viewport').offsetWidth;
-            const trackCenter = viewportWidth / 2;
-            const cardCenter = 150 + 15; // half width + margin
-
-            // Calculate shift needed to center the active card
-            // We want: (index * 330) + 165 = trackCenter
-            // So track transform = trackCenter - ((index * 330) + 165)
-            const shift = -((activeIndex * 330) + 165);
-
-            track.style.transform = `translateX(${shift}px)`;
-
-            // Update Cards (3D Effect)
             cards.forEach((card, index) => {
-                const offset = index - activeIndex;
+                // Calculate circular distance
+                // We want the shortest path (-3 to +3)
+                let offset = (index - activeIndex + len) % len;
+                if (offset > len / 2) offset -= len;
+
                 const absOffset = Math.abs(offset);
 
-                if (absOffset === 0) {
-                    card.style.transform = 'scale(1) translateZ(0)';
-                    card.style.opacity = '1';
-                    card.style.filter = 'grayscale(0) brightness(1)';
-                    card.style.zIndex = '10';
+                // Default hidden state
+                let scale = 0.7;
+                let translateX = offset > 0 ? 300 : -300;
+                let opacity = 0;
+                let zIndex = 0;
+                let filter = 'grayscale(1) brightness(0.4)';
+                let rotateY = 0;
+
+                if (offset === 0) {
+                    // Active (Center)
+                    scale = 1;
+                    translateX = 0;
+                    opacity = 1;
+                    zIndex = 10;
+                    filter = 'grayscale(0) brightness(1)';
                     card.classList.add('active');
-                } else if (absOffset === 1) {
-                    // Side cards - Increased overlap
-                    const scale = 0.85;
-                    const translateX = offset > 0 ? -120 : 120; // Was 40, now 120
-                    const rotateY = offset > 0 ? -15 : 15;
-                    card.style.transform = `scale(${scale}) translateX(${translateX}px) rotateY(${rotateY}deg)`;
-                    card.style.opacity = '0.6';
-                    card.style.filter = 'grayscale(1) brightness(0.6)';
-                    card.style.zIndex = '5';
+                } else if (Math.abs(offset) === 1) {
+                    // Previous / Next (Side cards)
+                    scale = 0.85;
+                    // Push them closer (120px)
+                    translateX = offset > 0 ? 120 : -120;
+                    rotateY = offset > 0 ? -15 : 15;
+                    opacity = 0.6;
+                    zIndex = 5;
+                    filter = 'grayscale(1) brightness(0.6)';
                     card.classList.remove('active');
                 } else {
-                    // Far cards
-                    const scale = 0.7;
-                    const translateX = offset > 0 ? -250 : 250; // Was 100, now 250
-                    card.style.transform = `scale(${scale}) translateX(${translateX}px)`;
-                    card.style.opacity = '0.3';
-                    card.style.filter = 'grayscale(1) brightness(0.4)';
-                    card.style.zIndex = '0';
+                    // Others (Hidden but positioned for entrance)
+                    // We keep them slightly further out so they can slide in
+                    translateX = offset > 0 ? 300 : -300;
+                    opacity = 0; // Hide invisible ones
                     card.classList.remove('active');
                 }
+
+                card.style.transform = `scale(${scale}) translateX(${translateX}px) rotateY(${rotateY}deg)`;
+                card.style.opacity = opacity;
+                card.style.filter = filter;
+                card.style.zIndex = zIndex;
             });
 
             // Update Pagination
@@ -2657,10 +2657,9 @@
         }
 
         function goToSlide(index) {
-            activeIndex = index;
-            // Clamp
-            if (activeIndex < 0) activeIndex = 0;
-            if (activeIndex >= surfaceData.length) activeIndex = surfaceData.length - 1;
+            const len = surfaceData.length;
+            // Handle negative wrapping (e.g. -1 becomes 6)
+            activeIndex = (index + len) % len;
             updateCarousel();
         }
 
@@ -2677,11 +2676,11 @@
             if (isDraggingTrack) {
                 const currentX = getPositionX(event);
                 const diff = startX - currentX;
-                // Add resistance? For now just simple swipe detection
-                // We'll implement "drag to scroll" later if needed, for now swipe
+
                 if (Math.abs(diff) > 50) {
-                    if (diff > 0) goToSlide(activeIndex + 1);
-                    else goToSlide(activeIndex - 1);
+                    if (diff > 0) goToSlide(activeIndex + 1); // Swipe Left -> Next
+                    else goToSlide(activeIndex - 1); // Swipe Right -> Prev
+
                     isDraggingTrack = false; // Trigger once
                 }
             }
@@ -2908,7 +2907,7 @@
 
             // Create Cart Item
             const cartItem = {
-                id: `${PRODUCT.id}-${selectedColorVal.toLowerCase()}`,
+                id: `${PRODUCT.id} - ${selectedColorVal.toLowerCase()}`,
                 title: PRODUCT.title,
                 price: PRODUCT.price,
                 compareAt: PRODUCT.compareAt,
@@ -2935,7 +2934,7 @@
             updateCartBadge();
 
             // Show Toast (Optional, but replacing with Mini Cart)
-            // showToast(`Added ${quantity} item(s) to cart`);
+            // showToast(`Added ${ quantity } item(s) to cart`);
 
             // Show Mini Cart Popup instead of Redirect
             showMiniCart(cartItem);
