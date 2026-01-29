@@ -246,7 +246,7 @@
 
         /* Hero (Sticky Animation) */
         .hero-spacer {
-            height: 400vh;
+            height: 300vh;
             /* Adjusted for faster 1000vh speed */
             position: relative;
         }
@@ -639,6 +639,37 @@
             /* Active is bright */
         }
 
+        /* Nav Arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 20;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .nav-arrow:hover {
+            transform: translateY(-50%) scale(1.1);
+            background: #fff;
+        }
+
+        .nav-arrow.nav-prev {
+            left: 10px;
+        }
+
+        .nav-arrow.nav-next {
+            right: 10px;
+        }
+
         .card-content {
             position: absolute;
             bottom: 30px;
@@ -692,6 +723,8 @@
         @media (max-width: 900px) {
             .carousel-viewport {
                 height: 450px;
+                margin-top: 1rem;
+                /* Tighten spacing on mobile */
                 /* Slightly smaller stage */
                 display: block;
                 /* Disable flex centering on mobile to avoid conflicts */
@@ -2064,13 +2097,22 @@
             <div class="text-center mb-4 reveal">
                 <h2 style="font-size: 2.5rem; color: var(--text-main-light); margin-bottom: 0.5rem;">Made for Every
                     Surface</h2>
-                <p class="text-muted-light">Drag to explore</p>
             </div>
 
             <!-- 3D Carousel Viewport -->
             <div class="carousel-viewport" id="carouselViewport">
+                <div class="nav-arrow nav-prev" onclick="adjustSlide(-1)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                </div>
                 <div class="carousel-track" id="surfaceTrack">
                     <!-- Cards injected via JS -->
+                </div>
+                <div class="nav-arrow nav-next" onclick="adjustSlide(1)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
                 </div>
             </div>
 
@@ -2217,7 +2259,6 @@
                     <div class="price-wrapper">
                         <span class="price-current">$34.99</span>
                         <span class="price-compare">$79.99</span>
-                        <span class="discount-badge">SAVE 56%</span>
                     </div>
 
                     <!-- Review Stars -->
@@ -2699,6 +2740,10 @@
             // Handle negative wrapping (e.g. -1 becomes 6)
             activeIndex = (index + len) % len;
             updateCarousel();
+        }
+
+        function adjustSlide(direction) {
+            goToSlide(activeIndex + direction);
         }
 
         // --- Drag / Swipe Logic ---
