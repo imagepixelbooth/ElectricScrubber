@@ -669,6 +669,9 @@
             justify-content: center;
             gap: 0.5rem;
             margin-top: 2rem;
+            position: relative;
+            z-index: 20;
+            /* Ensure clicks */
         }
 
         .page-dot {
@@ -703,7 +706,8 @@
             .carousel-card {
                 width: 260px;
                 height: 350px;
-                margin: -175px 0 0 -130px;
+                margin: -200px 0 0 -130px;
+                /* Moved up by 25px */
                 /* Recenter based on new dimensions (350/2, 260/2) */
             }
 
@@ -721,7 +725,8 @@
             .carousel-card {
                 width: 240px;
                 height: 320px;
-                margin: -160px 0 0 -120px;
+                margin: -185px 0 0 -120px;
+                /* Moved up by 25px */
                 /* Centering fix */
                 border-radius: 24px;
             }
