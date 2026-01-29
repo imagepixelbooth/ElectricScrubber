@@ -260,6 +260,7 @@
         // Init
         const cart = JSON.parse(localStorage.getItem('viraltrenz_cart')) || [];
         const shippingDetails = JSON.parse(localStorage.getItem('viraltrenz_shipping')) || {};
+        const storedPromo = localStorage.getItem('viraltrenz_promo'); // Read Promo
         let stripe, elements, card;
         let paymentIntentId = null;
 
@@ -289,7 +290,8 @@
                     body: JSON.stringify({
                         items: cart,
                         currency: 'usd',
-                        state: shippingDetails.state || null // Pass state here
+                        state: shippingDetails.state || null, // Pass state here
+                        promoCode: storedPromo // Pass Promo
                     }),
                 }).then(r => r.json());
 
@@ -369,7 +371,8 @@
                     body: JSON.stringify({
                         paymentIntentId: paymentIntentId,
                         items: cart,
-                        state: state
+                        state: state,
+                        promoCode: storedPromo // Pass Promo
                     }),
                 });
 

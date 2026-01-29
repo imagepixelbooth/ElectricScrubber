@@ -683,6 +683,14 @@
 
         async function init() {
             renderCart();
+
+            // Check for saved promo
+            const savedPromo = localStorage.getItem('viraltrenz_promo');
+            if (savedPromo) {
+                document.getElementById('promoInput').value = savedPromo;
+                applyPromo(); // Apply it cleanly
+            }
+
             await initializeStripeIntent();
             setupStateListener();
         }
@@ -900,6 +908,7 @@
             if (code === 'VIRAL10') {
                 discountApplied = true;
                 currentPromoCode = 'VIRAL10';
+                localStorage.setItem('viraltrenz_promo', 'VIRAL10'); // Persist
                 msg.style.display = 'block';
                 msg.style.color = '#2ecc71';
                 msg.innerText = 'Promo applied: 10% off!';
@@ -909,6 +918,7 @@
             } else if (code === 'FAVORITE99') {
                 discountApplied = true;
                 currentPromoCode = 'FAVORITE99';
+                localStorage.setItem('viraltrenz_promo', 'FAVORITE99'); // Persist
                 msg.style.display = 'block';
                 msg.style.color = '#2ecc71';
                 msg.innerText = 'VIP Promo applied: 99% off!';
@@ -917,6 +927,7 @@
             } else {
                 discountApplied = false;
                 currentPromoCode = null;
+                localStorage.removeItem('viraltrenz_promo'); // Clear
                 msg.style.display = 'block';
                 msg.style.color = '#ff4757';
                 msg.innerText = 'Invalid promo code.';
