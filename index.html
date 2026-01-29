@@ -2613,7 +2613,7 @@
             // Calculate shift needed to center the active card
             // We want: (index * 330) + 165 = trackCenter
             // So track transform = trackCenter - ((index * 330) + 165)
-            const shift = trackCenter - ((activeIndex * 330) + 165);
+            const shift = -((activeIndex * 330) + 165);
 
             track.style.transform = `translateX(${shift}px)`;
 
@@ -2629,10 +2629,10 @@
                     card.style.zIndex = '10';
                     card.classList.add('active');
                 } else if (absOffset === 1) {
-                    // Side cards
+                    // Side cards - Increased overlap
                     const scale = 0.85;
-                    const translateX = offset > 0 ? -40 : 40; // Pull them closer
-                    const rotateY = offset > 0 ? -15 : 15; // Rotate inward
+                    const translateX = offset > 0 ? -120 : 120; // Was 40, now 120
+                    const rotateY = offset > 0 ? -15 : 15;
                     card.style.transform = `scale(${scale}) translateX(${translateX}px) rotateY(${rotateY}deg)`;
                     card.style.opacity = '0.6';
                     card.style.filter = 'grayscale(1) brightness(0.6)';
@@ -2641,7 +2641,7 @@
                 } else {
                     // Far cards
                     const scale = 0.7;
-                    const translateX = offset > 0 ? -100 : 100;
+                    const translateX = offset > 0 ? -250 : 250; // Was 100, now 250
                     card.style.transform = `scale(${scale}) translateX(${translateX}px)`;
                     card.style.opacity = '0.3';
                     card.style.filter = 'grayscale(1) brightness(0.4)';
