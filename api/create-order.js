@@ -83,8 +83,6 @@ module.exports = async (req, res) => {
 
     if (req.method === 'POST') {
         try {
-            const { email, items, total } = req.body;
-
             const { email, items, total, shipping } = req.body; // 'shipping' contains name/address
             const orderId = generateOrderId();
 
