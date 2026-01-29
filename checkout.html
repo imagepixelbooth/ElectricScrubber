@@ -317,7 +317,23 @@
                         btn.disabled = false;
                         btn.innerText = 'Pay Now';
                     } else {
-                        // Successful payment (if redirect didn't happen)
+                        // Successful payment
+                        // Trigger Backend Email
+                        try {
+                            const totalAmount = document.getElementById('total').innerText.replace('$', '');
+                            await fetch('/api/create-order', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    email: shippingDetails.email,
+                                    items: cart,
+                                    total: totalAmount
+                                })
+                            });
+                        } catch (err) {
+                            console.error("Failed to send order email:", err);
+                        }
+
                         document.getElementById('successOverlay').style.display = 'flex';
                         localStorage.removeItem('viraltrenz_cart');
                         // Optional: Clear shipping info too
