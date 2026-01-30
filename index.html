@@ -2828,15 +2828,39 @@
         // --- 2. Marquee Pause Interaction ---
         const marqueeTracks = document.querySelectorAll('.marquee-track');
         marqueeTracks.forEach(track => {
-            // Mouse Events
-            track.addEventListener('mousedown', () => track.classList.add('marquee-paused'));
-            track.addEventListener('mouseup', () => track.classList.remove('marquee-paused'));
+            let pressTimer;
+
+            // -- Desktop / Mouse: Pause on Hover & Click Hold --
+            // Standard behavior: hover pauses it. 
+            // If we strictly want "hold to pause", we might remove mouseenter.
+            // But usually hover-to-pause is the expected desktop UX. 
+            // Keeping mouseenter/mouseleave for accessibility/readability on desktop.
+            track.addEventListener('mouseenter', () => track.classList.add('marquee-paused'));
             track.addEventListener('mouseleave', () => track.classList.remove('marquee-paused'));
 
-            // Touch Events (for mobile "Hold")
-            track.addEventListener('touchstart', () => track.classList.add('marquee-paused'), { passive: true });
-            track.addEventListener('touchend', () => track.classList.remove('marquee-paused'));
-            track.addEventListener('touchcancel', () => track.classList.remove('marquee-paused'));
+            track.addEventListener('mousedown', () => track.classList.add('marquee-paused'));
+            track.addEventListener('mouseup', () => track.classList.remove('marquee-paused'));
+
+            // -- Mobile / Touch: Hold to Pause (with Delay) --
+            // Prevent immediate pause on scrolling/tapping.
+
+            const startHold = () => {
+                pressTimer = setTimeout(() => {
+                    track.classList.add('marquee-paused');
+                }, 300); // 300ms wait to consider it a "Hold"
+            };
+
+            const endHold = () => {
+                clearTimeout(pressTimer);
+                track.classList.remove('marquee-paused');
+            };
+
+            track.addEventListener('touchstart', startHold, { passive: true });
+            track.addEventListener('touchend', endHold);
+            track.addEventListener('touchcancel', endHold);
+
+            // If user scrolls, cancel the hold (it's a swipe, not a read)
+            track.addEventListener('touchmove', endHold, { passive: true });
         });
 
         const canvas = document.getElementById('heroCanvas');
