@@ -246,7 +246,7 @@
 
         /* Hero (Sticky Animation) */
         .hero-spacer {
-            height: 250vh;
+            height: 300vh;
             /* Adjusted for faster 1000vh speed */
             position: relative;
         }
@@ -2865,7 +2865,7 @@
 
         const canvas = document.getElementById('heroCanvas');
         const ctx = canvas.getContext('2d');
-        const frameCount = 192; // Updated to 69 frames
+        const frameCount = 81; // Updated to 81 frames (WebP)
         const frames = [];
         let framesLoaded = 0;
 
@@ -2881,7 +2881,7 @@
         const heroSpacer = document.querySelector('.hero-spacer');
 
         // Fallback: Set background image in CSS or here in case JS fails or loading
-        canvas.style.backgroundImage = "url('hero/heroanimation/ezgif-frame-001.webp')";
+        canvas.style.backgroundImage = "url('hero/heroanimation/hero_001.webp')";
         canvas.style.backgroundSize = "cover";
         canvas.style.backgroundPosition = "center";
 
@@ -2907,7 +2907,7 @@
         // 1. Frame Path
         const currentFramePath = index => {
             const id = (index + 1).toString().padStart(3, '0');
-            return `hero/heroanimation/ezgif-frame-${id}.webp`;
+            return `hero/heroanimation/hero_${id}.webp`;
         };
 
         // 2. Preload
