@@ -198,8 +198,8 @@
                     <div class="error-message" id="card-errors"></div>
                 </div>
 
-                <div
-                    style="background:#f8f9fa; padding:1rem; border-radius:8px; border:1px solid #eee; margin-top:1rem;">
+                <div id="testModeMessage"
+                    style="display:none; background:#f8f9fa; padding:1rem; border-radius:8px; border:1px solid #eee; margin-top:1rem;">
                     <p style="font-size:0.85rem; color:#666;"><strong>Test Mode:</strong> Use a Stripe Test Card (e.g.,
                         4242...).
                     </p>
@@ -279,6 +279,12 @@
             // 1. Fetch Publishable Key from backend
             try {
                 const { publishableKey } = await fetch('/api/config').then(r => r.json());
+
+                // Check if Test Mode
+                if (publishableKey.startsWith('pk_test')) {
+                    document.getElementById('testModeMessage').style.display = 'block';
+                }
+
                 stripe = Stripe(publishableKey);
 
                 // 2. Create Payment Intent immediately (to get clientSecret)
