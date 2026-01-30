@@ -1177,8 +1177,6 @@
             /* Reduced by ~30% */
             width: 260px;
             padding: 1.5rem;
-            background: white;
-            /* Solid white for better contrast or keep glossy? Keeping specific style */
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -1191,6 +1189,28 @@
             white-space: normal;
             /* Essential for text wrapping */
             vertical-align: top;
+            user-select: none;
+            /* Prevent text selection while holding */
+            cursor: grab;
+        }
+
+        .review-card-mini:active {
+            cursor: grabbing;
+        }
+
+        @media (max-width: 768px) {
+            .review-card-mini {
+                min-width: 220px;
+                /* Reduced by ~15% more for mobile */
+                width: 220px;
+                padding: 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Pause class for JS control */
+        .marquee-paused {
+            animation-play-state: paused !important;
         }
 
 
@@ -2804,6 +2824,21 @@
         });
 
         // --- 69-Frame Sticky Scroll Hero Animation (Refined) ---
+
+        // --- 2. Marquee Pause Interaction ---
+        const marqueeTracks = document.querySelectorAll('.marquee-track');
+        marqueeTracks.forEach(track => {
+            // Mouse Events
+            track.addEventListener('mousedown', () => track.classList.add('marquee-paused'));
+            track.addEventListener('mouseup', () => track.classList.remove('marquee-paused'));
+            track.addEventListener('mouseleave', () => track.classList.remove('marquee-paused'));
+
+            // Touch Events (for mobile "Hold")
+            track.addEventListener('touchstart', () => track.classList.add('marquee-paused'), { passive: true });
+            track.addEventListener('touchend', () => track.classList.remove('marquee-paused'));
+            track.addEventListener('touchcancel', () => track.classList.remove('marquee-paused'));
+        });
+
         const canvas = document.getElementById('heroCanvas');
         const ctx = canvas.getContext('2d');
         const frameCount = 69; // Updated to 69 frames
