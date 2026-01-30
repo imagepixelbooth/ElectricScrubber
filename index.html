@@ -2881,7 +2881,7 @@
         const heroSpacer = document.querySelector('.hero-spacer');
 
         // Fallback: Set background image in CSS or here in case JS fails or loading
-        canvas.style.backgroundImage = "url('hero/heroanimation/ezgif-frame-001.jpg')";
+        canvas.style.backgroundImage = "url('hero/heroanimation/ezgif-frame-001.webp')";
         canvas.style.backgroundSize = "cover";
         canvas.style.backgroundPosition = "center";
 
@@ -2907,7 +2907,7 @@
         // 1. Frame Path
         const currentFramePath = index => {
             const id = (index + 1).toString().padStart(3, '0');
-            return `hero/heroanimation/ezgif-frame-${id}.jpg`;
+            return `hero/heroanimation/ezgif-frame-${id}.webp`;
         };
 
         // 2. Preload
