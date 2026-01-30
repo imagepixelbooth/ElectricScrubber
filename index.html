@@ -1119,6 +1119,81 @@
             gap: 1rem;
         }
 
+        /* --- Marquee Animation Styles --- */
+        .marquee-row {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            display: flex;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            /* Will animate loops */
+        }
+
+        .scroll-left {
+            animation: scrollLeft 40s linear infinite;
+        }
+
+        .scroll-right {
+            animation: scrollRight 40s linear infinite;
+        }
+
+        /* Stop on hover for readability */
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollLeft {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+
+            /* Note: Track must contain 2 identical halves. We will stack [A B C D] [A B C D] */
+        }
+
+        @keyframes scrollRight {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .review-card-mini {
+            min-width: 260px;
+            /* Reduced by ~30% */
+            width: 260px;
+            padding: 1.5rem;
+            background: white;
+            /* Solid white for better contrast or keep glossy? Keeping specific style */
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            display: inline-flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            white-space: normal;
+            /* Essential for text wrapping */
+            vertical-align: top;
+        }
+
+
         .stars {
             color: #ffb400;
             letter-spacing: 2px;
@@ -2207,63 +2282,279 @@
             <h2 class="text-center reveal" style="font-size: 2.5rem; color: var(--text-main-light);">Customer Reviews
             </h2>
 
-            <div class="reviews-slider reveal" style="margin-top: 1.5rem;">
-                <!-- Review 1 -->
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p style="color:var(--text-sec-light);">"I have arthritis and this brush changed my life. I can
-                        clean the whole shower without pain."</p>
-                    <strong>— Sarah M.</strong>
+            <!-- Marquee Container -->
+            <div class="reviews-marquee reveal"
+                style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
+
+                <!-- ROW 1: Left to Right (Reviews 1-4) -->
+                <!-- We duplicate content to create a seamless loop. 
+                     We need enough width so that 50% of track >= screen width.
+                     4 reviews * 280px = ~1120px. 
+                     We'll repeat them 6 times. Total ~6700px. Half ~3300px (covers 4k screens).
+                -->
+                <div class="marquee-row">
+                    <div class="marquee-track scroll-right">
+                        <!-- Set 1 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I have arthritis and this brush changed my life. I
+                                can clean the whole shower without pain."</p><strong>— Sarah M.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The power on this thing is crazy. Cleaned my grout
+                                lines to white in seconds."</p><strong>— James P.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Best purchase for my car. The wheel rim attachment
+                                is perfect."</p><strong>— Mike T.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★☆</div>
+                            <p style="color:var(--text-sec-light);">"Battery lasts a long time. Cleans the whole
+                                bathroom on one charge."</p><strong>— Linda K.</strong>
+                        </div>
+                        <!-- Set 2 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I have arthritis and this brush changed my life. I
+                                can clean the whole shower without pain."</p><strong>— Sarah M.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The power on this thing is crazy. Cleaned my grout
+                                lines to white in seconds."</p><strong>— James P.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Best purchase for my car. The wheel rim attachment
+                                is perfect."</p><strong>— Mike T.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★☆</div>
+                            <p style="color:var(--text-sec-light);">"Battery lasts a long time. Cleans the whole
+                                bathroom on one charge."</p><strong>— Linda K.</strong>
+                        </div>
+                        <!-- Set 3 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I have arthritis and this brush changed my life. I
+                                can clean the whole shower without pain."</p><strong>— Sarah M.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The power on this thing is crazy. Cleaned my grout
+                                lines to white in seconds."</p><strong>— James P.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Best purchase for my car. The wheel rim attachment
+                                is perfect."</p><strong>— Mike T.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★☆</div>
+                            <p style="color:var(--text-sec-light);">"Battery lasts a long time. Cleans the whole
+                                bathroom on one charge."</p><strong>— Linda K.</strong>
+                        </div>
+                        <!-- Set 4 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I have arthritis and this brush changed my life. I
+                                can clean the whole shower without pain."</p><strong>— Sarah M.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The power on this thing is crazy. Cleaned my grout
+                                lines to white in seconds."</p><strong>— James P.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Best purchase for my car. The wheel rim attachment
+                                is perfect."</p><strong>— Mike T.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★☆</div>
+                            <p style="color:var(--text-sec-light);">"Battery lasts a long time. Cleans the whole
+                                bathroom on one charge."</p><strong>— Linda K.</strong>
+                        </div>
+                        <!-- Set 5 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I have arthritis and this brush changed my life. I
+                                can clean the whole shower without pain."</p><strong>— Sarah M.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The power on this thing is crazy. Cleaned my grout
+                                lines to white in seconds."</p><strong>— James P.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Best purchase for my car. The wheel rim attachment
+                                is perfect."</p><strong>— Mike T.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★☆</div>
+                            <p style="color:var(--text-sec-light);">"Battery lasts a long time. Cleans the whole
+                                bathroom on one charge."</p><strong>— Linda K.</strong>
+                        </div>
+                        <!-- Set 6 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I have arthritis and this brush changed my life. I
+                                can clean the whole shower without pain."</p><strong>— Sarah M.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The power on this thing is crazy. Cleaned my grout
+                                lines to white in seconds."</p><strong>— James P.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Best purchase for my car. The wheel rim attachment
+                                is perfect."</p><strong>— Mike T.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★☆</div>
+                            <p style="color:var(--text-sec-light);">"Battery lasts a long time. Cleans the whole
+                                bathroom on one charge."</p><strong>— Linda K.</strong>
+                        </div>
+                    </div>
                 </div>
-                <!-- Review 2 -->
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p style="color:var(--text-sec-light);">"The power on this thing is crazy. Cleaned my grout lines to
-                        white in seconds."</p>
-                    <strong>— James P.</strong>
+
+                <!-- ROW 2: Right to Left (Reviews 5-8) -->
+                <div class="marquee-row">
+                    <div class="marquee-track scroll-left">
+                        <!-- Set 1 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
+                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
+                                love it. Highly recommended."</p><strong>— Emily W.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
+                                and sturdy."</p><strong>— David H.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
+                                mold. 10/10."</p><strong>— Jessica S.</strong>
+                        </div>
+                        <!-- Set 2 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
+                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
+                                love it. Highly recommended."</p><strong>— Emily W.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
+                                and sturdy."</p><strong>— David H.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
+                                mold. 10/10."</p><strong>— Jessica S.</strong>
+                        </div>
+                        <!-- Set 3 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
+                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
+                                love it. Highly recommended."</p><strong>— Emily W.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
+                                and sturdy."</p><strong>— David H.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
+                                mold. 10/10."</p><strong>— Jessica S.</strong>
+                        </div>
+                        <!-- Set 4 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
+                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
+                                love it. Highly recommended."</p><strong>— Emily W.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
+                                and sturdy."</p><strong>— David H.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
+                                mold. 10/10."</p><strong>— Jessica S.</strong>
+                        </div>
+                        <!-- Set 5 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
+                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
+                                love it. Highly recommended."</p><strong>— Emily W.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
+                                and sturdy."</p><strong>— David H.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
+                                mold. 10/10."</p><strong>— Jessica S.</strong>
+                        </div>
+                        <!-- Set 6 -->
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
+                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
+                                love it. Highly recommended."</p><strong>— Emily W.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
+                                and sturdy."</p><strong>— David H.</strong>
+                        </div>
+                        <div class="review-card-mini">
+                            <div class="stars">★★★★★</div>
+                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
+                                mold. 10/10."</p><strong>— Jessica S.</strong>
+                        </div>
+                    </div>
                 </div>
-                <!-- Review 3 -->
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p style="color:var(--text-sec-light);">"Best purchase for my car. The wheel rim attachment is
-                        perfect."</p>
-                    <strong>— Mike T.</strong>
-                </div>
-                <!-- Review 4 -->
-                <div class="review-card">
-                    <div class="stars">★★★★☆</div>
-                    <p style="color:var(--text-sec-light);">"Battery lasts a long time. Cleans the whole bathroom on one
-                        charge."</p>
-                    <strong>— Linda K.</strong>
-                </div>
-                <!-- Review 5 -->
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My back pain
-                        is gone thanks to this!"</p>
-                    <strong>— Robert D.</strong>
-                </div>
-                <!-- Review 6 -->
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both love
-                        it. Highly recommended."</p>
-                    <strong>— Emily W.</strong>
-                </div>
-                <!-- Review 7 -->
-                <div class="review-card">
-                    <div class="stars">★★★★☆</div>
-                    <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium and
-                        sturdy."</p>
-                    <strong>— David H.</strong>
-                </div>
-                <!-- Review 8 -->
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower mold.
-                        10/10."</p>
-                    <strong>— Jessica S.</strong>
-                </div>
+
             </div>
         </div>
     </section>
