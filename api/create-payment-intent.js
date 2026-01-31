@@ -2,9 +2,17 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const calculateOrderAmount = (items, state) => {
     let amount = 0;
+    let totalQuantity = 0;
+
     items.forEach(item => {
         amount += (item.price * 100) * item.quantity;
+        totalQuantity += item.quantity;
     });
+
+    // Buy 2 Get 15% Off
+    if (totalQuantity >= 2) {
+        amount = amount * 0.85;
+    }
 
     // Shipping is now always free
     // if (amount < 3500 && amount > 0) amount += 499;
