@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
         const { paymentIntentId, items, state } = req.body;
 
         const calculateOrderAmount = (items, state) => {
+            let amount = 0;
             let totalQuantity = 0;
 
             items.forEach(item => {

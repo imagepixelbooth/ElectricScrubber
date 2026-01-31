@@ -865,14 +865,22 @@
         function updateTotals(subtotal) {
 
             let discount = 0;
-            if (discountApplied && subtotal > 0) {
-                if (currentPromoCode === 'FAVORITE99') {
-                    discount = subtotal * 0.99;
-                    document.getElementById('discountCodeTag').innerText = '(FAVORITE99)';
-                } else {
-                    discount = subtotal * 0.10;
-                    document.getElementById('discountCodeTag').innerText = '(VIRAL10)';
-                }
+            const totalQty = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+            // Priority: Promo Code -> then Auto Discount
+            if (discountApplied && currentPromoCode === 'FAVORITE99') {
+                discount = subtotal * 0.99;
+                document.getElementById('discountCodeTag').innerText = '(FAVORITE99)';
+            } else if (discountApplied && currentPromoCode === 'VIRAL10') {
+                discount = subtotal * 0.10;
+                document.getElementById('discountCodeTag').innerText = '(VIRAL10)';
+            } else if (totalQty >= 2) {
+                // Auto-Apply Buy 2 Get 15% Off
+                discount = subtotal * 0.15;
+                document.getElementById('discountCodeTag').innerText = '(Buy 2 Deal)';
+            }
+
+            if (discount > 0) {
                 document.querySelector('.discount-row').classList.remove('hidden');
                 document.getElementById('discountVal').innerText = '-$' + discount.toFixed(2);
             } else {
