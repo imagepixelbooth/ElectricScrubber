@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 const { createClient } = require('@supabase/supabase-js');
-const crypto = require('crypto'); // Built-in Node module
-const fetch = require('node-fetch'); // Assuming node-fetch is available (or use global fetch in Node 18+)
+const crypto = require('crypto');
+const https = require('https');
 
 // Initialize Supabase
 const supabaseUrl = process.env.SUPABASE_URL;
