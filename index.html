@@ -2842,6 +2842,21 @@
             track.addEventListener('touchmove', endHold, { passive: true });
         });
 
+        // --- 3. Video Autoplay on Scroll ---
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.play().catch(e => console.log("Autoplay prevented:", e));
+                } else {
+                    entry.target.pause();
+                }
+            });
+        }, { threshold: 0.25 }); // Play when 25% visible
+
+        document.querySelectorAll('.lazy-video').forEach(video => {
+            videoObserver.observe(video);
+        });
+
         const canvas = document.getElementById('heroCanvas');
         const ctx = canvas.getContext('2d');
         const frameCount = 81; // Updated to 81 frames (WebP)
