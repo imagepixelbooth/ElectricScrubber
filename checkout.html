@@ -14,7 +14,7 @@
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -241,6 +241,10 @@
                     <span>Subtotal</span>
                     <span id="subtotal">$0.00</span>
                 </div>
+                <div class="summary-row" id="discountRow" style="display:none; color: #00c853;">
+                    <span>Discount (15% Off)</span>
+                    <span id="discountAmount">-$0.00</span>
+                </div>
                 <div class="summary-row">
                     <span>Shipping</span>
                     <span id="shipping">$0.00</span>
@@ -408,13 +412,26 @@
                 const data = await res.json();
 
                 if (data.amount) {
-                    // Current Total in Cents -> Dollars
                     const totalDollars = (data.amount / 100).toFixed(2);
                     const taxDollars = (data.tax / 100).toFixed(2);
+                    const subtotalDollars = (data.subtotal / 100).toFixed(2);
 
                     document.getElementById('total').innerText = '$' + totalDollars;
                     document.getElementById('payAmount').innerText = '$' + totalDollars;
                     document.getElementById('taxAmount').innerText = '$' + taxDollars;
+                    document.getElementById('subtotal').innerText = '$' + subtotalDollars;
+
+                    // Handle Discount Display
+                    const discountRow = document.getElementById('discountRow');
+                    if (data.discount > 0) {
+                        const discountDollars = (data.discount / 100).toFixed(2);
+                        document.getElementById('discountAmount').innerText = '-$' + discountDollars;
+                        discountRow.style.display = 'flex';
+                    } else {
+                        discountRow.style.display = 'none';
+                    }
+
+                    // Note: We are overwriting local calcs with server truth
                 }
 
             } catch (e) {

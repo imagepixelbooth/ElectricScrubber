@@ -16,7 +16,6 @@ module.exports = async (req, res) => {
         const { paymentIntentId, items, state } = req.body;
 
         const calculateOrderAmount = (items, state) => {
-            let amount = 0;
             let totalQuantity = 0;
 
             items.forEach(item => {
@@ -24,9 +23,13 @@ module.exports = async (req, res) => {
                 totalQuantity += item.quantity;
             });
 
+            const subtotal = Math.round(amount);
+            let discount = 0;
+
             // Buy 2 Get 15% Off
             if (totalQuantity >= 2) {
-                amount = amount * 0.85;
+                discount = Math.round(amount * 0.15);
+                amount = amount - discount;
             }
 
             // Tax Logic
@@ -35,10 +38,10 @@ module.exports = async (req, res) => {
                 tax = Math.round(amount * 0.06625);
             }
 
-            return { total: Math.round(amount + tax), tax: tax };
+            return { total: Math.round(amount + tax), tax: tax, subtotal: subtotal, discount: discount };
         };
 
-        const { total, tax } = calculateOrderAmount(items, state);
+        const { total, tax, subtotal, discount } = calculateOrderAmount(items, state);
 
         // Update Stripe PaymentIntent
         await stripe.paymentIntents.update(paymentIntentId, {
@@ -47,7 +50,9 @@ module.exports = async (req, res) => {
 
         res.status(200).json({
             amount: total,
-            tax: tax
+            tax: tax,
+            subtotal: subtotal,
+            discount: discount
         });
     } catch (e) {
         res.status(400).json({
