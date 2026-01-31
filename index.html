@@ -368,7 +368,8 @@
         /* Responsive Hero */
         @media (max-width: 768px) {
             .hero-content h1 {
-                font-size: 3.5rem;
+                font-size: 2.5rem;
+                /* Reduced from 3.5rem */
             }
 
             .hero-content .sub-text {
@@ -459,7 +460,7 @@
         .feature-card:hover .feature-icon {
             transform: rotate(15deg) scale(1.1);
             background: var(--accent-blue);
-            color: white;
+            color: rgb(178, 216, 250);
         }
 
         /* Mobile Only Feature Images */
@@ -1458,6 +1459,12 @@
                 width: 100vw;
             }
 
+            #product-variant-img {
+                filter: brightness(0.95);
+                /* 5% darker tint */
+                transition: 0.3s;
+            }
+
             /* Adjustment needed in JS for responsive slider */
             nav ul {
                 display: none;
@@ -2095,24 +2102,14 @@
             <div class="features-grid">
                 <div class="feature-card reveal">
                     <img src="https://i.postimg.cc/htJsCcyR/telescopic.png" alt="Handle" class="mobile-feature-img">
-                    <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M13 3l0 .01"></path>
-                            <path d="M12 21l0 .01"></path>
-                            <path d="M12 9l0 .01"></path>
-                            <path d="M12 15l0 .01"></path>
-                            <rect x="9" y="3" width="6" height="18" rx="2"></rect>
-                        </svg></div>
+
                     <h3>Telescopic Handle</h3>
                     <p class="text-muted-light">Extends up to 54 inches. No more back-breaking bending or climbing
                         unstable chairs to reach high spots.</p>
                 </div>
                 <div class="feature-card reveal">
                     <img src="https://i.postimg.cc/gJKfH84z/high-torque.png" alt="Motor" class="mobile-feature-img">
-                    <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                        </svg></div>
+
                     <h3>High-Torque Motor</h3>
                     <p class="text-muted-light">Powerful dual-speed spinning action cuts through soap scum, dirt, and
                         grime in half the time.</p>
@@ -2120,23 +2117,14 @@
                 <div class="feature-card reveal">
                     <img src="https://i.postimg.cc/bwbVR1wG/Whisk-a87822e033f0773b6b14abe375c7f12cdr.png"
                         alt="Waterproof" class="mobile-feature-img">
-                    <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M12 2.69l5.74 5.74-5.74 5.74-5.74-5.74z"></path>
-                            <path d="M5.64 18.36l6.36 6.36 6.36-6.36"></path>
-                        </svg></div>
+
                     <h3>Water-Resistant</h3>
                     <p class="text-muted-light">IPX5 waterproof rating ensures safe operation in wet environments like
                         showers and tubs.</p>
                 </div>
                 <div class="feature-card reveal">
                     <img src="https://i.postimg.cc/28BNPbSG/buckle-design.png" alt="Heads" class="mobile-feature-img">
-                    <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M3.5 12h17"></path>
-                            <path d="M12 3.5v17"></path>
-                        </svg></div>
+
                     <h3>Quick-Swap Heads</h3>
                     <p class="text-muted-light">Snap-on mechanism allows you to switch between 7 brushes in seconds for
                         any surface type.</p>
