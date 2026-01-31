@@ -6,7 +6,7 @@ const env = require('dotenv').config({ path: './.env' });
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-app.use(express.static('.'));
+app.use(express.static('.', { extensions: ['html'] }));
 app.use(express.json());
 
 const cors = require('cors');

@@ -1985,14 +1985,14 @@
                 </ul>
             </nav>
             <div class="flex items-center gap-4">
-                <a href="cart.html" class="cart-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                <a href="cart" class="cart-btn" onclick="openCart()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="9" cy="21" r="1"></circle>
                         <circle cx="20" cy="21" r="1"></circle>
                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                     </svg>
-                    <span class="badge" id="cartBadge">0</span>
+                    <span class="cart-badge" id="cartCount">0</span>
                 </a>
                 <a href="#buy-now-section" class="header-cta pc-only">Buy Now</a>
             </div>
@@ -2014,7 +2014,7 @@
                 <span id="mc-qty" style="color:var(--text-sec-dark); font-size:0.9rem;"></span>
             </div>
         </div>
-        <a href="cart.html" class="btn-primary"
+        <a href="cart" class="btn-primary"
             style="width:100%; text-align:center; display:block; margin-top:1rem;">Checkout</a>
     </div>
 
@@ -2162,23 +2162,22 @@
                     <span class="att-label">Universal Head</span>
                 </div>
                 <div class="att-card">
-                    <img src="https://i.postimg.cc/MTSW5TGH/cloth_removebg_preview.png" class="att-img" alt="Cloth Pad">
+                    <img src="https://i.postimg.cc/MTSW5TGH/cloth_removebg-preview.png" class="att-img" alt="Cloth Pad">
                     <span class="att-label">Cloth Pad</span>
                 </div>
                 <div class="att-card">
-                    <img src="https://i.postimg.cc/63X9c3QZ/wool_cloth_removebg_preview.png" class="att-img"
+                    <img src="https://i.postimg.cc/63X9c3QZ/wool_cloth_removebg-preview.png" class="att-img"
                         alt="Wool Cloth Pad">
                     <span class="att-label">Wool Cloth Pad</span>
                 </div>
                 <div class="att-card">
-                    <img src="https://i.postimg.cc/FR49pRK1/fiber_sponge_removebg_preview.png" class="att-img"
+                    <img src="https://i.postimg.cc/FR49pRK1/fiber_sponge_removebg-preview.png" class="att-img"
                         alt="Fiber Sponge">
                     <span class="att-label">Fiber Sponge</span>
                 </div>
                 <div class="att-card">
-                    <img src="https://i.postimg.cc/9MhWbMf4/regular_songe_removebg_preview.png" class="att-img"
+                    <img src="https://i.postimg.cc/9MhWbMf4/regular_songe_removebg-preview.png" class="att-img"
                         alt="Regular Sponge">
-                    <span class="att-label">Regular Sponge</span>
                 </div>
             </div>
 
@@ -2386,638 +2385,283 @@
                         <div class="review-card-mini">
                             <div class="stars">★★★★★</div>
                             <p style="color:var(--text-sec-light);">"The power on this thing is crazy. Cleaned my grout
-                                lines to white in seconds."</p><strong>— James P.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Best purchase for my car. The wheel rim attachment
-                                is perfect."</p><strong>— Mike T.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★☆</div>
-                            <p style="color:var(--text-sec-light);">"Battery lasts a long time. Cleans the whole
-                                bathroom on one charge."</p><strong>— Linda K.</strong>
-                        </div>
-                        <!-- Set 6 -->
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"I have arthritis and this brush changed my life. I
-                                can clean the whole shower without pain."</p><strong>— Sarah M.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"The power on this thing is crazy. Cleaned my grout
-                                lines to white in seconds."</p><strong>— James P.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Best purchase for my car. The wheel rim attachment
-                                is perfect."</p><strong>— Mike T.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★☆</div>
-                            <p style="color:var(--text-sec-light);">"Battery lasts a long time. Cleans the whole
-                                bathroom on one charge."</p><strong>— Linda K.</strong>
                         </div>
                     </div>
                 </div>
-
-                <!-- ROW 2: Right to Left (Reviews 5-8) -->
-                <div class="marquee-row">
-                    <div class="marquee-track scroll-left">
-                        <!-- Set 1 -->
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
-                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
-                                love it. Highly recommended."</p><strong>— Emily W.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
-                                and sturdy."</p><strong>— David H.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
-                                mold. 10/10."</p><strong>— Jessica S.</strong>
-                        </div>
-                        <!-- Set 2 -->
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
-                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
-                                love it. Highly recommended."</p><strong>— Emily W.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
-                                and sturdy."</p><strong>— David H.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
-                                mold. 10/10."</p><strong>— Jessica S.</strong>
-                        </div>
-                        <!-- Set 3 -->
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
-                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
-                                love it. Highly recommended."</p><strong>— Emily W.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
-                                and sturdy."</p><strong>— David H.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
-                                mold. 10/10."</p><strong>— Jessica S.</strong>
-                        </div>
-                        <!-- Set 4 -->
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
-                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
-                                love it. Highly recommended."</p><strong>— Emily W.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
-                                and sturdy."</p><strong>— David H.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
-                                mold. 10/10."</p><strong>— Jessica S.</strong>
-                        </div>
-                        <!-- Set 5 -->
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
-                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
-                                love it. Highly recommended."</p><strong>— Emily W.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
-                                and sturdy."</p><strong>— David H.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
-                                mold. 10/10."</p><strong>— Jessica S.</strong>
-                        </div>
-                        <!-- Set 6 -->
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Finally a product that lives up to the hype. My
-                                back pain is gone thanks to this!"</p><strong>— Robert D.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"I bought one for myself and one for my mom. We both
-                                love it. Highly recommended."</p><strong>— Emily W.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"Shipping was super fast. The device feels premium
-                                and sturdy."</p><strong>— David H.</strong>
-                        </div>
-                        <div class="review-card-mini">
-                            <div class="stars">★★★★★</div>
-                            <p style="color:var(--text-sec-light);">"The corner attachment is a game changer for shower
-                                mold. 10/10."</p><strong>— Jessica S.</strong>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 5.5: Buy Now (BLACK) -->
-    <section class="bg-offwhite py-20" id="buy-now-wrapper">
-        <div class="container">
-            <div class="product-grid reveal" id="buy-now-section">
-                <!-- Left Column: Visual -->
-                <div class="product-visual">
-                    <img id="product-variant-img" src="https://i.postimg.cc/nLdm9cQD/white_color_(1).jpg"
-                        alt="ViralTrenz Scrubber White">
-                </div>
-
-                <!-- Right Column: Info & Actions -->
-                <div class="product-info">
-                    <h2 class="product-title">ViralTrenz Electric Scrubber</h2>
-                    <div class="price-wrapper">
-                        <span class="price-current">$34.99</span>
-                        <span class="price-compare">$79.99</span>
-                    </div>
-
-                    <!-- Review Stars -->
-                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1.5rem; margin-top:-1rem;">
-                        <div
-                            style="color:#FFD700; font-size:1.1rem; letter-spacing:2px; text-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-                            ★★★★★</div>
-                        <span class="review-count" style="font-size:0.9rem;">(1,245 Reviews)</span>
-                    </div>
-                    <p class="product-desc">
-                        The ultimate 8-in-1 cleaning solution. High-torque cleaning power for every surface in your
-                        home, from bathrooms to vehicles.
-                    </p>
-
-                    <!-- Color Selection -->
-                    <div class="option-group">
-                        <span class="option-label" id="color-label-display">Color: <strong>White</strong></span>
-                        <div class="color-selector">
-                            <div class="color-opt color-white active" onclick="selectColor('white', this)"
-                                title="White"></div>
-                            <div class="color-opt color-black" onclick="selectColor('black', this)" title="Black"></div>
-                            <div class="color-opt color-pink" onclick="selectColor('pink', this)" title="Pink"></div>
-                        </div>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="actions-row">
-                        <div class="qty-selector">
-                            <button class="qty-btn" onclick="adjustQty(-1)">-</button>
-                            <input type="text" id="qtyInput" class="qty-input" value="1" readonly>
-                            <button class="qty-btn" onclick="adjustQty(1)">+</button>
-                        </div>
-                        <button class="btn-primary btn-large" onclick="addToCart(true)">Add to Cart</button>
-                    </div>
-
-                    <!-- Trust Signals -->
-                    <div class="trust-signals">
-                        <div class="trust-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                            </svg>
-                            <span>1-Year Warranty</span>
-                        </div>
-                        <div class="trust-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <rect x="1" y="3" width="15" height="13"></rect>
-                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                                <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                                <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                            </svg>
-                            <span>Free Shipping</span>
-                        </div>
-                        <div class="trust-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                            </svg>
-                            <span>30-Day Money Back</span>
-                        </div>
-                    </div>
+                <div class="copy text-muted-dark">
+                    &copy; 2026 ViralTrenz. All rights reserved. Demo landing page.
                 </div>
             </div>
-        </div>
-    </section>
+            </footer>
 
-    <!-- SECTION 6: FAQ (BLACK) -->
-    <section class="bg-midnight py-20" id="faq">
-        <div class="container" style="max-width: 800px;">
-            <h2 class="text-center reveal mb-4" style="font-size: 2.5rem; margin-bottom: 3rem;">Frequently Asked
-                Questions</h2>
+            <!-- Back to top -->
+            <button id="backToTop"
+                style="position:fixed; bottom:30px; right:30px; width:50px; height:50px; border-radius:50%; background:var(--accent-cyan); color:black; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 20px rgba(0,242,234,0.3); opacity:0; pointer-events:none; transition:0.3s; z-index:900;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 15l-6-6-6 6"></path>
+                </svg>
+            </button>
 
-            <div class="reveal">
-                <div class="accordion-item">
-                    <button class="accordion-btn" aria-expanded="false">
-                        Is it safe for tile and grout?
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">Yes! The corner brush and scouring pads are specifically designed for
-                        tile and grout without scratching.</div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-btn" aria-expanded="false">
-                        Can I use it on a car?
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">Absolutely. Use the sponge and polishing pads for car surfaces and
-                        the bristles for tires and rims.</div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-btn" aria-expanded="false">
-                        Is it rechargeable?
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">Yes, it comes with a high-capacity rechargeable battery and a USB-C
-                        charging cable.</div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-btn" aria-expanded="false">
-                        How long does the battery last?
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">It runs for up to 90 minutes on a single charge, depending on the
-                        intensity of use.</div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-btn" aria-expanded="false">
-                        Is it water resistant?
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">The head unit is IPX7 waterproof (submersible) and the handle is IPX5
-                        water-resistant (splash proof).</div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-btn" aria-expanded="false">
-                        What comes in the box?
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">The main unit, telescopic handle, 8 different cleaning heads, and
-                        USB-C charging cable.</div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-btn" aria-expanded="false">
-                        Do you accept returns?
-                        <span class="accordion-icon">+</span>
-                    </button>
-                    <div class="accordion-content">Returns are accepted if the item arrives damaged or if the product is
-                        not as described.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 7: CTA Strip (BLACK) -->
-    <section class="cta-strip py-12">
-        <div class="container flex justify-between items-center" style="gap: 2rem; flex-wrap: wrap;">
-            <div style="text-align: left;">
-                <h3 style="font-size: 1.8rem; color: white;">Try it risk-free for 30 days.</h3>
-                <p class="text-muted-dark">Join 10,000+ happy customers today.</p>
+            <!-- Toast Notification -->
+            <div class="toast" id="toast">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f2ea" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Added to cart!</span>
             </div>
 
-        </div>
-    </section>
+            <script>
+                // --- Interactions & Animations ---
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h4>ViralTrenz</h4>
-                    <p>The smartest way to clean your home. Powerful, versatile, and built to last.</p>
-                </div>
-                <div class="footer-col">
-                    <h5>Support</h5>
-                    <ul>
-                        <li><a href="help.html">Help Center</a></li>
-                        <li><a href="track-order.html">Track Order</a></li>
-                        <li><a href="warranty.html">Warranty</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h5>Policies</h5>
-                    <ul>
-                        <li><a href="privacy.html">Privacy</a></li>
-                        <li><a href="terms.html">Terms</a></li>
-                        <li><a href="returns.html">Return Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="copy text-muted-dark">
-            &copy; 2026 ViralTrenz. All rights reserved. Demo landing page.
-        </div>
-        </div>
-    </footer>
+                // Scroll Reveal
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                        }
+                    });
+                }, { threshold: 0.1 });
 
-    <!-- Back to top -->
-    <button id="backToTop"
-        style="position:fixed; bottom:30px; right:30px; width:50px; height:50px; border-radius:50%; background:var(--accent-cyan); color:black; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 20px rgba(0,242,234,0.3); opacity:0; pointer-events:none; transition:0.3s; z-index:900;">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 15l-6-6-6 6"></path>
-        </svg>
-    </button>
+                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f2ea" stroke-width="2">
-            <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-        <span>Added to cart!</span>
-    </div>
+                // Scroll Progress Bar
+                window.addEventListener('scroll', () => {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    document.getElementById('progressBar').style.width = scrolled + "%";
 
-    <script>
-        // --- Interactions & Animations ---
+                    // Back to top visibility
+                    const btt = document.getElementById('backToTop');
+                    if (winScroll > 500) {
+                        btt.style.opacity = '1';
+                        btt.style.pointerEvents = 'all';
+                    } else {
+                        btt.style.opacity = '0';
+                        btt.style.pointerEvents = 'none';
+                    }
+                });
 
-        // Scroll Reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+                document.getElementById('backToTop').addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+
+                // --- 69-Frame Sticky Scroll Hero Animation (Refined) ---
+
+                // --- 2. Marquee Pause Interaction ---
+                const marqueeTracks = document.querySelectorAll('.marquee-track');
+                marqueeTracks.forEach(track => {
+                    let pressTimer;
+
+                    // -- Desktop / Mouse: Pause on Hover & Click Hold --
+                    // Standard behavior: hover pauses it. 
+                    // If we strictly want "hold to pause", we might remove mouseenter.
+                    // But usually hover-to-pause is the expected desktop UX. 
+                    // Keeping mouseenter/mouseleave for accessibility/readability on desktop.
+                    track.addEventListener('mouseenter', () => track.classList.add('marquee-paused'));
+                    track.addEventListener('mouseleave', () => track.classList.remove('marquee-paused'));
+
+                    track.addEventListener('mousedown', () => track.classList.add('marquee-paused'));
+                    track.addEventListener('mouseup', () => track.classList.remove('marquee-paused'));
+
+                    // -- Mobile / Touch: Hold to Pause (with Delay) --
+                    // Prevent immediate pause on scrolling/tapping.
+
+                    const startHold = () => {
+                        pressTimer = setTimeout(() => {
+                            track.classList.add('marquee-paused');
+                        }, 300); // 300ms wait to consider it a "Hold"
+                    };
+
+                    const endHold = () => {
+                        clearTimeout(pressTimer);
+                        track.classList.remove('marquee-paused');
+                    };
+
+                    track.addEventListener('touchstart', startHold, { passive: true });
+                    track.addEventListener('touchend', endHold);
+                    track.addEventListener('touchcancel', endHold);
+
+                    // If user scrolls, cancel the hold (it's a swipe, not a read)
+                    track.addEventListener('touchmove', endHold, { passive: true });
+                });
+
+                // --- 3. Video Autoplay on Scroll ---
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.play().catch(e => console.log("Autoplay prevented:", e));
+                        } else {
+                            entry.target.pause();
+                        }
+                    });
+                }, { threshold: 0.25 }); // Play when 25% visible
+
+                document.querySelectorAll('.lazy-video').forEach(video => {
+                    videoObserver.observe(video);
+                });
+
+                const canvas = document.getElementById('heroCanvas');
+                const ctx = canvas.getContext('2d');
+                const frameCount = 81; // Updated to 81 frames (WebP)
+                const frames = [];
+                let framesLoaded = 0;
+
+                // Settings
+                const speed = 1.0; // Speed effectively controlled by 1000vh spacer
+                const easing = 0.12;
+
+                // State for smoothing
+                let currentFrameIndex = 0;
+                let targetFrameIndex = 0;
+
+                const isMobile = window.innerWidth < 768;
+                const heroSpacer = document.querySelector('.hero-spacer');
+
+                // Fallback: Set background image in CSS or here in case JS fails or loading
+                canvas.style.backgroundImage = "url('hero/heroanimation/hero_001.webp')";
+                canvas.style.backgroundSize = "cover";
+                canvas.style.backgroundPosition = "center";
+
+                // Resize Logic
+                function resizeCanvas() {
+                    const ratio = Math.min(window.devicePixelRatio, 2);
+                    const w = window.innerWidth;
+                    const h = window.innerHeight;
+
+                    canvas.width = w * ratio;
+                    canvas.height = h * ratio;
+                    canvas.style.width = w + 'px';
+                    canvas.style.height = h + 'px';
+
+                    ctx.scale(ratio, ratio);
+
+                    // Force re-render
+                    renderFrame(Math.round(currentFrameIndex));
                 }
-            });
-        }, { threshold: 0.1 });
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('progressBar').style.width = scrolled + "%";
-
-            // Back to top visibility
-            const btt = document.getElementById('backToTop');
-            if (winScroll > 500) {
-                btt.style.opacity = '1';
-                btt.style.pointerEvents = 'all';
-            } else {
-                btt.style.opacity = '0';
-                btt.style.pointerEvents = 'none';
-            }
-        });
-
-        document.getElementById('backToTop').addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // --- 69-Frame Sticky Scroll Hero Animation (Refined) ---
-
-        // --- 2. Marquee Pause Interaction ---
-        const marqueeTracks = document.querySelectorAll('.marquee-track');
-        marqueeTracks.forEach(track => {
-            let pressTimer;
-
-            // -- Desktop / Mouse: Pause on Hover & Click Hold --
-            // Standard behavior: hover pauses it. 
-            // If we strictly want "hold to pause", we might remove mouseenter.
-            // But usually hover-to-pause is the expected desktop UX. 
-            // Keeping mouseenter/mouseleave for accessibility/readability on desktop.
-            track.addEventListener('mouseenter', () => track.classList.add('marquee-paused'));
-            track.addEventListener('mouseleave', () => track.classList.remove('marquee-paused'));
-
-            track.addEventListener('mousedown', () => track.classList.add('marquee-paused'));
-            track.addEventListener('mouseup', () => track.classList.remove('marquee-paused'));
-
-            // -- Mobile / Touch: Hold to Pause (with Delay) --
-            // Prevent immediate pause on scrolling/tapping.
-
-            const startHold = () => {
-                pressTimer = setTimeout(() => {
-                    track.classList.add('marquee-paused');
-                }, 300); // 300ms wait to consider it a "Hold"
-            };
-
-            const endHold = () => {
-                clearTimeout(pressTimer);
-                track.classList.remove('marquee-paused');
-            };
-
-            track.addEventListener('touchstart', startHold, { passive: true });
-            track.addEventListener('touchend', endHold);
-            track.addEventListener('touchcancel', endHold);
-
-            // If user scrolls, cancel the hold (it's a swipe, not a read)
-            track.addEventListener('touchmove', endHold, { passive: true });
-        });
-
-        // --- 3. Video Autoplay on Scroll ---
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.play().catch(e => console.log("Autoplay prevented:", e));
-                } else {
-                    entry.target.pause();
-                }
-            });
-        }, { threshold: 0.25 }); // Play when 25% visible
-
-        document.querySelectorAll('.lazy-video').forEach(video => {
-            videoObserver.observe(video);
-        });
-
-        const canvas = document.getElementById('heroCanvas');
-        const ctx = canvas.getContext('2d');
-        const frameCount = 81; // Updated to 81 frames (WebP)
-        const frames = [];
-        let framesLoaded = 0;
-
-        // Settings
-        const speed = 1.0; // Speed effectively controlled by 1000vh spacer
-        const easing = 0.12;
-
-        // State for smoothing
-        let currentFrameIndex = 0;
-        let targetFrameIndex = 0;
-
-        const isMobile = window.innerWidth < 768;
-        const heroSpacer = document.querySelector('.hero-spacer');
-
-        // Fallback: Set background image in CSS or here in case JS fails or loading
-        canvas.style.backgroundImage = "url('hero/heroanimation/hero_001.webp')";
-        canvas.style.backgroundSize = "cover";
-        canvas.style.backgroundPosition = "center";
-
-        // Resize Logic
-        function resizeCanvas() {
-            const ratio = Math.min(window.devicePixelRatio, 2);
-            const w = window.innerWidth;
-            const h = window.innerHeight;
-
-            canvas.width = w * ratio;
-            canvas.height = h * ratio;
-            canvas.style.width = w + 'px';
-            canvas.style.height = h + 'px';
-
-            ctx.scale(ratio, ratio);
-
-            // Force re-render
-            renderFrame(Math.round(currentFrameIndex));
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        // 1. Frame Path
-        const currentFramePath = index => {
-            const id = (index + 1).toString().padStart(3, '0');
-            return `hero/heroanimation/hero_${id}.webp`;
-        };
-
-        // 2. Preload
-        function preloadFrames() {
-            const loadFrame = (i) => {
-                if (isMobile && i % 2 !== 0) {
-                    frames[i] = null;
-                    return;
-                }
-                const img = new Image();
-                img.src = currentFramePath(i);
-                img.onload = () => {
-                    framesLoaded++;
-                    if (framesLoaded === 1) renderFrame(0);
+                // 1. Frame Path
+                const currentFramePath = index => {
+                    const id = (index + 1).toString().padStart(3, '0');
+                    return `hero/heroanimation/hero_${id}.webp`;
                 };
-                frames[i] = img;
-            };
 
-            for (let i = 0; i < 10; i++) loadFrame(i);
-            setTimeout(() => {
-                for (let i = 10; i < frameCount; i++) loadFrame(i);
-            }, 100);
-        }
-        preloadFrames();
+                // 2. Preload
+                function preloadFrames() {
+                    const loadFrame = (i) => {
+                        if (isMobile && i % 2 !== 0) {
+                            frames[i] = null;
+                            return;
+                        }
+                        const img = new Image();
+                        img.src = currentFramePath(i);
+                        img.onload = () => {
+                            framesLoaded++;
+                            if (framesLoaded === 1) renderFrame(0);
+                        };
+                        frames[i] = img;
+                    };
 
-        // 3. Render
-        function renderFrame(index) {
-            if (index < 0) index = 0;
-            if (index >= frameCount) index = frameCount - 1;
+                    for (let i = 0; i < 10; i++) loadFrame(i);
+                    setTimeout(() => {
+                        for (let i = 10; i < frameCount; i++) loadFrame(i);
+                    }, 100);
+                }
+                preloadFrames();
 
-            if (isMobile && index % 2 !== 0) index = index - 1;
+                // 3. Render
+                function renderFrame(index) {
+                    if (index < 0) index = 0;
+                    if (index >= frameCount) index = frameCount - 1;
 
-            const img = frames[index];
-            if (!img) {
-                // Fallback is handled by background-image if canvas is transparent
-                // But we clearRect, so we need to draw over it. 
-                // If img is missing (not loaded), we skip drawImage, showing background?
-                // No, clearRect clears background too if it's on canvas element? 
-                // Actually BG image is on the element style, clearRect clears pixels. 
-                // So BG image shows through transparent pixels.
-                return;
-            }
+                    if (isMobile && index % 2 !== 0) index = index - 1;
 
-            const w = window.innerWidth;
-            const h = window.innerHeight;
-            const imgW = img.width;
-            const imgH = img.height;
+                    const img = frames[index];
+                    if (!img) {
+                        // Fallback is handled by background-image if canvas is transparent
+                        // But we clearRect, so we need to draw over it. 
+                        // If img is missing (not loaded), we skip drawImage, showing background?
+                        // No, clearRect clears background too if it's on canvas element? 
+                        // Actually BG image is on the element style, clearRect clears pixels. 
+                        // So BG image shows through transparent pixels.
+                        return;
+                    }
 
-            const scale = Math.max(w / imgW, h / imgH);
-            const x = (w / 2) - (imgW * scale / 2);
-            const y = (h / 2) - (imgH * scale / 2);
+                    const w = window.innerWidth;
+                    const h = window.innerHeight;
+                    const imgW = img.width;
+                    const imgH = img.height;
 
-            ctx.clearRect(0, 0, w, h);
-            ctx.drawImage(img, x, y, imgW * scale, imgH * scale);
-        }
+                    const scale = Math.max(w / imgW, h / imgH);
+                    const x = (w / 2) - (imgW * scale / 2);
+                    const y = (h / 2) - (imgH * scale / 2);
 
-        // 4. Update Target
-        function updateTarget() {
-            if (!heroSpacer) return;
-            const spacerRect = heroSpacer.getBoundingClientRect();
-            const scrollDistance = spacerRect.height - window.innerHeight;
-            const scrolled = -spacerRect.top;
+                    ctx.clearRect(0, 0, w, h);
+                    ctx.drawImage(img, x, y, imgW * scale, imgH * scale);
+                }
 
-            let progress = scrolled / scrollDistance;
-            progress = Math.max(0, Math.min(1, progress));
+                // 4. Update Target
+                function updateTarget() {
+                    if (!heroSpacer) return;
+                    const spacerRect = heroSpacer.getBoundingClientRect();
+                    const scrollDistance = spacerRect.height - window.innerHeight;
+                    const scrolled = -spacerRect.top;
 
-            // Map full progress to full frames
-            const maxFrame = frameCount - 1;
-            targetFrameIndex = Math.floor(progress * maxFrame);
-        }
+                    let progress = scrolled / scrollDistance;
+                    progress = Math.max(0, Math.min(1, progress));
 
-        window.addEventListener('scroll', updateTarget);
+                    // Map full progress to full frames
+                    const maxFrame = frameCount - 1;
+                    targetFrameIndex = Math.floor(progress * maxFrame);
+                }
 
-        // 5. Animation Loop
-        function animationLoop() {
-            const diff = targetFrameIndex - currentFrameIndex;
-            if (Math.abs(diff) > 0.01) {
-                currentFrameIndex += diff * easing;
-                renderFrame(Math.round(currentFrameIndex));
-            } else if (Math.abs(targetFrameIndex - Math.round(currentFrameIndex)) > 0) {
-                renderFrame(Math.round(targetFrameIndex));
-            }
-            requestAnimationFrame(animationLoop);
-        }
-        requestAnimationFrame(animationLoop);
+                window.addEventListener('scroll', updateTarget);
 
-        // Remove old logic hooks if any
-        // (Tilt effect follows)
+                // 5. Animation Loop
+                function animationLoop() {
+                    const diff = targetFrameIndex - currentFrameIndex;
+                    if (Math.abs(diff) > 0.01) {
+                        currentFrameIndex += diff * easing;
+                        renderFrame(Math.round(currentFrameIndex));
+                    } else if (Math.abs(targetFrameIndex - Math.round(currentFrameIndex)) > 0) {
+                        renderFrame(Math.round(targetFrameIndex));
+                    }
+                    requestAnimationFrame(animationLoop);
+                }
+                requestAnimationFrame(animationLoop);
 
-        // End Hero Animation Logic
+                // Remove old logic hooks if any
+                // (Tilt effect follows)
 
-        // Surface Swap Logic
-        const surfaceData = [
-            { text: "Kitchen", img: "assets/images/surfaces/kitchen_sink_and_stove.png", tip: "Pro Tip: Use the scouring pad for burnt-on grease." },
-            { text: "Bathroom", img: "assets/images/surfaces/bath_tub_and_sink.png", tip: "Pro Tip: The round brush contours perfectly to sinks." },
-            { text: "Tile", img: "assets/images/surfaces/tiles_and_grout.png", tip: "Pro Tip: Let the cleaner sit for 5 mins before scrubbing." },
-            { text: "Floors", img: "assets/images/surfaces/kitchen_floor.png", tip: "Pro Tip: Use the flat brush for large areas." },
-            { text: "Glass", img: "assets/images/surfaces/glass_shower.png", tip: "Pro Tip: Use the sponge head for a streak-free shine." },
-            { text: "Wheels", img: "assets/images/surfaces/car_wheel.png", tip: "Pro Tip: The corner brush gets into tight rim spokes." },
-            { text: "Outdoor", img: "assets/images/surfaces/house_windows.png", tip: "Pro Tip: Great for patio furniture and siding." }
-        ];
+                // End Hero Animation Logic
 
-        // --- 3D Carousel Logic ---
-        const track = document.getElementById('surfaceTrack');
-        const pagination = document.getElementById('surfacePagination');
-        let activeIndex = 0;
-        let startX = 0;
-        let isDraggingTrack = false;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
-        let animationID;
+                // Surface Swap Logic
+                const surfaceData = [
+                    { text: "Kitchen", img: "assets/images/surfaces/kitchen_sink_and_stove.png", tip: "Pro Tip: Use the scouring pad for burnt-on grease." },
+                    { text: "Bathroom", img: "assets/images/surfaces/bath_tub_and_sink.png", tip: "Pro Tip: The round brush contours perfectly to sinks." },
+                    { text: "Tile", img: "assets/images/surfaces/tiles_and_grout.png", tip: "Pro Tip: Let the cleaner sit for 5 mins before scrubbing." },
+                    { text: "Floors", img: "assets/images/surfaces/kitchen_floor.png", tip: "Pro Tip: Use the flat brush for large areas." },
+                    { text: "Glass", img: "assets/images/surfaces/glass_shower.png", tip: "Pro Tip: Use the sponge head for a streak-free shine." },
+                    { text: "Wheels", img: "assets/images/surfaces/car_wheel.png", tip: "Pro Tip: The corner brush gets into tight rim spokes." },
+                    { text: "Outdoor", img: "assets/images/surfaces/house_windows.png", tip: "Pro Tip: Great for patio furniture and siding." }
+                ];
 
-        // Render Carousel
-        function initCarousel() {
-            // Generate Cards
-            track.innerHTML = surfaceData.map((item, index) => `
+                // --- 3D Carousel Logic ---
+                const track = document.getElementById('surfaceTrack');
+                const pagination = document.getElementById('surfacePagination');
+                let activeIndex = 0;
+                let startX = 0;
+                let isDraggingTrack = false;
+                let currentTranslate = 0;
+                let prevTranslate = 0;
+                let animationID;
+
+                // Render Carousel
+                function initCarousel() {
+                    // Generate Cards
+                    track.innerHTML = surfaceData.map((item, index) => `
                 <div class="carousel-card" onclick="goToSlide(${index})">
                     <img src="${item.img}" alt="${item.text}">
                     <div class="card-overlay"></div>
@@ -3028,382 +2672,382 @@
                 </div>
             `).join('');
 
-            // Generate Pagination
-            pagination.innerHTML = surfaceData.map((_, index) => `
+                    // Generate Pagination
+                    pagination.innerHTML = surfaceData.map((_, index) => `
                 <div class="page-dot" onclick="goToSlide(${index})"></div>
             `).join('');
 
-            updateCarousel();
-        }
-
-        // Update Cards (Infinite Loop Logic)
-        function updateCarousel() {
-            const cards = document.querySelectorAll('.carousel-card');
-            const dots = document.querySelectorAll('.page-dot');
-            const len = surfaceData.length;
-            const isMobile = window.innerWidth <= 768;
-
-            // Responsive Params
-            const sideOffset = isMobile ? 55 : 120;
-            const farOffset = isMobile ? 80 : 300;
-
-            // Remove Track translation (we move cards absolutely now)
-            track.style.transform = 'none';
-
-            cards.forEach((card, index) => {
-                // Calculate circular distance
-                // We want the shortest path (-3 to +3)
-                let offset = (index - activeIndex + len) % len;
-                if (offset > len / 2) offset -= len;
-
-                const absOffset = Math.abs(offset);
-
-                // Default hidden state
-                let scale = 0.7;
-                let translateX = offset > 0 ? farOffset : -farOffset;
-                let opacity = 0;
-                let zIndex = 0;
-                let filter = 'grayscale(1) brightness(0.4)';
-                let rotateY = 0;
-
-                if (offset === 0) {
-                    // Active (Center)
-                    scale = 1;
-                    translateX = 0;
-                    opacity = 1;
-                    zIndex = 10;
-                    filter = 'grayscale(0) brightness(1)';
-                    card.classList.add('active');
-                } else if (Math.abs(offset) === 1) {
-                    // Previous / Next (Side cards)
-                    scale = 0.85;
-                    // Push them closer (120px)
-                    translateX = offset > 0 ? sideOffset : -sideOffset;
-                    rotateY = offset > 0 ? -15 : 15;
-                    opacity = 0.6;
-                    zIndex = 5;
-                    filter = 'grayscale(1) brightness(0.6)';
-                    card.classList.remove('active');
-                } else {
-                    // Others (Hidden but positioned for entrance)
-                    // We keep them slightly further out so they can slide in
-                    translateX = offset > 0 ? farOffset : -farOffset;
-                    opacity = 0; // Hide invisible ones
-                    card.classList.remove('active');
+                    updateCarousel();
                 }
 
-                card.style.transform = `scale(${scale}) translateX(${translateX}px) rotateY(${rotateY}deg)`;
-                card.style.opacity = opacity;
-                card.style.filter = filter;
-                card.style.zIndex = zIndex;
-            });
+                // Update Cards (Infinite Loop Logic)
+                function updateCarousel() {
+                    const cards = document.querySelectorAll('.carousel-card');
+                    const dots = document.querySelectorAll('.page-dot');
+                    const len = surfaceData.length;
+                    const isMobile = window.innerWidth <= 768;
 
-            // Update Pagination
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === activeIndex);
-            });
-        }
+                    // Responsive Params
+                    const sideOffset = isMobile ? 55 : 120;
+                    const farOffset = isMobile ? 80 : 300;
 
-        function goToSlide(index) {
-            const len = surfaceData.length;
-            // Handle negative wrapping (e.g. -1 becomes 6)
-            activeIndex = (index + len) % len;
-            updateCarousel();
-        }
+                    // Remove Track translation (we move cards absolutely now)
+                    track.style.transform = 'none';
 
-        function adjustSlide(direction) {
-            goToSlide(activeIndex + direction);
-        }
+                    cards.forEach((card, index) => {
+                        // Calculate circular distance
+                        // We want the shortest path (-3 to +3)
+                        let offset = (index - activeIndex + len) % len;
+                        if (offset > len / 2) offset -= len;
 
-        // --- Drag / Swipe Logic ---
-        function touchStart(index) {
-            return function (event) {
-                isDraggingTrack = true;
-                startX = getPositionX(event);
-                animationID = requestAnimationFrame(animation);
-            }
-        }
+                        const absOffset = Math.abs(offset);
 
-        function touchMove(event) {
-            if (isDraggingTrack) {
-                const currentX = getPositionX(event);
-                const diff = startX - currentX;
+                        // Default hidden state
+                        let scale = 0.7;
+                        let translateX = offset > 0 ? farOffset : -farOffset;
+                        let opacity = 0;
+                        let zIndex = 0;
+                        let filter = 'grayscale(1) brightness(0.4)';
+                        let rotateY = 0;
 
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0) goToSlide(activeIndex + 1); // Swipe Left -> Next
-                    else goToSlide(activeIndex - 1); // Swipe Right -> Prev
+                        if (offset === 0) {
+                            // Active (Center)
+                            scale = 1;
+                            translateX = 0;
+                            opacity = 1;
+                            zIndex = 10;
+                            filter = 'grayscale(0) brightness(1)';
+                            card.classList.add('active');
+                        } else if (Math.abs(offset) === 1) {
+                            // Previous / Next (Side cards)
+                            scale = 0.85;
+                            // Push them closer (120px)
+                            translateX = offset > 0 ? sideOffset : -sideOffset;
+                            rotateY = offset > 0 ? -15 : 15;
+                            opacity = 0.6;
+                            zIndex = 5;
+                            filter = 'grayscale(1) brightness(0.6)';
+                            card.classList.remove('active');
+                        } else {
+                            // Others (Hidden but positioned for entrance)
+                            // We keep them slightly further out so they can slide in
+                            translateX = offset > 0 ? farOffset : -farOffset;
+                            opacity = 0; // Hide invisible ones
+                            card.classList.remove('active');
+                        }
 
-                    isDraggingTrack = false; // Trigger once
+                        card.style.transform = `scale(${scale}) translateX(${translateX}px) rotateY(${rotateY}deg)`;
+                        card.style.opacity = opacity;
+                        card.style.filter = filter;
+                        card.style.zIndex = zIndex;
+                    });
+
+                    // Update Pagination
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === activeIndex);
+                    });
                 }
-            }
-        }
 
-        function touchEnd() {
-            isDraggingTrack = false;
-            cancelAnimationFrame(animationID);
-        }
-
-        function getPositionX(event) {
-            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-        }
-
-        function animation() {
-            if (isDraggingTrack) requestAnimationFrame(animation);
-        }
-
-        // Attach Events
-        const viewport = document.querySelector('.carousel-viewport');
-        viewport.addEventListener('mousedown', touchStart(activeIndex));
-        viewport.addEventListener('touchstart', touchStart(activeIndex), { passive: true });
-
-        viewport.addEventListener('mousemove', touchMove);
-        viewport.addEventListener('touchmove', touchMove, { passive: true });
-
-        viewport.addEventListener('mouseup', touchEnd);
-        viewport.addEventListener('mouseleave', touchEnd);
-        viewport.addEventListener('touchend', touchEnd);
-
-        // Resize
-        window.addEventListener('resize', () => {
-            // Debounce or just raw update
-            updateCarousel();
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', initCarousel);
-
-
-
-
-        // Before/After Slider
-        const baContainer = document.getElementById('baSlider');
-        const baOverlay = document.getElementById('baOverlay');
-        const baOverlayImg = baOverlay.querySelector('img'); // Select inner image
-        const baHandle = document.getElementById('baHandle');
-        let isDragging = false;
-
-        baContainer.addEventListener('mousedown', () => isDragging = true);
-        window.addEventListener('mouseup', () => isDragging = false);
-        baContainer.addEventListener('touchstart', () => isDragging = true);
-        window.addEventListener('touchend', () => isDragging = false);
-
-        // Sync overlay image width to container width (Fix for responsive behavior)
-        function updateSliderImageWidth() {
-            const width = baContainer.offsetWidth;
-            baOverlayImg.style.width = width + 'px';
-            baOverlayImg.style.maxWidth = 'none'; // Override CSS constraint if any
-        }
-        window.addEventListener('resize', updateSliderImageWidth);
-        // Initial call
-        updateSliderImageWidth();
-        // Also call on load just in case images load late
-        window.addEventListener('load', updateSliderImageWidth);
-
-        const moveSlider = (x) => {
-            const rect = baContainer.getBoundingClientRect();
-            let pos = ((x - rect.left) / rect.width) * 100;
-            if (pos < 0) pos = 0;
-            if (pos > 100) pos = 100;
-            baOverlay.style.width = pos + "%";
-            baHandle.style.left = pos + "%";
-        };
-
-        baContainer.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            moveSlider(e.clientX);
-        });
-
-        baContainer.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault(); // Stop page scroll
-            moveSlider(e.touches[0].clientX);
-        }, { passive: false });
-
-        // Result Categories Logic
-        const resultsData = [
-            { // Bathroom
-                before: "https://i.postimg.cc/RF143B4T/dirtytub.png",
-                after: "https://i.postimg.cc/fL7D3NDf/cleantub.png"
-            },
-            { // Kitchen
-                before: "https://i.postimg.cc/vHyWnHhb/dirty_sink.jpg",
-                after: "https://i.postimg.cc/CL0j8LN2/clean_sink.jpg"
-            },
-            { // Living Room
-                before: "https://i.postimg.cc/k4NqVmqF/dirtywindow.png",
-                after: "https://i.postimg.cc/fL7D3NDK/cleanwindow.png"
-            }
-        ];
-
-
-        function changeResult(index) {
-            // Update buttons
-            document.querySelectorAll('.result-btn').forEach((btn, i) => {
-                btn.classList.toggle('active', i === index);
-                btn.style.borderColor = i === index ? 'var(--accent-cyan)' : 'transparent';
-                btn.style.background = i === index ? 'rgba(0, 242, 234, 0.1)' : 'white';
-            });
-
-            // Update images
-            const afterImg = baContainer.querySelector('.ba-img');
-            const beforeImg = baOverlay.querySelector('img');
-
-            // Fade out
-            baContainer.style.opacity = 0.5;
-
-            setTimeout(() => {
-                beforeImg.src = resultsData[index].before;
-                afterImg.src = resultsData[index].after;
-
-                // Reset slider to center
-                baOverlay.style.width = '50%';
-                baHandle.style.left = '50%';
-
-                // Fade in
-                baContainer.style.opacity = 1;
-            }, 200);
-        }
-
-        // FAQ Accordion
-        document.querySelectorAll('.accordion-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = btn.parentElement;
-                const content = item.querySelector('.accordion-content');
-                const isActive = item.classList.contains('accordion-active');
-
-                item.classList.toggle('accordion-active');
-                btn.setAttribute('aria-expanded', !isActive);
-
-                if (!isActive) {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } else {
-                    content.style.maxHeight = null;
+                function goToSlide(index) {
+                    const len = surfaceData.length;
+                    // Handle negative wrapping (e.g. -1 becomes 6)
+                    activeIndex = (index + len) % len;
+                    updateCarousel();
                 }
-            });
-        });
 
-        // --- Cart Logic (LocalStorage) ---
+                function adjustSlide(direction) {
+                    goToSlide(activeIndex + direction);
+                }
 
-        const PRODUCT = {
-            id: "cleanbrush-7in1",
-            title: "Multifunctional Electric Cleaning Brush",
-            price: 34.99,
-            compareAt: 79.99,
-            // Variants now have specific images
-            variants: {
-                White: "https://i.postimg.cc/nLdm9cQD/white_color_(1).jpg",
-                Black: "https://i.postimg.cc/qv3yYdSd/black_color_(1).jpg",
-                Pink: "https://i.postimg.cc/cJD3t48Y/pink_color_(1).jpg"
-            }
-        };
+                // --- Drag / Swipe Logic ---
+                function touchStart(index) {
+                    return function (event) {
+                        isDraggingTrack = true;
+                        startX = getPositionX(event);
+                        animationID = requestAnimationFrame(animation);
+                    }
+                }
 
-        const qtyInput = document.getElementById('qtyInput');
-        let selectedColor = 'White'; // Default
+                function touchMove(event) {
+                    if (isDraggingTrack) {
+                        const currentX = getPositionX(event);
+                        const diff = startX - currentX;
 
-        function selectColor(color, btn) {
-            selectedColor = color.charAt(0).toUpperCase() + color.slice(1);
+                        if (Math.abs(diff) > 50) {
+                            if (diff > 0) goToSlide(activeIndex + 1); // Swipe Left -> Next
+                            else goToSlide(activeIndex - 1); // Swipe Right -> Prev
 
-            // Update Label
-            const label = document.getElementById('color-label-display');
-            if (label) label.innerHTML = `Color: <strong>${selectedColor}</strong>`;
+                            isDraggingTrack = false; // Trigger once
+                        }
+                    }
+                }
 
-            // Update Image
-            const img = document.getElementById('product-variant-img');
-            if (PRODUCT.variants[selectedColor]) {
-                img.src = PRODUCT.variants[selectedColor];
-            }
+                function touchEnd() {
+                    isDraggingTrack = false;
+                    cancelAnimationFrame(animationID);
+                }
 
-            // Update UI (Buttons)
-            document.querySelectorAll('.color-opt').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
+                function getPositionX(event) {
+                    return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+                }
 
-        function adjustQty(amount) {
-            let val = parseInt(qtyInput.value) + amount;
-            if (val < 1) val = 1;
-            if (val > 10) val = 10;
-            qtyInput.value = val;
-        }
+                function animation() {
+                    if (isDraggingTrack) requestAnimationFrame(animation);
+                }
 
-        function updateCartBadge() {
-            const cart = JSON.parse(localStorage.getItem('viraltrenz_cart')) || [];
-            const count = cart.reduce((acc, item) => acc + item.quantity, 0);
-            const badge = document.getElementById('cartBadge');
-            badge.innerText = count;
-            badge.classList.toggle('visible', count > 0);
-        }
+                // Attach Events
+                const viewport = document.querySelector('.carousel-viewport');
+                viewport.addEventListener('mousedown', touchStart(activeIndex));
+                viewport.addEventListener('touchstart', touchStart(activeIndex), { passive: true });
 
-        // Show Mini Cart Popup
-        function showMiniCart(item) {
-            const popup = document.getElementById('mini-cart-popup');
-            document.getElementById('mc-img').src = item.image;
-            document.getElementById('mc-title').textContent = item.title;
-            document.getElementById('mc-variant').textContent = `Color: ${item.color}`;
-            document.getElementById('mc-qty').textContent = `Qty: ${item.quantity}`;
+                viewport.addEventListener('mousemove', touchMove);
+                viewport.addEventListener('touchmove', touchMove, { passive: true });
 
-            popup.classList.add('show');
+                viewport.addEventListener('mouseup', touchEnd);
+                viewport.addEventListener('mouseleave', touchEnd);
+                viewport.addEventListener('touchend', touchEnd);
 
-            // Auto hide after 5 seconds
-            setTimeout(() => {
-                // closeMiniCart(); // Optional: user might want it to stay
-            }, 5000);
-        }
+                // Resize
+                window.addEventListener('resize', () => {
+                    // Debounce or just raw update
+                    updateCarousel();
+                });
 
-        function closeMiniCart() {
-            document.getElementById('mini-cart-popup').classList.remove('show');
-        }
+                // Initialize
+                document.addEventListener('DOMContentLoaded', initCarousel);
 
-        function addToCart(redirect = false) { // redirect arg kept for compatibility but overridden
-            const quantity = parseInt(qtyInput.value);
-            const selectedColorVal = selectedColor || 'White';
 
-            // Create Cart Item
-            const cartItem = {
-                id: `${PRODUCT.id} - ${selectedColorVal.toLowerCase()}`,
-                title: PRODUCT.title,
-                price: PRODUCT.price,
-                compareAt: PRODUCT.compareAt,
-                image: PRODUCT.variants[selectedColorVal], // Specific image
-                quantity: quantity,
-                color: selectedColorVal
-            };
 
-            // Get existing cart
-            let cart = JSON.parse(localStorage.getItem('viraltrenz_cart')) || [];
 
-            // Check if item exists
-            const existingItem = cart.find(i => i.id === cartItem.id);
-            if (existingItem) {
-                existingItem.quantity += quantity;
-            } else {
-                cart.push(cartItem);
-            }
+                // Before/After Slider
+                const baContainer = document.getElementById('baSlider');
+                const baOverlay = document.getElementById('baOverlay');
+                const baOverlayImg = baOverlay.querySelector('img'); // Select inner image
+                const baHandle = document.getElementById('baHandle');
+                let isDragging = false;
 
-            // Save
-            localStorage.setItem('viraltrenz_cart', JSON.stringify(cart));
+                baContainer.addEventListener('mousedown', () => isDragging = true);
+                window.addEventListener('mouseup', () => isDragging = false);
+                baContainer.addEventListener('touchstart', () => isDragging = true);
+                window.addEventListener('touchend', () => isDragging = false);
 
-            // Update Badge
-            updateCartBadge();
+                // Sync overlay image width to container width (Fix for responsive behavior)
+                function updateSliderImageWidth() {
+                    const width = baContainer.offsetWidth;
+                    baOverlayImg.style.width = width + 'px';
+                    baOverlayImg.style.maxWidth = 'none'; // Override CSS constraint if any
+                }
+                window.addEventListener('resize', updateSliderImageWidth);
+                // Initial call
+                updateSliderImageWidth();
+                // Also call on load just in case images load late
+                window.addEventListener('load', updateSliderImageWidth);
 
-            // Show Toast (Optional, but replacing with Mini Cart)
-            // showToast(`Added ${ quantity } item(s) to cart`);
+                const moveSlider = (x) => {
+                    const rect = baContainer.getBoundingClientRect();
+                    let pos = ((x - rect.left) / rect.width) * 100;
+                    if (pos < 0) pos = 0;
+                    if (pos > 100) pos = 100;
+                    baOverlay.style.width = pos + "%";
+                    baHandle.style.left = pos + "%";
+                };
 
-            // Show Mini Cart Popup instead of Redirect
-            showMiniCart(cartItem);
-        }
+                baContainer.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    moveSlider(e.clientX);
+                });
 
-        function showToast() {
-            const toast = document.getElementById('toast');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
+                baContainer.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    e.preventDefault(); // Stop page scroll
+                    moveSlider(e.touches[0].clientX);
+                }, { passive: false });
 
-        // Init
-        updateCartBadge();
+                // Result Categories Logic
+                const resultsData = [
+                    { // Bathroom
+                        before: "https://i.postimg.cc/RF143B4T/dirtytub.png",
+                        after: "https://i.postimg.cc/fL7D3NDf/cleantub.png"
+                    },
+                    { // Kitchen
+                        before: "https://i.postimg.cc/vHyWnHhb/dirty_sink.jpg",
+                        after: "https://i.postimg.cc/CL0j8LN2/clean_sink.jpg"
+                    },
+                    { // Living Room
+                        before: "https://i.postimg.cc/k4NqVmqF/dirtywindow.png",
+                        after: "https://i.postimg.cc/fL7D3NDK/cleanwindow.png"
+                    }
+                ];
 
-    </script>
+
+                function changeResult(index) {
+                    // Update buttons
+                    document.querySelectorAll('.result-btn').forEach((btn, i) => {
+                        btn.classList.toggle('active', i === index);
+                        btn.style.borderColor = i === index ? 'var(--accent-cyan)' : 'transparent';
+                        btn.style.background = i === index ? 'rgba(0, 242, 234, 0.1)' : 'white';
+                    });
+
+                    // Update images
+                    const afterImg = baContainer.querySelector('.ba-img');
+                    const beforeImg = baOverlay.querySelector('img');
+
+                    // Fade out
+                    baContainer.style.opacity = 0.5;
+
+                    setTimeout(() => {
+                        beforeImg.src = resultsData[index].before;
+                        afterImg.src = resultsData[index].after;
+
+                        // Reset slider to center
+                        baOverlay.style.width = '50%';
+                        baHandle.style.left = '50%';
+
+                        // Fade in
+                        baContainer.style.opacity = 1;
+                    }, 200);
+                }
+
+                // FAQ Accordion
+                document.querySelectorAll('.accordion-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const item = btn.parentElement;
+                        const content = item.querySelector('.accordion-content');
+                        const isActive = item.classList.contains('accordion-active');
+
+                        item.classList.toggle('accordion-active');
+                        btn.setAttribute('aria-expanded', !isActive);
+
+                        if (!isActive) {
+                            content.style.maxHeight = content.scrollHeight + "px";
+                        } else {
+                            content.style.maxHeight = null;
+                        }
+                    });
+                });
+
+                // --- Cart Logic (LocalStorage) ---
+
+                const PRODUCT = {
+                    id: "cleanbrush-7in1",
+                    title: "Multifunctional Electric Cleaning Brush",
+                    price: 34.99,
+                    compareAt: 79.99,
+                    // Variants now have specific images
+                    variants: {
+                        White: "https://i.postimg.cc/nLdm9cQD/white_color_(1).jpg",
+                        Black: "https://i.postimg.cc/qv3yYdSd/black_color_(1).jpg",
+                        Pink: "https://i.postimg.cc/cJD3t48Y/pink_color_(1).jpg"
+                    }
+                };
+
+                const qtyInput = document.getElementById('qtyInput');
+                let selectedColor = 'White'; // Default
+
+                function selectColor(color, btn) {
+                    selectedColor = color.charAt(0).toUpperCase() + color.slice(1);
+
+                    // Update Label
+                    const label = document.getElementById('color-label-display');
+                    if (label) label.innerHTML = `Color: <strong>${selectedColor}</strong>`;
+
+                    // Update Image
+                    const img = document.getElementById('product-variant-img');
+                    if (PRODUCT.variants[selectedColor]) {
+                        img.src = PRODUCT.variants[selectedColor];
+                    }
+
+                    // Update UI (Buttons)
+                    document.querySelectorAll('.color-opt').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                }
+
+                function adjustQty(amount) {
+                    let val = parseInt(qtyInput.value) + amount;
+                    if (val < 1) val = 1;
+                    if (val > 10) val = 10;
+                    qtyInput.value = val;
+                }
+
+                function updateCartBadge() {
+                    const cart = JSON.parse(localStorage.getItem('viraltrenz_cart')) || [];
+                    const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+                    const badge = document.getElementById('cartBadge');
+                    badge.innerText = count;
+                    badge.classList.toggle('visible', count > 0);
+                }
+
+                // Show Mini Cart Popup
+                function showMiniCart(item) {
+                    const popup = document.getElementById('mini-cart-popup');
+                    document.getElementById('mc-img').src = item.image;
+                    document.getElementById('mc-title').textContent = item.title;
+                    document.getElementById('mc-variant').textContent = `Color: ${item.color}`;
+                    document.getElementById('mc-qty').textContent = `Qty: ${item.quantity}`;
+
+                    popup.classList.add('show');
+
+                    // Auto hide after 5 seconds
+                    setTimeout(() => {
+                        // closeMiniCart(); // Optional: user might want it to stay
+                    }, 5000);
+                }
+
+                function closeMiniCart() {
+                    document.getElementById('mini-cart-popup').classList.remove('show');
+                }
+
+                function addToCart(redirect = false) { // redirect arg kept for compatibility but overridden
+                    const quantity = parseInt(qtyInput.value);
+                    const selectedColorVal = selectedColor || 'White';
+
+                    // Create Cart Item
+                    const cartItem = {
+                        id: `${PRODUCT.id} - ${selectedColorVal.toLowerCase()}`,
+                        title: PRODUCT.title,
+                        price: PRODUCT.price,
+                        compareAt: PRODUCT.compareAt,
+                        image: PRODUCT.variants[selectedColorVal], // Specific image
+                        quantity: quantity,
+                        color: selectedColorVal
+                    };
+
+                    // Get existing cart
+                    let cart = JSON.parse(localStorage.getItem('viraltrenz_cart')) || [];
+
+                    // Check if item exists
+                    const existingItem = cart.find(i => i.id === cartItem.id);
+                    if (existingItem) {
+                        existingItem.quantity += quantity;
+                    } else {
+                        cart.push(cartItem);
+                    }
+
+                    // Save
+                    localStorage.setItem('viraltrenz_cart', JSON.stringify(cart));
+
+                    // Update Badge
+                    updateCartBadge();
+
+                    // Show Toast (Optional, but replacing with Mini Cart)
+                    // showToast(`Added ${ quantity } item(s) to cart`);
+
+                    // Show Mini Cart Popup instead of Redirect
+                    showMiniCart(cartItem);
+                }
+
+                function showToast() {
+                    const toast = document.getElementById('toast');
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                }
+
+                // Init
+                updateCartBadge();
+
+            </script>
 </body>
 
 </html>
