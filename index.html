@@ -329,7 +329,7 @@
         }
 
         .hero-content h1 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin-bottom: 1rem;
             letter-spacing: -2px;
             text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -1253,10 +1253,12 @@
         }
 
         .star-partial {
-            background: linear-gradient(90deg, #FFD700 50%, #666 50%);
+            background: linear-gradient(90deg, #FFD700 50%, #ccc 50%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            text-shadow: none;
+            /* Fixes "black shadow" on transparent text */
 
             /* Fallback for browsers not supporting background-clip: text */
             @supports not (background-clip: text) {
