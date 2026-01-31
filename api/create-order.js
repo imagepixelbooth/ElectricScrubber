@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
 const { createClient } = require('@supabase/supabase-js');
+const crypto = require('crypto'); // Built-in Node module
+const fetch = require('node-fetch'); // Assuming node-fetch is available (or use global fetch in Node 18+)
 
 // Initialize Supabase
 const supabaseUrl = process.env.SUPABASE_URL;
@@ -151,6 +153,54 @@ module.exports = async (req, res) => {
                 subject: `Order Confirmation ${orderId}`,
                 html: htmlContent
             });
+
+            // --- CAPI: Send Purchase Event to Meta ---
+            if (process.env.META_PIXEL_ID && process.env.META_ACCESS_TOKEN) {
+                try {
+                    const hash = (str) => crypto.createHash('sha256').update(str.trim().toLowerCase()).digest('hex');
+
+                    const eventTime = Math.floor(Date.now() / 1000);
+                    const userData = {
+                        em: hash(email),
+                        // ph: hash(phone), // Add phone if you capture it
+                        fn: hash(firstName),
+                        ln: hash(lastName),
+                        ct: hash(city),
+                        st: hash(state),
+                        zp: hash(zip),
+                        country: hash('US')
+                    };
+
+                    const body = {
+                        data: [{
+                            event_name: 'Purchase',
+                            event_time: eventTime,
+                            user_data: userData,
+                            custom_data: {
+                                currency: 'USD',
+                                value: total // Total passed from server.js
+                            },
+                            event_id: orderId // Deduplication Key
+                        }]
+                    };
+
+                    // Add Test Code if present
+                    if (process.env.META_TEST_EVENT_CODE) {
+                        body.data[0].test_event_code = process.env.META_TEST_EVENT_CODE;
+                    }
+
+                    // Send to Graph API
+                    await fetch(`https://graph.facebook.com/v19.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_ACCESS_TOKEN}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    });
+                    console.log("CAPI Event Sent:", orderId);
+
+                } catch (capiErr) {
+                    console.error("CAPI Error:", capiErr.message); // Don't fail order if CAPI fails
+                }
+            }
 
             // Success Response
             res.status(200).json({
