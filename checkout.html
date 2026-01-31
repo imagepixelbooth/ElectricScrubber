@@ -353,10 +353,13 @@
                             console.error("Failed to send order email:", err);
                         }
 
-                        document.getElementById('successOverlay').style.display = 'flex';
+                        // document.getElementById('successOverlay').style.display = 'flex'; // Removed Overlay
                         localStorage.removeItem('viraltrenz_cart');
                         // Optional: Clear shipping info too
                         localStorage.removeItem('viraltrenz_shipping');
+
+                        // REDIRECT TO THANK YOU PAGE
+                        window.location.href = 'thankyou.html';
                     }
                 });
 
