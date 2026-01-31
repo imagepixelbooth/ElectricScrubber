@@ -189,12 +189,29 @@ module.exports = async (req, res) => {
                         body.data[0].test_event_code = process.env.META_TEST_EVENT_CODE;
                     }
 
-                    // Send to Graph API
-                    await fetch(`https://graph.facebook.com/v19.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_ACCESS_TOKEN}`, {
+                    // Send to Graph API via HTTPS (No Dependency)
+                    const postData = JSON.stringify(body);
+                    const options = {
+                        hostname: 'graph.facebook.com',
+                        path: `/v19.0/${process.env.META_PIXEL_ID}/events?access_token=${process.env.META_ACCESS_TOKEN}`,
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body)
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Content-Length': Buffer.byteLength(postData)
+                        }
+                    };
+
+                    const req = https.request(options, (res) => {
+                        // console.log(`CAPI Status: ${res.statusCode}`);
                     });
+
+                    req.on('error', (e) => {
+                        console.error(`CAPI Request Error: ${e.message}`);
+                    });
+
+                    req.write(postData);
+                    req.end();
+
                     console.log("CAPI Event Sent:", orderId);
 
                 } catch (capiErr) {
